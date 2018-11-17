@@ -1,0 +1,2 @@
+module Settings
+singleton PaintOptions 1.0 PaintOptions.qml
