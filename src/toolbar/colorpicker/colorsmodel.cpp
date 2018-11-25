@@ -32,7 +32,7 @@ int ColorsModel::rowCount(const QModelIndex& parent) const
     return m_colors.count();
 }
 
-QVariant ColorsModel::data(const QModelIndex &index, int role) const
+QVariant ColorsModel::data(const QModelIndex &index, const int role) const
 {
     if (!index.isValid()) {
         qWarning() << "Invalid index requested for colors model!";

@@ -1,5 +1,5 @@
 QT += quick
-CONFIG += c++11
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -14,7 +14,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/main.cpp \
-    src/toolbar/colorpicker/colorsmodel.cpp
+    src/toolbar/colorpicker/colorsmodel.cpp \
+    src/workarea/workareaplugin.cpp \
+    src/workarea/workareaelement.cpp \
+    src/workarea/workareaserverimpl.cpp \
+    src/common/commands/drawcommands/drawlinecommand.cpp \
+    src/common/commands/command.cpp \
+    src/common/commands/drawcommand.cpp \
+    src/common/strategies/drawstrategy.cpp \
+    src/common/shapes/boundedshape.cpp \
+    src/common/shapes/lineshape.cpp \
+    src/common/strategies/drawlinestrategy.cpp \
+    src/common/drawhistory/history.cpp \
+    src/common/drawhistory/drawhistory.cpp \
+    src/common/commands/drawcommands/drawrectanglecommand.cpp \
+    src/common/strategies/drawrectanglestrategy.cpp \
+    src/common/commands/drawcommands/drawcirclecommand.cpp \
+    src/common/strategies/drawcirclestrategy.cpp \
+    src/common/commands/drawcommands/drawcurvecommand.cpp \
+    src/common/strategies/drawcurvestrategy.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,6 +48,23 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    src/toolbar/colorpicker/colorsmodel.h
-
-DISTFILES +=
+    src/toolbar/colorpicker/colorsmodel.h \
+    src/workarea/workareaplugin.h \
+    src/workarea/workareaelement.h \
+    src/workarea/workareaserverimpl.h \
+    src/common/commands/drawcommands/drawlinecommand.h \
+    src/common/commands/command.h \
+    src/common/commands/drawcommand.h \
+    src/common/painttypes.h \
+    src/common/strategies/drawstrategy.h \
+    src/common/shapes/boundedshape.h \
+    src/common/shapes/lineshape.h \
+    src/common/strategies/drawlinestrategy.h \
+    src/common/drawhistory/history.h \
+    src/common/drawhistory/drawhistory.h \
+    src/common/commands/drawcommands/drawrectanglecommand.h \
+    src/common/strategies/drawrectanglestrategy.h \
+    src/common/commands/drawcommands/drawcirclecommand.h \
+    src/common/strategies/drawcirclestrategy.h \
+    src/common/commands/drawcommands/drawcurvecommand.h \
+    src/common/strategies/drawcurvestrategy.h

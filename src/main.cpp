@@ -4,6 +4,8 @@
 
 #include "src/toolbar/colorpicker/colorsmodel.h"
 
+#include "src/workarea/workareaplugin.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -13,6 +15,9 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     QQmlContext *ctxt = engine.rootContext();
+
+    WorkAreaPlugin workAreaPlugin;
+    workAreaPlugin.registerTypes("WorkArea");
 
     ColorsModel defaultColors (nullptr);
     ctxt->setContextProperty("colorsModel", &defaultColors);

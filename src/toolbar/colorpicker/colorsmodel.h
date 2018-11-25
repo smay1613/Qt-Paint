@@ -6,10 +6,10 @@
 class ColorsModel : public QAbstractListModel
 {
 public:
-    ColorsModel(QObject*);
+    explicit ColorsModel(QObject* parent);
 
     int rowCount(const QModelIndex&) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
+    QVariant data(const QModelIndex &index, const int role) const override;
 
 private:
     QVector<QColor> m_colors;
