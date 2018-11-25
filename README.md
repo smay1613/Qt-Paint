@@ -5,5 +5,5 @@ Required features:
 * Pen size changing
 * Undo/redo actions
 * Whiteboard cleanup
-* Possibility to draw shapes: line, curve, rectangle, ellipse
+* Possibility to draw shapes: line ✓, curve, rectangle ✓, ellipse ✓
 * Viewport streaming (share image via network)
