@@ -30,6 +30,10 @@ Window {
             acceptedButtons: Qt.LeftButton
             hoverEnabled: true
 
+            onReleased: {
+                _workArea.mouseReleased(mouseX, mouseY);
+            }
+
             onPressed: {
                 _workArea.mouseClicked(mouseX, mouseY);
             }

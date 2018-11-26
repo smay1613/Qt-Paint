@@ -4,7 +4,6 @@
 
 class DrawLineCommand : public DrawCommand
 {
-    Q_OBJECT
 public:
     explicit DrawLineCommand(QPainter* painter);
 };

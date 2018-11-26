@@ -14,6 +14,7 @@ public:
 signals:
     void mousePositionChanged(const int mouseX, const int mouseY, const bool mouseClicked);
     void mouseClicked(const int mouseX, const int mouseY);
+    void mouseReleased(const int mouseX, const int mouseY);
 
 private slots:
     void onUpdateRequested();

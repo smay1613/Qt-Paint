@@ -19,6 +19,7 @@ signals:
 public slots:
     void onMousePositionChanged(const int mouseX, const int mouseY, const bool mousePressed);
     void onMouseClicked(const int mouseX, const int mouseY);
+    void onMouseReleased(const int mouseX, const int mouseY);
 
     void onPaint(QPainter* painter);
 

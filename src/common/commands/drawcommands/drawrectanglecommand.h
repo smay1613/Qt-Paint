@@ -4,7 +4,6 @@
 
 class DrawRectangleCommand : public DrawCommand
 {
-    Q_OBJECT
 public:
     explicit DrawRectangleCommand(QPainter* painter);
 };

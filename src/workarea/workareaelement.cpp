@@ -36,6 +36,9 @@ void WorkAreaElement::connectSignals()
     connect(this, &WorkAreaElement::mousePositionChanged,
                     m_workAreaBL.get(), &WorkAreaServerImpl::onMousePositionChanged);
 
+    connect(this, &WorkAreaElement::mouseReleased,
+                    m_workAreaBL.get(), &WorkAreaServerImpl::onMouseReleased);
+
     connect(m_workAreaBL.get(), &WorkAreaServerImpl::updateRequested,
                     this, &WorkAreaElement::onUpdateRequested);
 }

@@ -1,12 +1,12 @@
 #include "workareaserverimpl.h"
 #include <QDebug>
 #include "../common/painttypes.h"
-#include "../common/commands/drawcommands/drawcirclecommand.h"
+#include "../common/commands/drawcommands/drawcurvecommand.h"
 
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted(false),
       m_painter(nullptr),
-      m_activeCommand(new DrawCircleCommand(m_painter))
+      m_activeCommand(new DrawCurveCommand(m_painter))
 {
     connectActiveCommand();
 }
@@ -17,13 +17,13 @@ void WorkAreaServerImpl::submit()
         m_history.add(std::move(m_activeCommand));
         m_activeCommand.reset(nullptr);
     }
-    m_activeCommand.reset(new DrawCircleCommand(m_painter));
+    m_activeCommand.reset(new DrawCurveCommand(m_painter));
     connectActiveCommand();
 }
 
 void WorkAreaServerImpl::onMousePositionChanged(const int mouseX, const int mouseY, const bool mousePressed)
 {
-    if (m_activeCommand) {
+    if (m_activeCommand && m_paintStarted) {
         m_activeCommand->execute({mouseX, mouseY, mousePressed}, m_paintStarted);
     }
 }
@@ -37,6 +37,15 @@ void WorkAreaServerImpl::onMouseClicked(const int mouseX, const int mouseY)
     }
 
     if (!m_paintStarted) {
+        submit();
+    }
+}
+
+void WorkAreaServerImpl::onMouseReleased(const int mouseX, const int mouseY)
+{
+    if (m_paintStarted) {
+        onMouseClicked(mouseX, mouseY);
+    } else {
         submit();
     }
 }
