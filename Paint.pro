@@ -71,7 +71,4 @@ HEADERS += \
     src/common/commands/drawcommands/drawcurvecommand.h \
     src/common/strategies/drawcurvestrategy.h \
     src/common/shapes/splineshape.h \
-    src/toolbar/toolbarplugin.h \
-    src/common/utils.h
-
-DISTFILES +=
+    src/toolbar/toolbarplugin.h
