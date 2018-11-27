@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 //import "."
 import Toolbar.Settings 1.0 as Settings
+import ToolBarPlugin 1.0
 
 RowLayout {
     id: _rootColorBar
@@ -34,12 +35,16 @@ RowLayout {
     }
 
     ColorPicker {
-        model: colorsModel
+        model: _model
 
         Layout.alignment: Qt.AlignVCenter
 
         onActiveColorChanged: {
             Settings.PaintOptions.activeColor = activeColor;
+        }
+
+        ColorsModel {
+            id: _model
         }
     }
 }

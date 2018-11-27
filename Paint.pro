@@ -33,7 +33,8 @@ SOURCES += \
     src/common/strategies/drawcirclestrategy.cpp \
     src/common/commands/drawcommands/drawcurvecommand.cpp \
     src/common/strategies/drawcurvestrategy.cpp \
-    src/common/shapes/splineshape.cpp
+    src/common/shapes/splineshape.cpp \
+    src/toolbar/toolbarplugin.cpp
 
 RESOURCES += qml.qrc
 
@@ -69,4 +70,8 @@ HEADERS += \
     src/common/strategies/drawcirclestrategy.h \
     src/common/commands/drawcommands/drawcurvecommand.h \
     src/common/strategies/drawcurvestrategy.h \
-    src/common/shapes/splineshape.h
+    src/common/shapes/splineshape.h \
+    src/toolbar/toolbarplugin.h \
+    src/common/utils.h
+
+DISTFILES +=

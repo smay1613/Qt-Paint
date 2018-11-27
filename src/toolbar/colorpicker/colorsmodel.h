@@ -6,7 +6,7 @@
 class ColorsModel : public QAbstractListModel
 {
 public:
-    explicit ColorsModel(QObject* parent);
+    explicit ColorsModel(QObject* parent = nullptr);
 
     int rowCount(const QModelIndex&) const override;
     QVariant data(const QModelIndex &index, const int role) const override;

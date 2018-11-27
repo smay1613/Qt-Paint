@@ -4,6 +4,7 @@
 
 #include "src/toolbar/colorpicker/colorsmodel.h"
 
+#include "src/toolbar/toolbarplugin.h"
 #include "src/workarea/workareaplugin.h"
 
 int main(int argc, char *argv[])
@@ -14,13 +15,11 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    QQmlContext *ctxt = engine.rootContext();
-
     WorkAreaPlugin workAreaPlugin;
-    workAreaPlugin.registerTypes("WorkArea");
+    workAreaPlugin.registerTypes("WorkAreaPlugin");
 
-    ColorsModel defaultColors (nullptr);
-    ctxt->setContextProperty("colorsModel", &defaultColors);
+    ToolBarPlugin toolBarPlugin;
+    toolBarPlugin.registerTypes("ToolBarPlugin");
 
     engine.addImportPath("qrc:/qml");
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));

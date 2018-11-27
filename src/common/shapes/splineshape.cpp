@@ -16,9 +16,9 @@ void SplineShape::addPoint(const QPointF point)
     }
 
     if (m_points.size() >= m_segmentPointCount) {
-        m_activePath.cubicTo(*std::next(m_points.rend(),
-                                        m_segmentPointCount - 1),
-                                        *std::next(m_points.rend()), point);
+        m_activePath.cubicTo(*std::next(m_points.rend(), m_segmentPointCount - 1),
+                                *std::next(m_points.rend()), 
+				point);
         m_points.clear();
     }
 

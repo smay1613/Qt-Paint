@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 import "."
 import Toolbar 1.0
-import WorkArea 1.0
+import WorkAreaPlugin 1.0
 
 Window {
     id: _rootWindow
