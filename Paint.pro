@@ -34,7 +34,8 @@ SOURCES += \
     src/common/commands/drawcommands/drawcurvecommand.cpp \
     src/common/strategies/drawcurvestrategy.cpp \
     src/common/shapes/splineshape.cpp \
-    src/toolbar/toolbarplugin.cpp
+    src/toolbar/toolbarplugin.cpp \
+    src/toolbar/paintsettings/paintsettings.cpp
 
 RESOURCES += qml.qrc
 
@@ -71,4 +72,5 @@ HEADERS += \
     src/common/commands/drawcommands/drawcurvecommand.h \
     src/common/strategies/drawcurvestrategy.h \
     src/common/shapes/splineshape.h \
-    src/toolbar/toolbarplugin.h
+    src/toolbar/toolbarplugin.h \
+    src/toolbar/paintsettings/paintsettings.h

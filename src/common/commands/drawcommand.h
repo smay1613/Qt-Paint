@@ -15,7 +15,7 @@ public:
     virtual ~DrawCommand();
 
     void execute() final;
-    virtual void execute(const MouseState& mouseState, bool paintStarted);
+    virtual void execute(const PaintTypes::MouseState& mouseState, bool paintStarted);
     virtual void draw() const;
 
     void setPainter(QPainter *painter);

@@ -1,7 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
-//import "."
-import Toolbar.Settings 1.0 as Settings
 import ToolBarPlugin 1.0
 
 RowLayout {
@@ -27,7 +25,7 @@ RowLayout {
             border.width: 1
             radius: width / 6
 
-            color: Settings.PaintOptions.activeColor
+            color: PaintSettings.activeColor
         }
         Text {
             text: "Pen color"
@@ -40,7 +38,7 @@ RowLayout {
         Layout.alignment: Qt.AlignVCenter
 
         onActiveColorChanged: {
-            Settings.PaintOptions.activeColor = activeColor;
+            PaintSettings.activeColor = activeColor;
         }
 
         ColorsModel {

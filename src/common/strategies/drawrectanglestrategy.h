@@ -8,7 +8,7 @@ class DrawRectangleStrategy : public IDrawStrategy
 public:
     DrawRectangleStrategy();
     virtual void drawRequest(QPainter* painter);
-    virtual void mouseTouch(const MouseState& state, bool paintStarted);
+    virtual void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted);
 
 private:
     BoundedShape m_bounds;

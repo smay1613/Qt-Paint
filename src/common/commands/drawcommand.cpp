@@ -16,7 +16,7 @@ void DrawCommand::execute()
     qWarning() << "Please provide execution arguments for draw command!";
 }
 
-void DrawCommand::execute(const MouseState &mouseState, bool paintStarted)
+void DrawCommand::execute(const PaintTypes::MouseState &mouseState, bool paintStarted)
 {
     if (m_drawStrategy) {
         m_drawStrategy->mouseTouch(mouseState, paintStarted);

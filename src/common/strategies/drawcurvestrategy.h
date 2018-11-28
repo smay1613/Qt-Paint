@@ -9,7 +9,7 @@ public:
     DrawCurveStrategy();
 
     void drawRequest(QPainter* painter) override;
-    void mouseTouch(const MouseState& state, bool paintStarted) override;
+    void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted) override;
 
 private:
     SplineShape m_spline;
