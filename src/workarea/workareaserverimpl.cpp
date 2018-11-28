@@ -57,7 +57,7 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     }
 
     for (const auto& command : m_history) {
-        static_cast<DrawCommand*>(command.get())->draw();
+        static_cast<DrawCommand*>(command.first.get())->draw();
     }
 
     if (m_activeCommand) {
@@ -77,6 +77,6 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
     m_activeCommand->setPainter(m_painter);
 
     for (auto& command : m_history) {
-        static_cast<DrawCommand*>(command.get())->setPainter(m_painter);
+        static_cast<DrawCommand*>(command.first.get())->setPainter(m_painter);
     }
 }

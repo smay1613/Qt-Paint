@@ -1,7 +1,7 @@
 #include "drawhistory.h"
 
 DrawHistory::DrawHistory()
-        : m_currentAction(m_history.begin())
+        : m_currentAction(m_commandHistory.begin())
 {
 
 }
@@ -22,41 +22,46 @@ void DrawHistory::redo()
 
 void DrawHistory::add(std::unique_ptr<ICommand> command)
 {
+    this->add(std::move(command), QBrush{});
+}
+
+void DrawHistory::add(std::unique_ptr<ICommand> command, const QBrush& brush)
+{
     if (!isEmpty() && !isOnTop()) {
         // clearing old branch
-        m_history.erase(std::next(m_currentAction), m_history.end());
+        m_commandHistory.erase(std::next(m_currentAction), m_commandHistory.end());
     }
 
-    m_history.emplace_back(std::move(command));
+    m_commandHistory.push_back(std::make_pair(std::move(command), brush));
     ++m_currentAction;
 }
 
-std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::begin()
+std::list<DrawHistory::CommandBrushPair>::iterator DrawHistory::begin()
 {
-    return m_history.begin();
+    return m_commandHistory.begin();
 }
 
-std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::end()
+std::list<DrawHistory::CommandBrushPair>::iterator DrawHistory::end()
 {
-    return m_history.end();
+    return m_commandHistory.end();
 }
 
 void DrawHistory::clear()
 {
-    m_history.clear();
+    m_commandHistory.clear();
 }
 
 bool DrawHistory::isEmpty() const
 {
-    return m_history.empty();
+    return m_commandHistory.empty();
 }
 
 bool DrawHistory::isOnTop() const
 {
-    return m_currentAction == std::prev(m_history.end());
+    return m_currentAction == std::prev(m_commandHistory.end());
 }
 
 bool DrawHistory::isOnStart() const
 {
-    return m_currentAction == m_history.begin();
+    return m_currentAction == m_commandHistory.begin();
 }
