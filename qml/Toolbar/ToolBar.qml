@@ -3,11 +3,11 @@ import QtQuick.Layouts 1.3
 import Toolbar.ColorPicker 1.0
 import Toolbar.PenSettings 1.0
 
-RowLayout {
+GridLayout {
     id: _rootToolbar
     objectName: "ToolBarRowLayout"
 
-    spacing: 15
+    rowSpacing: 15
 
     ColorBar {
         id: _colorBar

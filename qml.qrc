@@ -9,5 +9,8 @@
         <file>qml/Toolbar/PenSettings/qmldir</file>
         <file>qml/Toolbar/PenSettings/PenSizeTrackBar.qml</file>
         <file>qml/qtquickcontrols2.conf</file>
+        <file>qml/Common/Picker.qml</file>
+        <file>qml/Common/qmldir</file>
+        <file>qml/Toolbar/ColorPicker/ColorBox.qml</file>
     </qresource>
 </RCC>

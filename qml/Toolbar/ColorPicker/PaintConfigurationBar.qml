@@ -33,16 +33,8 @@ RowLayout {
     }
 
     ColorPicker {
-        model: _model
+        id: _colorPicker
 
         Layout.alignment: Qt.AlignVCenter
-
-        onActiveColorChanged: {
-            PaintSettings.activeColor = activeColor;
-        }
-
-        ColorsModel {
-            id: _model
-        }
     }
 }
