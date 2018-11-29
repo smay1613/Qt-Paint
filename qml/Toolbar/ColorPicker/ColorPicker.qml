@@ -9,7 +9,7 @@ Picker {
 
     model: _model
 
-    delegateSource: "qrc:/qml/Toolbar/ColorPicker/ColorBox.qml"
+    delegateSource: Qt.resolvedUrl("ColorBox.qml")
 
     onActiveItemChanged: {
         PaintSettings.activeColor = _rootColorPicker.activeItem.color;

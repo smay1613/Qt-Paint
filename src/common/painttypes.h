@@ -16,10 +16,10 @@ enum class ShapeType {
     Line,
     Curve,
     Circle,
-    Rectangle
+    Rectangle,
+    Invalid
 };
 
 Q_ENUM_NS(ShapeType)
-
 }
 #endif // PAINTTYPES_H

@@ -4,6 +4,8 @@
 #include <QQmlEngine>
 #include "colorpicker/colorsmodel.h"
 #include "paintsettings/paintsettings.h"
+#include "shapepicker/shapesmodel.h"
+#include "../common/painttypes.h"
 
 class ToolBarPlugin : public QQmlExtensionPlugin
 {
@@ -12,8 +14,9 @@ public:
     void registerTypes(const char *uri)
     {
         qmlRegisterType<ColorsModel>(uri, 1, 0, "ColorsModel");
+        qmlRegisterType<ShapesModel>(uri, 1, 0, "ShapesModel");
 
-        auto qmlInstance = [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+        const auto qmlInstance = [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
             Q_UNUSED(engine)
             Q_UNUSED(scriptEngine)
             return &PaintSettings::instance();

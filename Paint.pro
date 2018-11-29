@@ -35,7 +35,8 @@ SOURCES += \
     src/common/strategies/drawcurvestrategy.cpp \
     src/common/shapes/splineshape.cpp \
     src/toolbar/toolbarplugin.cpp \
-    src/toolbar/paintsettings/paintsettings.cpp
+    src/toolbar/paintsettings/paintsettings.cpp \
+    src/toolbar/shapepicker/shapesmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -73,4 +74,7 @@ HEADERS += \
     src/common/strategies/drawcurvestrategy.h \
     src/common/shapes/splineshape.h \
     src/toolbar/toolbarplugin.h \
-    src/toolbar/paintsettings/paintsettings.h
+    src/toolbar/paintsettings/paintsettings.h \
+    src/toolbar/shapepicker/shapesmodel.h
+
+DISTFILES +=

@@ -12,5 +12,12 @@
         <file>qml/Common/Picker.qml</file>
         <file>qml/Common/qmldir</file>
         <file>qml/Toolbar/ColorPicker/ColorBox.qml</file>
+        <file>qml/Toolbar/ShapePicker/qmldir</file>
+        <file>qml/Toolbar/ShapePicker/ShapePicker.qml</file>
+        <file>qml/Toolbar/ShapePicker/ShapeBox.qml</file>
+        <file>resources/shapeicons/ellipse.svg</file>
+        <file>resources/shapeicons/line.svg</file>
+        <file>resources/shapeicons/pencil.svg</file>
+        <file>resources/shapeicons/rectangle.svg</file>
     </qresource>
 </RCC>

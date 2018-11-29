@@ -4,6 +4,7 @@ PaintSettings::PaintSettings() :
     m_penSizeDefault(14),
     m_penSizeMin(1),
     m_penSizeMax(72),
+    m_activeShapeType(PaintTypes::ShapeType::Invalid),
     m_currentPenSize(m_penSizeDefault)
 {
 
