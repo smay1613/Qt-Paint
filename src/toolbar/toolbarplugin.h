@@ -17,8 +17,9 @@ public:
         qmlRegisterType<ShapesModel>(uri, 1, 0, "ShapesModel");
 
         const auto qmlInstance = [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
-            Q_UNUSED(engine)
             Q_UNUSED(scriptEngine)
+            // Only c++ must handle singleton lifetime!
+            engine->setObjectOwnership(&PaintSettings::instance(), QQmlEngine::CppOwnership);
             return &PaintSettings::instance();
         };
 
