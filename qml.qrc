@@ -5,8 +5,6 @@
         <file>qml/Toolbar/ColorPicker/PaintConfigurationBar.qml</file>
         <file>qml/Toolbar/ColorPicker/qmldir</file>
         <file>qml/Toolbar/qmldir</file>
-        <file>qml/Toolbar/Settings/PaintOptions.qml</file>
-        <file>qml/Toolbar/Settings/qmldir</file>
         <file>qml/Toolbar/ToolBar.qml</file>
         <file>qml/Toolbar/PenSettings/qmldir</file>
         <file>qml/Toolbar/PenSettings/PenSizeTrackBar.qml</file>
