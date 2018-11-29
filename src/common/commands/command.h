@@ -4,8 +4,8 @@
 class ICommand
 {
 public:
-    ICommand();
-    virtual ~ICommand();
+    ICommand() = default;
+    virtual ~ICommand() = default;
 
     virtual void execute() = 0;
 };

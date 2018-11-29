@@ -5,5 +5,5 @@
 DrawLineCommand::DrawLineCommand(QPainter* painter)
     : DrawCommand (painter)
 {
-    m_drawStrategy.reset(new DrawLineStrategy());
+    m_drawStrategy = std::make_unique<DrawLineStrategy>();
 }

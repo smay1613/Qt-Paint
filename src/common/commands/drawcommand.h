@@ -12,7 +12,7 @@ class DrawCommand : public QObject, public ICommand
     Q_OBJECT
 public:
     explicit DrawCommand(QPainter* painter);
-    virtual ~DrawCommand();
+    virtual ~DrawCommand() = default;
 
     void execute() final;
     virtual void execute(const PaintTypes::MouseState& mouseState, bool paintStarted);

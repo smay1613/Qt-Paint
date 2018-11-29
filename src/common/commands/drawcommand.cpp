@@ -7,10 +7,6 @@ DrawCommand::DrawCommand(QPainter* painter)
 
 }
 
-DrawCommand::~DrawCommand()
-{
-}
-
 void DrawCommand::execute()
 {
     qWarning() << "Please provide execution arguments for draw command!";

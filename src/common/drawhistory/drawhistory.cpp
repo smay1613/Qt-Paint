@@ -32,7 +32,7 @@ void DrawHistory::add(std::unique_ptr<ICommand> command, const QBrush& brush)
         m_commandHistory.erase(std::next(m_currentAction), m_commandHistory.end());
     }
 
-    m_commandHistory.push_back(std::make_pair(std::move(command), brush));
+    m_commandHistory.emplace_back(std::make_pair(std::move(command), brush));
     ++m_currentAction;
 }
 

@@ -1,11 +1,6 @@
 #include "drawcurvestrategy.h"
 #include <QDebug>
 
-DrawCurveStrategy::DrawCurveStrategy()
-{
-
-}
-
 void DrawCurveStrategy::drawRequest(QPainter *painter)
 {
     painter->drawPath(m_spline.getPath());

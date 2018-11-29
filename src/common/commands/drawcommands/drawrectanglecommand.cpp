@@ -5,5 +5,5 @@
 DrawRectangleCommand::DrawRectangleCommand(QPainter* painter)
     : DrawCommand (painter)
 {
-    m_drawStrategy.reset(new DrawRectangleStrategy());
+    m_drawStrategy = std::make_unique<DrawRectangleStrategy>();
 }

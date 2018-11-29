@@ -6,8 +6,8 @@
 class BoundedShape
 {
 public:
-    BoundedShape();
-    virtual ~BoundedShape();
+    BoundedShape() = default;
+    virtual ~BoundedShape() = default;
 
     void setStart(const QPointF& startPoint);
     void setEnd(const QPointF& endPoint);

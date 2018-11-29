@@ -7,7 +7,7 @@
 class IHistory
 {
 public:
-    IHistory();
+    IHistory() = default;
     virtual ~IHistory() {}
 
     virtual void undo() = 0;

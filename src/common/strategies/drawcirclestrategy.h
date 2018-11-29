@@ -6,7 +6,7 @@
 class DrawCircleStrategy : public IDrawStrategy
 {
 public:
-    DrawCircleStrategy();
+    DrawCircleStrategy() = default;
     virtual void drawRequest(QPainter* painter);
     virtual void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted);
 

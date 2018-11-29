@@ -1,4 +1,5 @@
 #include "paintsettings.h"
+#include <QDebug>
 
 PaintSettings::PaintSettings() :
     m_penSizeDefault(14),

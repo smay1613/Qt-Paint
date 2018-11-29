@@ -45,7 +45,7 @@ QVariant ColorsModel::data(const QModelIndex &index, const int role) const
 
     if (role == Qt::DisplayRole) {
         return m_colors.at(index.row());
-    } else {
-        return QVariant();
     }
+
+    return QVariant();
 }

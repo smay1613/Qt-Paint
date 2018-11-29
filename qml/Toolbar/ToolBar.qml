@@ -21,7 +21,5 @@ GridLayout {
 
     ShapePicker {
         id: _shapePicker
-        Layout.row: 2
-        Layout.leftMargin: 10
     }
 }

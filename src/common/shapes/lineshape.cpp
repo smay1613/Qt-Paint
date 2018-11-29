@@ -1,10 +1,5 @@
 #include "lineshape.h"
 
-LineShape::LineShape()
-{
-
-}
-
 void LineShape::setStart(const QPoint &startPoint)
 {
     m_line.setPoints(startPoint, startPoint);

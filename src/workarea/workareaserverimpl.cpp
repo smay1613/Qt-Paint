@@ -17,7 +17,7 @@ void WorkAreaServerImpl::submit()
         m_history.add(std::move(m_activeCommand));
         m_activeCommand.reset(nullptr);
     }
-    m_activeCommand.reset(new DrawCurveCommand(m_painter));
+    m_activeCommand = std::make_unique<DrawCurveCommand> (m_painter);
     connectActiveCommand();
 }
 
@@ -57,7 +57,9 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     }
 
     for (const auto& command : m_history) {
-        static_cast<DrawCommand*>(command.first.get())->draw();
+        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
+            drawCommand->draw();
+        }
     }
 
     if (m_activeCommand) {
@@ -77,6 +79,8 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
     m_activeCommand->setPainter(m_painter);
 
     for (auto& command : m_history) {
-        static_cast<DrawCommand*>(command.first.get())->setPainter(m_painter);
+        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
+            drawCommand->setPainter(m_painter);
+        }
     }
 }

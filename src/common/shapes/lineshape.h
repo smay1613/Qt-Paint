@@ -6,7 +6,7 @@
 class LineShape
 {
 public:
-    LineShape();
+    LineShape() = default;
     void setStart(const QPoint& startPoint);
     void setEnd(const QPoint& endPoint);
     const QLineF getLine() const;

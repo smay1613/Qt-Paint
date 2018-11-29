@@ -2,16 +2,6 @@
 #include <utility>
 #include <QDebug>
 
-BoundedShape::BoundedShape()
-{
-
-}
-
-BoundedShape::~BoundedShape()
-{
-
-}
-
 void BoundedShape::setStart(const QPointF &startPoint)
 {
     m_diagonal.setP1(startPoint);

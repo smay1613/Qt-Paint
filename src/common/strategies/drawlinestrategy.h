@@ -7,7 +7,7 @@
 class DrawLineStrategy : public IDrawStrategy
 {
 public:
-    DrawLineStrategy();
+    DrawLineStrategy() = default;
 
     void drawRequest(QPainter* painter) override;
     void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted) override;

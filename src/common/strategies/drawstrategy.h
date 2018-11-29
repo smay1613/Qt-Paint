@@ -6,7 +6,7 @@
 class IDrawStrategy
 {
 public:
-    IDrawStrategy();
+    IDrawStrategy() = default;
     virtual ~IDrawStrategy() {}
 
     virtual void drawRequest(QPainter* painter) = 0;

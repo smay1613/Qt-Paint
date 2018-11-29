@@ -1,10 +1,5 @@
 #include "drawrectanglestrategy.h"
 
-DrawRectangleStrategy::DrawRectangleStrategy()
-{
-
-}
-
 void DrawRectangleStrategy::drawRequest(QPainter *painter)
 {
     painter->drawRect(m_bounds.getRect());

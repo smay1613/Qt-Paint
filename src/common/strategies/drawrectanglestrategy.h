@@ -6,7 +6,7 @@
 class DrawRectangleStrategy : public IDrawStrategy
 {
 public:
-    DrawRectangleStrategy();
+    DrawRectangleStrategy() = default;
     virtual void drawRequest(QPainter* painter);
     virtual void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted);
 

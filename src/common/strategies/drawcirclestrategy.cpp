@@ -1,10 +1,5 @@
 #include "drawcirclestrategy.h"
 
-DrawCircleStrategy::DrawCircleStrategy()
-{
-
-}
-
 void DrawCircleStrategy::drawRequest(QPainter *painter)
 {
     painter->drawEllipse(m_bounds.getRect());

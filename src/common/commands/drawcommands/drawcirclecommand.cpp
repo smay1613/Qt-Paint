@@ -5,5 +5,5 @@
 DrawCircleCommand::DrawCircleCommand(QPainter* painter)
     : DrawCommand (painter)
 {
-    m_drawStrategy.reset(new DrawCircleStrategy());
+    m_drawStrategy = std::make_unique<DrawCircleStrategy>();
 }

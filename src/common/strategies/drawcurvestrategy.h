@@ -6,7 +6,7 @@
 class DrawCurveStrategy : public IDrawStrategy
 {
 public:
-    DrawCurveStrategy();
+    DrawCurveStrategy() = default;
 
     void drawRequest(QPainter* painter) override;
     void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted) override;

@@ -1,10 +1,5 @@
 #include "drawlinestrategy.h"
 
-DrawLineStrategy::DrawLineStrategy()
-{
-
-}
-
 void DrawLineStrategy::drawRequest(QPainter *painter)
 {
     painter->drawLine(m_line.getLine());

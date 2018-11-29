@@ -4,5 +4,5 @@
 DrawCurveCommand::DrawCurveCommand(QPainter *painter)
     : DrawCommand(painter)
 {
-    m_drawStrategy.reset(new DrawCurveStrategy());
+    m_drawStrategy = std::make_unique<DrawCurveStrategy>();
 }
