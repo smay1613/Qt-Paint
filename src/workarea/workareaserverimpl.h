@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QPainter>
 #include "../common/drawhistory/drawhistory.h"
+#include "../common/builders/commandbuilder.h"
 
 class WorkAreaServerImpl : public QObject
 {
@@ -23,15 +24,20 @@ public slots:
 
     void onPaint(QPainter* painter);
 
+private slots:
+    void onSettingsChanged();
+
 private:
     void connectActiveCommand();
     void updatePainter(QPainter* painter);
+    void updateActiveCommand();
 
     bool m_paintStarted;
     QPainter* m_painter;
     std::unique_ptr<DrawCommand> m_activeCommand;
 
     DrawHistory m_history;
+    DrawCommandBuilder m_commandBuilder;
 };
 
 #endif // WORKAREASERVERIMPL_H

@@ -36,7 +36,8 @@ SOURCES += \
     src/common/shapes/splineshape.cpp \
     src/toolbar/toolbarplugin.cpp \
     src/toolbar/paintsettings/paintsettings.cpp \
-    src/toolbar/shapepicker/shapesmodel.cpp
+    src/toolbar/shapepicker/shapesmodel.cpp \
+    src/common/builders/commandbuilder.cpp
 
 RESOURCES += qml.qrc
 
@@ -75,6 +76,7 @@ HEADERS += \
     src/common/shapes/splineshape.h \
     src/toolbar/toolbarplugin.h \
     src/toolbar/paintsettings/paintsettings.h \
-    src/toolbar/shapepicker/shapesmodel.h
+    src/toolbar/shapepicker/shapesmodel.h \
+    src/common/builders/commandbuilder.h
 
 DISTFILES +=

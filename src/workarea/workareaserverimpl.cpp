@@ -5,10 +5,11 @@
 
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted(false),
-      m_painter(nullptr),
-      m_activeCommand(new DrawCurveCommand(m_painter))
+      m_painter(nullptr)
 {
-    connectActiveCommand();
+    updateActiveCommand();
+    connect(&PaintSettings::instance(), &PaintSettings::activeShapeTypeChanged,
+                this, &WorkAreaServerImpl::onSettingsChanged);
 }
 
 void WorkAreaServerImpl::submit()
@@ -17,8 +18,7 @@ void WorkAreaServerImpl::submit()
         m_history.add(std::move(m_activeCommand));
         m_activeCommand.reset(nullptr);
     }
-    m_activeCommand = std::make_unique<DrawCurveCommand> (m_painter);
-    connectActiveCommand();
+    updateActiveCommand();
 }
 
 void WorkAreaServerImpl::onMousePositionChanged(const int mouseX, const int mouseY, const bool mousePressed)
@@ -67,6 +67,11 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     }
 }
 
+void WorkAreaServerImpl::onSettingsChanged()
+{
+    updateActiveCommand();
+}
+
 void WorkAreaServerImpl::connectActiveCommand()
 {
     connect(m_activeCommand.get(), &DrawCommand::updateRequested,
@@ -76,11 +81,23 @@ void WorkAreaServerImpl::connectActiveCommand()
 void WorkAreaServerImpl::updatePainter(QPainter *painter)
 {
     m_painter = painter;
-    m_activeCommand->setPainter(m_painter);
+    if (m_activeCommand) {
+        m_activeCommand->setPainter(m_painter);
+    }
 
     for (auto& command : m_history) {
         if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
             drawCommand->setPainter(m_painter);
         }
+    }
+}
+
+void WorkAreaServerImpl::updateActiveCommand()
+{
+    m_activeCommand = m_commandBuilder.getActiveCommand(m_painter);
+    if (m_activeCommand) {
+        connectActiveCommand();
+    } else {
+        qDebug() << "Active command is nullptr!";
     }
 }
