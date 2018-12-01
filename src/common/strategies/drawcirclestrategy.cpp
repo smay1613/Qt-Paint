@@ -1,4 +1,5 @@
 #include "drawcirclestrategy.h"
+#include <QDebug>
 
 void DrawCircleStrategy::drawRequest(QPainter *painter)
 {
@@ -8,8 +9,8 @@ void DrawCircleStrategy::drawRequest(QPainter *painter)
 void DrawCircleStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
 {
     if (!paintStarted) {
-        m_bounds.setStart({static_cast<qreal>(state.m_x), static_cast<qreal>(state.m_y)});
+        m_bounds.setStart({state.m_x, state.m_y});
     } else {
-        m_bounds.setEnd({static_cast<qreal>(state.m_x), static_cast<qreal>(state.m_y)});
+        m_bounds.setEnd({state.m_x, state.m_y});
     }
 }

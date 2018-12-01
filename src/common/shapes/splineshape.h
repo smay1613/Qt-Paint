@@ -1,18 +1,18 @@
 #ifndef SPLINESHAPE_H
 #define SPLINESHAPE_H
 #include <list>
-#include <QPointF>
+#include <QPoint>
 #include <QPainterPath>
 
 class SplineShape
 {
 public:
     SplineShape();
-    void addPoint(const QPointF point);
+    void addPoint(const QPoint& point);
     const QPainterPath getPath() const;
 
 private:
-    std::list<QPointF> m_points;
+    std::list<QPoint> m_points;
     QPainterPath m_activePath;
 
     const unsigned int m_segmentPointCount;

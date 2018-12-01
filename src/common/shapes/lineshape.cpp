@@ -10,7 +10,7 @@ void LineShape::setEnd(const QPoint &endPoint)
     m_line.setP2(endPoint);
 }
 
-const QLineF LineShape::getLine() const
+const QLine LineShape::getLine() const
 {
     return m_line;
 }

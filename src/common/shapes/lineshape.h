@@ -1,7 +1,7 @@
 #ifndef LINESHAPE_H
 #define LINESHAPE_H
 #include <QPoint>
-#include <QLineF>
+#include <QLine>
 
 class LineShape
 {
@@ -9,10 +9,10 @@ public:
     LineShape() = default;
     void setStart(const QPoint& startPoint);
     void setEnd(const QPoint& endPoint);
-    const QLineF getLine() const;
+    const QLine getLine() const;
 
 private:
-    QLineF m_line;
+    QLine m_line;
 };
 
 #endif // LINESHAPE_H

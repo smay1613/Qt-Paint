@@ -8,7 +8,7 @@ SplineShape::SplineShape() :
 
 }
 
-void SplineShape::addPoint(const QPointF point)
+void SplineShape::addPoint(const QPoint point)
 {
     if (m_isEmpty) {
         m_activePath.moveTo(point);

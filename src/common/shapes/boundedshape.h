@@ -1,7 +1,7 @@
 #ifndef BASICSHAPE_H
 #define BASICSHAPE_H
-#include <QRectF>
-#include <QLineF>
+#include <QRect>
+#include <QLine>
 
 class BoundedShape
 {
@@ -9,13 +9,13 @@ public:
     BoundedShape() = default;
     virtual ~BoundedShape() = default;
 
-    void setStart(const QPointF& startPoint);
-    void setEnd(const QPointF& endPoint);
+    void setStart(const QPoint& startPoint);
+    void setEnd(const QPoint& endPoint);
 
-    const QRectF getRect() const;
+    const QRect getRect() const;
 
 protected:
-    QLineF m_diagonal;
+    QLine m_diagonal;
 };
 
 #endif // BASICSHAPE_H
