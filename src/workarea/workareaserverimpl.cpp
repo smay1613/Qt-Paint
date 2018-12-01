@@ -134,11 +134,11 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
         m_activeCommand->setPainter(m_painter);
     }
 
-    for (auto& command : m_history) {
+    std::for_each(m_history.begin(), m_history.top(), [&](auto& command) {
         if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
             drawCommand->setPainter(m_painter);
         }
-    }
+    });
 }
 
 void WorkAreaServerImpl::updateActiveCommand()

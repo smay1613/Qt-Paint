@@ -47,6 +47,11 @@ std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::end()
     return std::next(m_currentAction);
 }
 
+std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::top()
+{
+    return m_commandHistory.end();
+}
+
 void DrawHistory::clear()
 {
     m_commandHistory.clear();

@@ -21,6 +21,7 @@ public:
 
     std::list<CommandPenPair>::iterator begin();
     std::list<CommandPenPair>::iterator end();
+    std::list<CommandPenPair>::iterator top();
 
     void clear() override;
     bool isEmpty() const override;
