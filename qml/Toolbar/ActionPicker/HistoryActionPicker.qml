@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
 import ToolBarPlugin 1.0
 
 RowLayout {
@@ -10,6 +11,7 @@ RowLayout {
     property string resourcePath: "qrc:/resources/actionicons/"
 
     RoundButton {
+        Material.background: Material.LightGreen
         enabled: ActionManager.undoAvailable
         contentItem: ActionBox {
             source: resourcePath + "undo.svg"
@@ -19,6 +21,7 @@ RowLayout {
         }
     }
     RoundButton {
+        Material.background: Material.LightGreen
         enabled: ActionManager.redoAvailable
         contentItem: ActionBox {
             source: resourcePath + "redo.svg"
