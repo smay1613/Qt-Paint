@@ -48,5 +48,5 @@ void WorkAreaElement::connectSignals()
 
 void WorkAreaElement::setDefaultPaintSettings()
 {
-    m_painter->setRenderHint(QPainter::RenderHint::HighQualityAntialiasing);
+    m_painter->setRenderHint(QPainter::RenderHint::Antialiasing);
 }
