@@ -12,10 +12,10 @@ public:
     const QPainterPath getPath() const;
 
 private:
-    std::list<QPoint> m_points;
+    size_t m_pointsCount;
     QPainterPath m_activePath;
 
-    const unsigned int m_segmentPointCount;
+    const size_t m_segmentPointCount;
     bool m_isEmpty;
 };
 
