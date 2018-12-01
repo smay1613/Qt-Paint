@@ -3,7 +3,6 @@
 #include <QDebug>
 
 DrawCircleCommand::DrawCircleCommand(QPainter* painter)
-    : DrawCommand (painter)
+    : DrawCommand (painter, std::make_unique<DrawCircleStrategy>())
 {
-    m_drawStrategy = std::make_unique<DrawCircleStrategy>();
 }

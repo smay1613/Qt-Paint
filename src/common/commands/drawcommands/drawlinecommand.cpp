@@ -3,7 +3,6 @@
 #include <QDebug>
 
 DrawLineCommand::DrawLineCommand(QPainter* painter)
-    : DrawCommand (painter)
+    : DrawCommand (painter, std::make_unique<DrawLineStrategy>())
 {
-    m_drawStrategy = std::make_unique<DrawLineStrategy>();
 }

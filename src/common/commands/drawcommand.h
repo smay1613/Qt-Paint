@@ -12,6 +12,7 @@ class DrawCommand : public QObject, public ICommand
     Q_OBJECT
 public:
     explicit DrawCommand(QPainter* painter);
+    DrawCommand(QPainter* painter, std::unique_ptr<IDrawStrategy> strategy);
     virtual ~DrawCommand() = default;
 
     void execute() final;

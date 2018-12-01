@@ -2,7 +2,6 @@
 #include "../../strategies/drawcurvestrategy.h"
 
 DrawCurveCommand::DrawCurveCommand(QPainter *painter)
-    : DrawCommand(painter)
+    : DrawCommand(painter, std::make_unique<DrawCurveStrategy>())
 {
-    m_drawStrategy = std::make_unique<DrawCurveStrategy>();
 }

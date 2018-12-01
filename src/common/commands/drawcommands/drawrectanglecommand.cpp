@@ -3,7 +3,6 @@
 #include <QDebug>
 
 DrawRectangleCommand::DrawRectangleCommand(QPainter* painter)
-    : DrawCommand (painter)
+    : DrawCommand (painter, std::make_unique<DrawRectangleStrategy>())
 {
-    m_drawStrategy = std::make_unique<DrawRectangleStrategy>();
 }

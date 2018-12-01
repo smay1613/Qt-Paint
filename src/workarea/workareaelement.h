@@ -20,9 +20,8 @@ private slots:
     void onUpdateRequested();
 
 private:
-    std::unique_ptr<WorkAreaServerImpl> m_workAreaBL;
-
     void connectSignals();
+    std::unique_ptr<WorkAreaServerImpl> m_workAreaBL;
 };
 
 #endif // WORKAREA_H

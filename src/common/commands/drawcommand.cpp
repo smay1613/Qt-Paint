@@ -7,6 +7,13 @@ DrawCommand::DrawCommand(QPainter* painter)
 
 }
 
+DrawCommand::DrawCommand(QPainter *painter, std::unique_ptr<IDrawStrategy> strategy)
+                : m_painter {painter},
+                  m_drawStrategy {std::move(strategy)}
+{
+
+}
+
 void DrawCommand::execute()
 {
     qWarning() << "Please provide execution arguments for draw command!";

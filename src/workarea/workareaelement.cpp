@@ -7,7 +7,7 @@
 #include "workareaserverimpl.h"
 
 WorkAreaElement::WorkAreaElement() :
-    m_workAreaBL(new WorkAreaServerImpl)
+    m_workAreaBL {std::make_unique<WorkAreaServerImpl>()}
 {
     connectSignals();
 }
