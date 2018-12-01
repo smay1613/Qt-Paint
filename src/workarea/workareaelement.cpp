@@ -9,6 +9,7 @@ WorkAreaElement::WorkAreaElement() :
     m_workAreaBL {std::make_unique<WorkAreaServerImpl>()},
     m_painter {nullptr}
 {
+    setAntialiasing(true);
     connectSignals();
 }
 
