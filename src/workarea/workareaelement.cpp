@@ -12,8 +12,12 @@ WorkAreaElement::WorkAreaElement() :
     connectSignals();
 }
 
-void WorkAreaElement::paint(QPainter *painter)
+void WorkAreaElement::paint(QPainter* painter)
 {
+    if (m_painter != painter) {
+        m_painter = painter;
+        setDefaultPaintSettings();
+    }
     if (m_workAreaBL) {
         m_workAreaBL->onPaint(painter);
     }
@@ -41,4 +45,9 @@ void WorkAreaElement::connectSignals()
 
     connect(m_workAreaBL.get(), &WorkAreaServerImpl::updateRequested,
                     this, &WorkAreaElement::onUpdateRequested);
+}
+
+void WorkAreaElement::setDefaultPaintSettings()
+{
+    m_painter->setRenderHint(QPainter::RenderHint::HighQualityAntialiasing);
 }

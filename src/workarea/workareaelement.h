@@ -21,7 +21,9 @@ private slots:
 
 private:
     void connectSignals();
+    void setDefaultPaintSettings();
     std::unique_ptr<WorkAreaServerImpl> m_workAreaBL;
+    QPainter* m_painter;
 };
 
 #endif // WORKAREA_H
