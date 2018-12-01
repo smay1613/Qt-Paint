@@ -1,5 +1,4 @@
 #include "workareaelement.h"
-//#include <QBrush>
 #include <QPainter>
 #include <QObject>
 #include <QPoint>

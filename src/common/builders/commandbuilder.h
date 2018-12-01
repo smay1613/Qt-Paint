@@ -8,10 +8,7 @@ class DrawCommandBuilder
 public:
     DrawCommandBuilder() = default;
 
-    std::unique_ptr<DrawCommand> getActiveCommand(QPainter* painter);
-
-private:
-    std::unique_ptr<DrawCommand> m_currentCommand;
+    std::unique_ptr<DrawCommand> getActiveCommand(QPainter* painter) const;
 };
 
 #endif // COMMANDBUILDER_H

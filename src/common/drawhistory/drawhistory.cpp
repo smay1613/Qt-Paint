@@ -22,10 +22,10 @@ void DrawHistory::redo()
 
 void DrawHistory::add(std::unique_ptr<ICommand> command)
 {
-    this->add(std::move(command), QBrush{});
+    this->add(std::move(command), QPen {});
 }
 
-void DrawHistory::add(std::unique_ptr<ICommand> command, const QBrush& brush)
+void DrawHistory::add(std::unique_ptr<ICommand> command, const QPen &brush)
 {
     if (!isEmpty() && !isOnTop()) {
         // clearing old branch
@@ -36,12 +36,12 @@ void DrawHistory::add(std::unique_ptr<ICommand> command, const QBrush& brush)
     ++m_currentAction;
 }
 
-std::list<DrawHistory::CommandBrushPair>::iterator DrawHistory::begin()
+std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::begin()
 {
     return m_commandHistory.begin();
 }
 
-std::list<DrawHistory::CommandBrushPair>::iterator DrawHistory::end()
+std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::end()
 {
     return m_commandHistory.end();
 }

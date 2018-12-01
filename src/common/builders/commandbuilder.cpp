@@ -5,7 +5,7 @@
 #include "../commands/drawcommands/drawlinecommand.h"
 #include <QDebug>
 
-std::unique_ptr<DrawCommand> DrawCommandBuilder::getActiveCommand(QPainter *painter)
+std::unique_ptr<DrawCommand> DrawCommandBuilder::getActiveCommand(QPainter *painter) const
 {
     PaintTypes::ShapeType activeShapeType = PaintSettings::instance().activeShapeType();
 

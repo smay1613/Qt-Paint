@@ -8,14 +8,19 @@ WorkAreaServerImpl::WorkAreaServerImpl()
       m_painter(nullptr)
 {
     updateActiveCommand();
+    updateActivePen();
     connect(&PaintSettings::instance(), &PaintSettings::activeShapeTypeChanged,
-                this, &WorkAreaServerImpl::onSettingsChanged);
+                this, &WorkAreaServerImpl::onActiveCommandSettingsChanged);
+    connect(&PaintSettings::instance(), &PaintSettings::activeColorChanged,
+                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
+    connect(&PaintSettings::instance(), &PaintSettings::penSizeChanged,
+                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
 }
 
 void WorkAreaServerImpl::submit()
 {
     if (m_activeCommand) {
-        m_history.add(std::move(m_activeCommand));
+        m_history.add(std::move(m_activeCommand), m_activePen);
         m_activeCommand.reset(nullptr);
     }
     updateActiveCommand();
@@ -57,19 +62,26 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     }
 
     for (const auto& command : m_history) {
+        m_painter->setPen(command.second);
         if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
             drawCommand->draw();
         }
     }
 
     if (m_activeCommand) {
+        m_painter->setPen(m_activePen);
         m_activeCommand->draw();
     }
 }
 
-void WorkAreaServerImpl::onSettingsChanged()
+void WorkAreaServerImpl::onActiveCommandSettingsChanged()
 {
     updateActiveCommand();
+}
+
+void WorkAreaServerImpl::onActivePenSettingsChanged()
+{
+    updateActivePen();
 }
 
 void WorkAreaServerImpl::connectActiveCommand()
@@ -100,4 +112,9 @@ void WorkAreaServerImpl::updateActiveCommand()
     } else {
         qDebug() << "Active command is nullptr!";
     }
+}
+
+void WorkAreaServerImpl::updateActivePen()
+{
+    m_activePen = m_penBuilder.getActivePen();
 }

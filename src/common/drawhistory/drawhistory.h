@@ -3,13 +3,13 @@
 #include "history.h"
 #include <unordered_map>
 #include <utility>
-#include <QBrush>
+#include <QPen>
 #include "../commands/drawcommand.h"
 
 class DrawHistory : public IHistory
 {
 public:
-    using CommandBrushPair = std::pair<std::unique_ptr<ICommand>, const QBrush>;
+    using CommandPenPair = std::pair<std::unique_ptr<ICommand>, const QPen>;
 
     DrawHistory();
 
@@ -17,10 +17,10 @@ public:
     void redo() override;
 
     void add(std::unique_ptr<ICommand> command) override;
-    void add(std::unique_ptr<ICommand> command, const QBrush& brush);
+    void add(std::unique_ptr<ICommand> command, const QPen& brush);
 
-    std::list<CommandBrushPair>::iterator begin();
-    std::list<CommandBrushPair>::iterator end();
+    std::list<CommandPenPair>::iterator begin();
+    std::list<CommandPenPair>::iterator end();
 
     void clear() override;
     bool isEmpty() const override;
@@ -29,9 +29,9 @@ public:
     bool isOnStart() const;
 
 private:
-    std::list<CommandBrushPair> m_commandHistory;
+    std::list<CommandPenPair> m_commandHistory;
 
-    std::list<CommandBrushPair>::iterator m_currentAction;
+    std::list<CommandPenPair>::iterator m_currentAction;
 };
 
 #endif // DRAWHISTORY_H
