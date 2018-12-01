@@ -3,7 +3,7 @@ import QtQuick.Controls 2.4
 
 Image {
     property var shapeType: type
-    sourceSize.width: 20
-    sourceSize.height: 20
+    sourceSize.width: 40
+    sourceSize.height: 40
     source: display
 }

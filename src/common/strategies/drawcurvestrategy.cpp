@@ -9,6 +9,6 @@ void DrawCurveStrategy::drawRequest(QPainter *painter)
 void DrawCurveStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
 {
     if (paintStarted && state.m_pressed) {
-        m_spline.addPoint({static_cast<qreal>(state.m_x), static_cast<qreal>(state.m_y)});
+        m_spline.addPoint({state.m_x, state.m_y});
     }
 }

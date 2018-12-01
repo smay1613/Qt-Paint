@@ -14,12 +14,10 @@ GridLayout {
     ColorBar {
         id: _colorBar
     }
-
-    PenSizeTrackBar {
-        width: 150
-    }
-
     ShapePicker {
         id: _shapePicker
+    }
+    PenSizeTrackBar {
+        width: 150
     }
 }

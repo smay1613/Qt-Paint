@@ -8,7 +8,6 @@
         <file>qml/Toolbar/ToolBar.qml</file>
         <file>qml/Toolbar/PenSettings/qmldir</file>
         <file>qml/Toolbar/PenSettings/PenSizeTrackBar.qml</file>
-        <file>qml/qtquickcontrols2.conf</file>
         <file>qml/Common/Picker.qml</file>
         <file>qml/Common/qmldir</file>
         <file>qml/Toolbar/ColorPicker/ColorBox.qml</file>
@@ -19,5 +18,6 @@
         <file>resources/shapeicons/line.svg</file>
         <file>resources/shapeicons/pencil.svg</file>
         <file>resources/shapeicons/rectangle.svg</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

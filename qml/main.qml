@@ -1,28 +1,30 @@
 import QtQuick 2.9
-import QtQuick.Window 2.2
-import "."
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
 import Toolbar 1.0
 import WorkAreaPlugin 1.0
 
-Window {
+ApplicationWindow {
     id: _rootWindow
     visible: true
-    width: 640
-    height: 480
+    width: 860
+    height: 640
     title: qsTr("Paint")
 
-    ToolBar {
-        id: _toolBar
-        anchors.top: _rootWindow.top
+    header: Pane {
+        Material.elevation: 5
+        ToolBar {
+            id: _toolBar
+            anchors.fill: parent
+        }
     }
 
     WorkArea {
         id: _workArea
 
         width: _rootWindow.width
-        height: _rootWindow.height - _toolBar.height
+        height: _rootWindow.height - header.height
 
-        anchors.top: _toolBar.bottom
         anchors.topMargin: 10
 
         MouseArea {
