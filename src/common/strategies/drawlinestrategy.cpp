@@ -1,8 +1,11 @@
 #include "drawlinestrategy.h"
+#include <QDebug>
 
 void DrawLineStrategy::drawRequest(QPainter *painter)
 {
-    painter->drawLine(m_line.getLine());
+    if (!m_line.getLine().isNull()) {
+        painter->drawLine(m_line.getLine());
+    }
 }
 
 void DrawLineStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
