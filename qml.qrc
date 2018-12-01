@@ -19,5 +19,11 @@
         <file>resources/shapeicons/pencil.svg</file>
         <file>resources/shapeicons/rectangle.svg</file>
         <file>qtquickcontrols2.conf</file>
+        <file>qml/Toolbar/ActionPicker/ActionBox.qml</file>
+        <file>qml/Toolbar/ActionPicker/HistoryActionPicker.qml</file>
+        <file>qml/Toolbar/ActionPicker/qmldir</file>
+        <file>resources/actionicons/clear.svg</file>
+        <file>resources/actionicons/redo.svg</file>
+        <file>resources/actionicons/undo.svg</file>
     </qresource>
 </RCC>

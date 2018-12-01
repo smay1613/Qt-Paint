@@ -38,7 +38,8 @@ SOURCES += \
     src/toolbar/paintsettings/paintsettings.cpp \
     src/toolbar/shapepicker/shapesmodel.cpp \
     src/common/builders/commandbuilder.cpp \
-    src/common/builders/paintpenbuilder.cpp
+    src/common/builders/paintpenbuilder.cpp \
+    src/toolbar/adaptors/actionmanageradaptor.cpp
 
 RESOURCES += qml.qrc
 
@@ -79,6 +80,7 @@ HEADERS += \
     src/toolbar/paintsettings/paintsettings.h \
     src/toolbar/shapepicker/shapesmodel.h \
     src/common/builders/commandbuilder.h \
-    src/common/builders/paintpenbuilder.h
+    src/common/builders/paintpenbuilder.h \
+    src/toolbar/adaptors/actionmanageradaptor.h
 
 DISTFILES +=

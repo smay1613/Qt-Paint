@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import Toolbar.ColorPicker 1.0
 import Toolbar.PenSettings 1.0
 import Toolbar.ShapePicker 1.0
+import Toolbar.ActionPicker 1.0
 
 GridLayout {
     id: _rootToolbar
@@ -16,6 +17,9 @@ GridLayout {
     }
     ShapePicker {
         id: _shapePicker
+    }
+    ActionPicker {
+        id: _actionPicker
     }
     PenSizeTrackBar {
         width: 150

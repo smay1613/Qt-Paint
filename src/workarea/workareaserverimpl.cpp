@@ -5,23 +5,20 @@
 
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted(false),
-      m_painter(nullptr)
+      m_painter(nullptr),
+      m_rActionManager(ActionManagerAdaptor::instance())
 {
     updateActiveCommand();
     updateActivePen();
-    connect(&PaintSettings::instance(), &PaintSettings::activeShapeTypeChanged,
-                this, &WorkAreaServerImpl::onActiveCommandSettingsChanged);
-    connect(&PaintSettings::instance(), &PaintSettings::activeColorChanged,
-                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
-    connect(&PaintSettings::instance(), &PaintSettings::penSizeChanged,
-                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
+
+    connectSignals();
 }
 
 void WorkAreaServerImpl::submit()
 {
     if (m_activeCommand) {
         m_history.add(std::move(m_activeCommand), m_activePen);
-        m_activeCommand.reset(nullptr);
+        updateActionsAvailability();
     }
     updateActiveCommand();
 }
@@ -84,6 +81,46 @@ void WorkAreaServerImpl::onActivePenSettingsChanged()
     updateActivePen();
 }
 
+void WorkAreaServerImpl::onUndoRequested()
+{
+    m_history.undo();
+    updateActionsAvailability();
+    emit updateRequested();
+}
+
+void WorkAreaServerImpl::onRedoRequested()
+{
+    m_history.redo();
+    updateActionsAvailability();
+    emit updateRequested();
+}
+
+void WorkAreaServerImpl::onClearRequested()
+{
+    m_history.clear();
+    updateActionsAvailability();
+    emit updateRequested();
+}
+
+void WorkAreaServerImpl::connectSignals()
+{
+    // Connections with settings
+    connect(&PaintSettings::instance(), &PaintSettings::activeShapeTypeChanged,
+                this, &WorkAreaServerImpl::onActiveCommandSettingsChanged);
+    connect(&PaintSettings::instance(), &PaintSettings::activeColorChanged,
+                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
+    connect(&PaintSettings::instance(), &PaintSettings::penSizeChanged,
+                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
+
+    // Connections with ActionManager
+    connect(&m_rActionManager, &ActionManagerAdaptor::undoRequested,
+                this, &WorkAreaServerImpl::onUndoRequested);
+    connect(&m_rActionManager, &ActionManagerAdaptor::redoRequested,
+                this, &WorkAreaServerImpl::onRedoRequested);
+    connect(&m_rActionManager, &ActionManagerAdaptor::clearRequested,
+                this, &WorkAreaServerImpl::onClearRequested);
+}
+
 void WorkAreaServerImpl::connectActiveCommand()
 {
     connect(m_activeCommand.get(), &DrawCommand::updateRequested,
@@ -110,11 +147,17 @@ void WorkAreaServerImpl::updateActiveCommand()
     if (m_activeCommand) {
         connectActiveCommand();
     } else {
-        qDebug() << "Active command is nullptr!";
+        qCritical() << "Active command is nullptr!";
     }
 }
 
 void WorkAreaServerImpl::updateActivePen()
 {
     m_activePen = m_penBuilder.getActivePen();
+}
+
+void WorkAreaServerImpl::updateActionsAvailability()
+{
+    m_rActionManager.setUndoAvailable(!m_history.isEmpty() && !m_history.isOnStart());
+    m_rActionManager.setRedoAvailable(!m_history.isEmpty() && !m_history.isOnTop());
 }

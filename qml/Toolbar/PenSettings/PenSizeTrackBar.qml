@@ -5,7 +5,7 @@ import ToolBarPlugin 1.0
 
 ColumnLayout {
     id: _rootPenSizeTrackBar
-    objectName: "PenSizeTrackBarItem"
+    objectName: "PenSizeTrackBarColumnLayout"
 
     Layout.topMargin: 5
 

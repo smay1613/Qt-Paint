@@ -1,4 +1,5 @@
 #include "drawhistory.h"
+#include <QDebug>
 
 DrawHistory::DrawHistory()
         : m_currentAction(m_commandHistory.begin())
@@ -33,7 +34,7 @@ void DrawHistory::add(std::unique_ptr<ICommand> command, const QPen &brush)
     }
 
     m_commandHistory.emplace_back(std::make_pair(std::move(command), brush));
-    ++m_currentAction;
+    m_currentAction = std::prev(m_commandHistory.end());
 }
 
 std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::begin()
@@ -43,12 +44,13 @@ std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::begin()
 
 std::list<DrawHistory::CommandPenPair>::iterator DrawHistory::end()
 {
-    return m_commandHistory.end();
+    return std::next(m_currentAction);
 }
 
 void DrawHistory::clear()
 {
     m_commandHistory.clear();
+    m_currentAction = m_commandHistory.begin();
 }
 
 bool DrawHistory::isEmpty() const
@@ -63,5 +65,5 @@ bool DrawHistory::isOnTop() const
 
 bool DrawHistory::isOnStart() const
 {
-    return m_currentAction == m_commandHistory.begin();
+    return m_currentAction == std::prev(m_commandHistory.begin());
 }
