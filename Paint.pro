@@ -15,17 +15,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     src/main.cpp \
     src/toolbar/colorpicker/colorsmodel.cpp \
-    src/workarea/workareaplugin.cpp \
     src/workarea/workareaelement.cpp \
     src/workarea/workareaserverimpl.cpp \
     src/common/commands/drawcommands/drawlinecommand.cpp \
-    src/common/commands/command.cpp \
     src/common/commands/drawcommand.cpp \
-    src/common/strategies/drawstrategy.cpp \
     src/common/shapes/boundedshape.cpp \
     src/common/shapes/lineshape.cpp \
     src/common/strategies/drawlinestrategy.cpp \
-    src/common/drawhistory/history.cpp \
     src/common/drawhistory/drawhistory.cpp \
     src/common/commands/drawcommands/drawrectanglecommand.cpp \
     src/common/strategies/drawrectanglestrategy.cpp \
@@ -34,7 +30,6 @@ SOURCES += \
     src/common/commands/drawcommands/drawcurvecommand.cpp \
     src/common/strategies/drawcurvestrategy.cpp \
     src/common/shapes/splineshape.cpp \
-    src/toolbar/toolbarplugin.cpp \
     src/toolbar/paintsettings/paintsettings.cpp \
     src/toolbar/shapepicker/shapesmodel.cpp \
     src/common/builders/commandbuilder.cpp \
@@ -82,5 +77,3 @@ HEADERS += \
     src/common/builders/commandbuilder.h \
     src/common/builders/paintpenbuilder.h \
     src/toolbar/adaptors/actionmanageradaptor.h
-
-DISTFILES +=
