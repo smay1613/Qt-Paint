@@ -1,2 +1,2 @@
 module Toolbar
-ToolBar 1.0 ToolBar.qml
+ScalableToolBar 1.0 ToolBar.qml

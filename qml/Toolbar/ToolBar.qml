@@ -6,12 +6,11 @@ import Toolbar.ShapePicker 1.0
 import Toolbar.ActionPicker 1.0
 import Toolbar.AntialiasingSettings 1.0
 
-GridLayout {
+Flow {
     id: _rootToolbar
-    objectName: "ToolBarRowLayout"
+    objectName: "ToolBarFlow"
 
-    rowSpacing: 15
-    columnSpacing: 15
+    spacing: 15
 
     ColorBar {
         id: _colorBar
@@ -23,7 +22,7 @@ GridLayout {
         id: _actionPicker
     }
     PenSizeTrackBar {
-        width: 150
+        id: _penSizeBar
     }
     AntialiasingToggle {
         id: _antialiasingToggle
