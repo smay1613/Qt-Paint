@@ -29,9 +29,9 @@ void WorkAreaElement::onUpdateRequested()
     update({QPoint {0, 0}, size().toSize()});
 }
 
-void WorkAreaElement::onAntialisingChanged(bool antialising)
+void WorkAreaElement::onAntialiasingChanged(bool antialiasing)
 {
-    setAntialiasing(antialising);
+    setAntialiasing(antialiasing);
 }
 
 void WorkAreaElement::connectSignals()
@@ -52,7 +52,7 @@ void WorkAreaElement::connectSignals()
                     this, &WorkAreaElement::onUpdateRequested);
 
     connect(&PaintSettings::instance(), &PaintSettings::antialiasingChanged,
-                    this, &WorkAreaElement::onAntialisingChanged);
+                    this, &WorkAreaElement::onAntialiasingChanged);
 }
 
 void WorkAreaElement::setDefaultPaintSettings()

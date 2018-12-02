@@ -18,7 +18,7 @@ signals:
 
 private slots:
     void onUpdateRequested();
-    void onAntialisingChanged(bool antialising);
+    void onAntialiasingChanged(bool antialising);
 
 private:
     void connectSignals();
