@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import ToolBarPlugin 1.0
+import Common 1.0
 
 RowLayout {
     id: _rootShapePicker
@@ -19,6 +20,9 @@ RowLayout {
         onClicked: {
             ActionManager.undo();
         }
+        BasicTooltip {
+            text: "Undo action"
+        }
     }
     RoundButton {
         Material.background: Material.LightGreen
@@ -29,6 +33,9 @@ RowLayout {
         onClicked: {
             ActionManager.redo();
         }
+        BasicTooltip {
+            text: "Redo action"
+        }
     }
     RoundButton {
         contentItem: ActionBox {
@@ -36,6 +43,9 @@ RowLayout {
         }
         onClicked: {
             ActionManager.clear();
+        }
+        BasicTooltip {
+            text: "Clear action"
         }
     }
 }

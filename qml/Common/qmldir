@@ -1,2 +1,3 @@
 module Common
 Picker 1.0 Picker.qml
+BasicTooltip 1.0 BasicTooltip.qml
