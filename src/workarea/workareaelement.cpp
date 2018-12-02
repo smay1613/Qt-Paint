@@ -4,12 +4,12 @@
 #include <QPoint>
 #include <memory>
 #include "workareaserverimpl.h"
+#include "../toolbar/paintsettings/paintsettings.h"
 
 WorkAreaElement::WorkAreaElement() :
     m_workAreaBL {std::make_unique<WorkAreaServerImpl>()},
     m_painter {nullptr}
 {
-    setAntialiasing(true);
     connectSignals();
 }
 
@@ -29,6 +29,11 @@ void WorkAreaElement::onUpdateRequested()
     update({QPoint {0, 0}, size().toSize()});
 }
 
+void WorkAreaElement::onAntialisingChanged(bool antialising)
+{
+    setAntialiasing(antialising);
+}
+
 void WorkAreaElement::connectSignals()
 {
     if (!m_workAreaBL) {
@@ -40,12 +45,14 @@ void WorkAreaElement::connectSignals()
                     m_workAreaBL.get(), &WorkAreaServerImpl::onMouseClicked);
     connect(this, &WorkAreaElement::mousePositionChanged,
                     m_workAreaBL.get(), &WorkAreaServerImpl::onMousePositionChanged);
-
     connect(this, &WorkAreaElement::mouseReleased,
                     m_workAreaBL.get(), &WorkAreaServerImpl::onMouseReleased);
 
     connect(m_workAreaBL.get(), &WorkAreaServerImpl::updateRequested,
                     this, &WorkAreaElement::onUpdateRequested);
+
+    connect(&PaintSettings::instance(), &PaintSettings::antialiasingChanged,
+                    this, &WorkAreaElement::onAntialisingChanged);
 }
 
 void WorkAreaElement::setDefaultPaintSettings()

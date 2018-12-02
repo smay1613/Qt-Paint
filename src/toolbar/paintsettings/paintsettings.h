@@ -9,6 +9,7 @@ class PaintSettings : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool antialiasing READ antialiasing WRITE setAntialiasing NOTIFY antialiasingChanged)
     Q_PROPERTY(QColor activeColor READ activeColor WRITE setActiveColor NOTIFY activeColorChanged)
     Q_PROPERTY(PaintTypes::ShapeType activeShape READ activeShapeType WRITE setActiveShapeType NOTIFY activeShapeTypeChanged)
     Q_PROPERTY(int penSize READ currentPenSize WRITE setCurrentPenSize NOTIFY penSizeChanged)
@@ -33,13 +34,19 @@ public:
     int currentPenSize() const;
     void setCurrentPenSize(int currentPenSize);
 
+    bool antialiasing() const;
+    void setAntialiasing(bool antialiasing);
+
 signals:
     void activeColorChanged(const QColor& color);
     void penSizeChanged(const int penSize);
     void activeShapeTypeChanged(const PaintTypes::ShapeType& shapeType);
+    void antialiasingChanged(bool antialiasing);
 
 private:
     PaintSettings();
+
+    bool m_antialiasing;
 
     const int m_penSizeDefault;
     const int m_penSizeMin;

@@ -18,6 +18,7 @@ signals:
 
 private slots:
     void onUpdateRequested();
+    void onAntialisingChanged(bool antialising);
 
 private:
     void connectSignals();

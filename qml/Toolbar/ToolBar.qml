@@ -4,6 +4,7 @@ import Toolbar.ColorPicker 1.0
 import Toolbar.PenSettings 1.0
 import Toolbar.ShapePicker 1.0
 import Toolbar.ActionPicker 1.0
+import Toolbar.AntialiasingSettings 1.0
 
 GridLayout {
     id: _rootToolbar
@@ -23,5 +24,8 @@ GridLayout {
     }
     PenSizeTrackBar {
         width: 150
+    }
+    AntialiasingToggle {
+        id: _antialiasingToggle
     }
 }

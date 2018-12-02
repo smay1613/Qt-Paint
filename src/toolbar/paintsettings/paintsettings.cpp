@@ -2,13 +2,25 @@
 #include <QDebug>
 
 PaintSettings::PaintSettings() :
-    m_penSizeDefault(14),
-    m_penSizeMin(1),
-    m_penSizeMax(72),
-    m_activeShapeType(PaintTypes::ShapeType::Invalid),
-    m_currentPenSize(m_penSizeDefault)
+    m_antialiasing {false},
+    m_penSizeDefault {14},
+    m_penSizeMin {1},
+    m_penSizeMax {72},
+    m_activeShapeType {PaintTypes::ShapeType::Invalid},
+    m_currentPenSize {m_penSizeDefault}
 {
 
+}
+
+bool PaintSettings::antialiasing() const
+{
+    return m_antialiasing;
+}
+
+void PaintSettings::setAntialiasing(bool antialiasing)
+{
+    m_antialiasing = antialiasing;
+    emit antialiasingChanged(m_antialiasing);
 }
 
 int PaintSettings::currentPenSize() const
