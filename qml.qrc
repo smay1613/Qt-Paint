@@ -25,8 +25,6 @@
         <file>resources/actionicons/clear.svg</file>
         <file>resources/actionicons/redo.svg</file>
         <file>resources/actionicons/undo.svg</file>
-        <file>qml/Toolbar/AntialiasingSettings/AntialiasingToggle.qml</file>
-        <file>qml/Toolbar/AntialiasingSettings/qmldir</file>
         <file>qml/Common/BasicTooltip.qml</file>
     </qresource>
 </RCC>
