@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.11
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
@@ -21,7 +21,14 @@ RowLayout {
             ActionManager.undo();
         }
         BasicTooltip {
-            text: "Undo action"
+            text: "Undo action (" + _undoShortcut.nativeText + ")"
+        }
+        Shortcut {
+            id: _undoShortcut
+            sequence: StandardKey.Undo
+            onActivated: {
+                ActionManager.undo();
+            }
         }
     }
     RoundButton {
@@ -34,7 +41,14 @@ RowLayout {
             ActionManager.redo();
         }
         BasicTooltip {
-            text: "Redo action"
+            text: "Redo action (" + _redoShortcut.nativeText + ")"
+        }
+        Shortcut {
+            id: _redoShortcut
+            sequence: StandardKey.Redo
+            onActivated: {
+                ActionManager.redo();
+            }
         }
     }
     RoundButton {
@@ -45,7 +59,14 @@ RowLayout {
             ActionManager.clear();
         }
         BasicTooltip {
-            text: "Clear action"
+            text: "Clear workarea (" + _clearShortcut.nativeText + ")"
+        }
+        Shortcut {
+            id: _clearShortcut
+            sequence: StandardKey.Delete
+            onActivated: {
+                ActionManager.clear();
+            }
         }
     }
 }

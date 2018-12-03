@@ -15,6 +15,10 @@ RoundButton {
         source: model.display
     }
     BasicTooltip {
-        text: _image.type.toString()
+        text: _image.type.toString() + " (Ctrl+" + (index + 1) + ")"
+    }
+    Shortcut {
+        sequence: "Ctrl+" + (index + 1)
+        onActivated: requestActivate(index)
     }
 }

@@ -10,6 +10,14 @@ Grid {
 
     property string delegateSource
 
+    function requestActivate(index) {
+        if (index < 0 || index >= model.rowCount()) {
+            return;
+        } else {
+            _dataRepeater.setActive(index);
+        }
+    }
+
     columns: model ? model.rowCount() / 2
                    : 1
     rows: 2
@@ -23,19 +31,13 @@ Grid {
 
         property int activeItemIndex
 
-        // we should configure it on data repeater level,
-        // because each item box should know nothing about another one
         function setActive(index) {
-            if (activeItemIndex >= 0) {
-                itemAt(activeItemIndex).active = false;
-            }
+            itemAt(activeItemIndex).active = false;
 
-            if (index >= 0) {
-                var newActiveItem = itemAt(index);
-                newActiveItem.active = true;
-                activeItemIndex = index;
-                _rootPicker.activeItem = newActiveItem.itemBox;
-            }
+            var newActiveItem = itemAt(index);
+            newActiveItem.active = true;
+            activeItemIndex = index;
+            _rootPicker.activeItem = newActiveItem.itemBox;
         }
 
         delegate: Rectangle {
