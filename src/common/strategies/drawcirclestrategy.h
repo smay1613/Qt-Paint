@@ -8,7 +8,7 @@ class DrawCircleStrategy : public IDrawStrategy
 public:
     DrawCircleStrategy() = default;
     virtual void drawRequest(QPainter* painter);
-    virtual void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted);
+    virtual void mouseTouch(const QMouseEvent &state, bool paintStarted);
 
 private:
     BoundedShape m_bounds;

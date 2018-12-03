@@ -6,9 +6,9 @@ void DrawCurveStrategy::drawRequest(QPainter *painter)
     painter->drawPath(m_spline.getPath());
 }
 
-void DrawCurveStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
+void DrawCurveStrategy::mouseTouch(const QMouseEvent& state, bool paintStarted)
 {
-    if (paintStarted && state.m_pressed) {
-        m_spline.addPoint({state.m_x, state.m_y});
+    if (paintStarted && state.buttons() == Qt::LeftButton) {
+        m_spline.addPoint(state.pos());
     }
 }

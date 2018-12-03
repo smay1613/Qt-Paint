@@ -2,6 +2,7 @@
 #define DRAWSTRATEGY_H
 #include "../painttypes.h"
 #include <QPainter>
+#include <QMouseEvent>
 
 class IDrawStrategy
 {
@@ -10,7 +11,7 @@ public:
     virtual ~IDrawStrategy() {}
 
     virtual void drawRequest(QPainter* painter) = 0;
-    virtual void mouseTouch(const PaintTypes::MouseState& state, bool paintStarted) = 0;
+    virtual void mouseTouch(const QMouseEvent& state, bool paintStarted) = 0;
 };
 
 #endif // DRAWSTRATEGY_H

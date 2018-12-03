@@ -2,6 +2,7 @@
 #define WORKAREASERVERIMPL_H
 #include <QObject>
 #include <QPainter>
+#include <QMouseEvent>
 #include "../common/drawhistory/drawhistory.h"
 #include "../common/builders/commandbuilder.h"
 #include "../common/builders/paintpenbuilder.h"
@@ -20,9 +21,9 @@ signals:
     void updateRequested();
 
 public slots:
-    void onMousePositionChanged(const int mouseX, const int mouseY, const bool mousePressed);
-    void onMouseClicked(const int mouseX, const int mouseY);
-    void onMouseReleased(const int mouseX, const int mouseY);
+    void onMouseMoved(const QMouseEvent* event);
+    void onMousePressed(const QMouseEvent* event);
+    void onMouseReleased(const QMouseEvent* event);
 
     void onPaint(QPainter* painter);
 

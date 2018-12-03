@@ -25,23 +25,5 @@ ApplicationWindow {
         height: _rootWindow.height - header.height
 
         anchors.topMargin: 10
-
-        MouseArea {
-            anchors.fill: parent
-            acceptedButtons: Qt.LeftButton
-            hoverEnabled: true
-
-            onReleased: {
-                _workArea.mouseReleased(mouseX, mouseY);
-            }
-
-            onPressed: {
-                _workArea.mouseClicked(mouseX, mouseY);
-            }
-
-            onPositionChanged: {
-                _workArea.mousePositionChanged(mouseX, mouseY, pressed);
-            }
-        }
     }
 }

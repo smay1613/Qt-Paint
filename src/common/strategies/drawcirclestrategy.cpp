@@ -6,11 +6,11 @@ void DrawCircleStrategy::drawRequest(QPainter *painter)
     painter->drawEllipse(m_bounds.getRect());
 }
 
-void DrawCircleStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
+void DrawCircleStrategy::mouseTouch(const QMouseEvent& state, bool paintStarted)
 {
     if (!paintStarted) {
-        m_bounds.setStart({state.m_x, state.m_y});
+        m_bounds.setStart(state.pos());
     } else {
-        m_bounds.setEnd({state.m_x, state.m_y});
+        m_bounds.setEnd(state.pos());
     }
 }

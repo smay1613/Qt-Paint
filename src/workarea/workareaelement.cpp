@@ -9,6 +9,7 @@ WorkAreaElement::WorkAreaElement() :
     m_workAreaBL {std::make_unique<WorkAreaServerImpl>()},
     m_painter {nullptr}
 {
+    setAcceptedMouseButtons(Qt::LeftButton);
     setAntialiasing(true);
     setRenderTarget(FramebufferObject);
     connectSignals();
@@ -37,11 +38,11 @@ void WorkAreaElement::connectSignals()
         return;
     }
 
-    connect(this, &WorkAreaElement::mouseClicked,
-                    m_workAreaBL.get(), &WorkAreaServerImpl::onMouseClicked);
-    connect(this, &WorkAreaElement::mousePositionChanged,
-                    m_workAreaBL.get(), &WorkAreaServerImpl::onMousePositionChanged);
-    connect(this, &WorkAreaElement::mouseReleased,
+    connect(this, &WorkAreaElement::mousePressEvent,
+                    m_workAreaBL.get(), &WorkAreaServerImpl::onMousePressed);
+    connect(this, &WorkAreaElement::mouseMoveEvent,
+                    m_workAreaBL.get(), &WorkAreaServerImpl::onMouseMoved);
+    connect(this, &WorkAreaElement::mouseReleaseEvent,
                     m_workAreaBL.get(), &WorkAreaServerImpl::onMouseReleased);
 
     connect(m_workAreaBL.get(), &WorkAreaServerImpl::updateRequested,

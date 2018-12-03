@@ -3,6 +3,7 @@
 #include "command.h"
 #include <QPainter>
 #include <QObject>
+#include <QMouseEvent>
 #include <memory>
 #include "../painttypes.h"
 #include "../strategies/drawstrategy.h"
@@ -16,7 +17,7 @@ public:
     virtual ~DrawCommand() = default;
 
     void execute() final;
-    virtual void execute(const PaintTypes::MouseState& mouseState, bool paintStarted);
+    virtual void execute(const QMouseEvent& mouseState, bool paintStarted);
     virtual void draw() const;
 
     void setPainter(QPainter *painter);

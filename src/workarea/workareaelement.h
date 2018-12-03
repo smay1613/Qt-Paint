@@ -12,9 +12,9 @@ public:
     void paint(QPainter* painter) override;
 
 signals:
-    void mousePositionChanged(const int mouseX, const int mouseY, const bool mouseClicked);
-    void mouseClicked(const int mouseX, const int mouseY);
-    void mouseReleased(const int mouseX, const int mouseY);
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
 
 private slots:
     void onUpdateRequested();

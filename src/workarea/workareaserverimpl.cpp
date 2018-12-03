@@ -23,19 +23,19 @@ void WorkAreaServerImpl::submit()
     updateActiveCommand();
 }
 
-void WorkAreaServerImpl::onMousePositionChanged(const int mouseX, const int mouseY, const bool mousePressed)
+void WorkAreaServerImpl::onMouseMoved(const QMouseEvent* event)
 {
     if (m_activeCommand && m_paintStarted) {
-        m_activeCommand->execute({mouseX, mouseY, mousePressed}, m_paintStarted);
+        m_activeCommand->execute(*event, m_paintStarted);
     }
 }
 
-void WorkAreaServerImpl::onMouseClicked(const int mouseX, const int mouseY)
+void WorkAreaServerImpl::onMousePressed(const QMouseEvent* event)
 {
     m_paintStarted = !m_paintStarted;
 
     if (m_activeCommand) {
-        m_activeCommand->execute({mouseX, mouseY, true}, !m_paintStarted);
+        m_activeCommand->execute(*event, !m_paintStarted);
     }
 
     if (!m_paintStarted) {
@@ -43,10 +43,10 @@ void WorkAreaServerImpl::onMouseClicked(const int mouseX, const int mouseY)
     }
 }
 
-void WorkAreaServerImpl::onMouseReleased(const int mouseX, const int mouseY)
+void WorkAreaServerImpl::onMouseReleased(const QMouseEvent *event)
 {
     if (m_paintStarted) {
-        onMouseClicked(mouseX, mouseY);
+        onMousePressed(event);
     } else {
         submit();
     }

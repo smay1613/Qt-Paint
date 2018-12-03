@@ -5,11 +5,11 @@ void DrawRectangleStrategy::drawRequest(QPainter *painter)
     painter->drawRect(m_bounds.getRect());
 }
 
-void DrawRectangleStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
+void DrawRectangleStrategy::mouseTouch(const QMouseEvent &state, bool paintStarted)
 {
     if (!paintStarted) {
-        m_bounds.setStart({state.m_x, state.m_y});
+        m_bounds.setStart(state.pos());
     } else {
-        m_bounds.setEnd({state.m_x, state.m_y});
+        m_bounds.setEnd(state.pos());
     }
 }

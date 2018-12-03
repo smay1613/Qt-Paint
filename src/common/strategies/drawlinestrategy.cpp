@@ -8,11 +8,11 @@ void DrawLineStrategy::drawRequest(QPainter *painter)
     }
 }
 
-void DrawLineStrategy::mouseTouch(const PaintTypes::MouseState &state, bool paintStarted)
+void DrawLineStrategy::mouseTouch(const QMouseEvent &state, bool paintStarted)
 {
     if (!paintStarted) {
-        m_line.setStart({state.m_x, state.m_y});
+        m_line.setStart(state.pos());
     } else {
-        m_line.setEnd({state.m_x, state.m_y});
+        m_line.setEnd(state.pos());
     }
 }
