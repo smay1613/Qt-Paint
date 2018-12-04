@@ -17,7 +17,7 @@ WorkAreaServerImpl::WorkAreaServerImpl()
 void WorkAreaServerImpl::submit()
 {
     if (m_activeCommand) {
-        m_history.add(std::move(m_activeCommand), m_activePen);
+        m_history.add(std::move(m_activeCommand));
         updateActionsAvailability();
     }
     updateActiveCommand();
@@ -59,14 +59,14 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     }
 
     for (const auto& command : m_history) {
-        m_painter->setPen(command.second);
-        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
+        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.get())) {
+            m_painter->setPen(drawCommand->pen());
             drawCommand->draw();
         }
     }
 
     if (m_activeCommand) {
-        m_painter->setPen(m_activePen);
+        m_painter->setPen(m_activeCommand->pen());
         m_activeCommand->draw();
     }
 }
@@ -135,7 +135,7 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
     }
 
     std::for_each(m_history.begin(), m_history.top(), [&](auto& command) {
-        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.first.get())) {
+        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.get())) {
             drawCommand->setPainter(m_painter);
         }
     });
@@ -144,6 +144,7 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
 void WorkAreaServerImpl::updateActiveCommand()
 {
     m_activeCommand = m_commandBuilder.getActiveCommand(m_painter);
+    updateActivePen();
     if (m_activeCommand) {
         connectActiveCommand();
     } else {
@@ -153,7 +154,9 @@ void WorkAreaServerImpl::updateActiveCommand()
 
 void WorkAreaServerImpl::updateActivePen()
 {
-    m_activePen = m_penBuilder.getActivePen();
+    if (m_activeCommand) {
+        m_activeCommand->setPen(m_penBuilder.getActivePen());
+    }
 }
 
 void WorkAreaServerImpl::updateActionsAvailability()

@@ -22,11 +22,15 @@ public:
 
     void setPainter(QPainter *painter);
 
+    QPen pen() const;
+    void setPen(const QPen &pen);
+
 signals:
     void updateRequested();
 
 protected:
     QPainter* m_painter;
+    QPen m_pen;
     std::unique_ptr<IDrawStrategy> m_drawStrategy;
 };
 

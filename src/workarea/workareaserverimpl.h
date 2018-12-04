@@ -50,7 +50,6 @@ private:
     QPainter* m_painter;
 
     std::unique_ptr<DrawCommand> m_activeCommand;
-    QPen m_activePen;
 
     DrawHistory m_history;
 

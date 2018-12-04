@@ -42,3 +42,13 @@ void DrawCommand::setPainter(QPainter *painter)
 {
     m_painter = painter;
 }
+
+QPen DrawCommand::pen() const
+{
+    return m_pen;
+}
+
+void DrawCommand::setPen(const QPen &pen)
+{
+    m_pen = pen;
+}
