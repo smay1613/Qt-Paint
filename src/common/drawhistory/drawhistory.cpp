@@ -32,17 +32,17 @@ void DrawHistory::add(std::unique_ptr<ICommand> command)
     m_currentAction = std::prev(m_commandHistory.end());
 }
 
-std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::begin()
+std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::begin() noexcept
 {
     return m_commandHistory.begin();
 }
 
-std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::end()
+std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::end() noexcept
 {
     return std::next(m_currentAction);
 }
 
-std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::top()
+std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::top() noexcept
 {
     return m_commandHistory.end();
 }

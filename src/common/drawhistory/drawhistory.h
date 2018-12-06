@@ -16,9 +16,9 @@ public:
 
     void add(std::unique_ptr<ICommand> command) override;
 
-    std::list<std::unique_ptr<ICommand>>::iterator begin();
-    std::list<std::unique_ptr<ICommand>>::iterator end();
-    std::list<std::unique_ptr<ICommand>>::iterator top();
+    std::list<std::unique_ptr<ICommand>>::iterator begin() noexcept override;
+    std::list<std::unique_ptr<ICommand>>::iterator end() noexcept override;
+    std::list<std::unique_ptr<ICommand>>::iterator top() noexcept override;
 
     void clear() override;
     bool isEmpty() const override;
