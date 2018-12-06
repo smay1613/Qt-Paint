@@ -16,9 +16,8 @@ public:
     DrawCommand(QPainter* painter, std::unique_ptr<IDrawStrategy> strategy);
     virtual ~DrawCommand() = default;
 
-    void execute() final;
     virtual void execute(const QMouseEvent& mouseState, bool paintStarted);
-    virtual void draw() const;
+    virtual void execute() override;
 
     void setPainter(QPainter *painter);
 

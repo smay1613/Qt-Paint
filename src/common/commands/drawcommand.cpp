@@ -14,11 +14,6 @@ DrawCommand::DrawCommand(QPainter *painter, std::unique_ptr<IDrawStrategy> strat
 
 }
 
-void DrawCommand::execute()
-{
-    qWarning() << "Please provide execution arguments for draw command!";
-}
-
 void DrawCommand::execute(const QMouseEvent& mouseState, bool paintStarted)
 {
     if (m_drawStrategy) {
@@ -29,7 +24,7 @@ void DrawCommand::execute(const QMouseEvent& mouseState, bool paintStarted)
     }
 }
 
-void DrawCommand::draw() const
+void DrawCommand::execute()
 {
     if (m_painter && m_painter->isActive()) {
         m_drawStrategy->drawRequest(m_painter);

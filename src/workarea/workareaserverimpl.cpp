@@ -61,13 +61,13 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     for (const auto& command : m_history) {
         if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.get())) {
             m_painter->setPen(drawCommand->pen());
-            drawCommand->draw();
         }
+        command->execute();
     }
 
     if (m_activeCommand) {
         m_painter->setPen(m_activeCommand->pen());
-        m_activeCommand->draw();
+        m_activeCommand->execute();
     }
 }
 
