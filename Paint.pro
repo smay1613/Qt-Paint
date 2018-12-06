@@ -32,9 +32,9 @@ SOURCES += \
     src/common/shapes/splineshape.cpp \
     src/toolbar/paintsettings/paintsettings.cpp \
     src/toolbar/shapepicker/shapesmodel.cpp \
-    src/common/builders/commandbuilder.cpp \
     src/common/builders/paintpenbuilder.cpp \
-    src/toolbar/adaptors/actionmanageradaptor.cpp
+    src/toolbar/adaptors/actionmanageradaptor.cpp \
+    src/common/builders/drawcommandfactory.cpp
 
 RESOURCES += qml.qrc
 
@@ -74,6 +74,6 @@ HEADERS += \
     src/toolbar/toolbarplugin.h \
     src/toolbar/paintsettings/paintsettings.h \
     src/toolbar/shapepicker/shapesmodel.h \
-    src/common/builders/commandbuilder.h \
     src/common/builders/paintpenbuilder.h \
-    src/toolbar/adaptors/actionmanageradaptor.h
+    src/toolbar/adaptors/actionmanageradaptor.h \
+    src/common/builders/drawcommandfactory.h

@@ -143,7 +143,7 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
 
 void WorkAreaServerImpl::updateActiveCommand()
 {
-    m_activeCommand = m_commandBuilder.getActiveCommand(m_painter);
+    m_activeCommand = m_commandBuilder.createActiveCommand(m_painter);
     updateActivePen();
     if (m_activeCommand) {
         connectActiveCommand();

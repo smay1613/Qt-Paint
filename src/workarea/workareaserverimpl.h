@@ -4,7 +4,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include "../common/drawhistory/drawhistory.h"
-#include "../common/builders/commandbuilder.h"
+#include "../common/builders/drawcommandfactory.h"
 #include "../common/builders/paintpenbuilder.h"
 #include "../toolbar/adaptors/actionmanageradaptor.h"
 
@@ -53,7 +53,7 @@ private:
 
     DrawHistory m_history;
 
-    DrawCommandBuilder m_commandBuilder;
+    DrawCommandFactory m_commandBuilder;
     PaintPenBuilder m_penBuilder;
 
     ActionManagerAdaptor& m_rActionManager;

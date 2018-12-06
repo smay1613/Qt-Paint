@@ -1,11 +1,11 @@
-#include "commandbuilder.h"
+#include "drawcommandfactory.h"
 #include "../commands/drawcommands/drawcurvecommand.h"
 #include "../commands/drawcommands/drawcirclecommand.h"
 #include "../commands/drawcommands/drawrectanglecommand.h"
 #include "../commands/drawcommands/drawlinecommand.h"
 #include <QDebug>
 
-std::unique_ptr<DrawCommand> DrawCommandBuilder::getActiveCommand(QPainter *painter) const
+std::unique_ptr<DrawCommand> DrawCommandFactory::createActiveCommand(QPainter *painter) const
 {
     PaintTypes::ShapeType activeShapeType = PaintSettings::instance().activeShapeType();
 
