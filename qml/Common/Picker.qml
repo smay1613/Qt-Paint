@@ -44,7 +44,7 @@ Grid {
             id: _itemBoxWrapper
 
             property bool active: false
-            property var itemBox: _itemBoxLoader.item
+            property alias itemBox: _itemBoxLoader.item
 
             width: _itemBoxLoader.item.width + 4 // WARNING: Parent depends on dynamically loaded child!
             height: _itemBoxLoader.item.height + 4

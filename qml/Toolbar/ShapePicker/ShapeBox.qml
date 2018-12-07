@@ -5,7 +5,7 @@ import Common 1.0
 RoundButton {
     id: _rootButton
 
-    property var shapeType: _image.type
+    property alias shapeType: _image.type
 
     contentItem: Image {
         id: _image
