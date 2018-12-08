@@ -2,7 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import Toolbar 1.0
-import WorkAreaPlugin 1.0
+import Common 1.0
+import Workarea 1.0
 
 ApplicationWindow {
     id: _rootWindow
@@ -18,12 +19,8 @@ ApplicationWindow {
         }
     }
 
-    WorkArea {
-        id: _workArea
-
+    Workarea {
         width: _rootWindow.width
-        height: _rootWindow.height - header.height
-
-        anchors.topMargin: 10
+        height: _rootWindow.height - _rootWindow.header.height
     }
 }

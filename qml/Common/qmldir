@@ -1,3 +1,5 @@
 module Common
 Picker 1.0 Picker.qml
 BasicTooltip 1.0 BasicTooltip.qml
+BorderShadow 1.0 BorderShadow.qml
+Scaler 1.0 Scaler.qml
