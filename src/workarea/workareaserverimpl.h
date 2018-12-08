@@ -7,6 +7,7 @@
 #include "../common/builders/drawcommandfactory.h"
 #include "../common/builders/paintpenbuilder.h"
 #include "../toolbar/adaptors/actionmanageradaptor.h"
+#include "../toolbar/settings/paintsettings.h"
 
 class WorkAreaServerImpl : public QObject
 {
@@ -57,6 +58,7 @@ private:
     PaintPenBuilder m_penBuilder;
 
     ActionManagerAdaptor& m_rActionManager;
+    PaintSettings& m_rPaintSettings;
 };
 
 #endif // WORKAREASERVERIMPL_H

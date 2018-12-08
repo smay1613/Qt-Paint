@@ -4,9 +4,10 @@
 #include "../common/commands/drawcommands/drawcurvecommand.h"
 
 WorkAreaServerImpl::WorkAreaServerImpl()
-    : m_paintStarted(false),
-      m_painter(nullptr),
-      m_rActionManager(ActionManagerAdaptor::instance())
+    : m_paintStarted {false},
+      m_painter {nullptr},
+      m_rActionManager {ActionManagerAdaptor::instance()},
+      m_rPaintSettings {PaintSettings::instance()}
 {
     updateActiveCommand();
     updateActivePen();
@@ -105,11 +106,11 @@ void WorkAreaServerImpl::onClearRequested()
 void WorkAreaServerImpl::connectSignals()
 {
     // Connections with settings
-    connect(&PaintSettings::instance(), &PaintSettings::activeShapeTypeChanged,
+    connect(&m_rPaintSettings, &PaintSettings::activeShapeTypeChanged,
                 this, &WorkAreaServerImpl::onActiveCommandSettingsChanged);
-    connect(&PaintSettings::instance(), &PaintSettings::activeColorChanged,
+    connect(&m_rPaintSettings, &PaintSettings::activeColorChanged,
                 this, &WorkAreaServerImpl::onActivePenSettingsChanged);
-    connect(&PaintSettings::instance(), &PaintSettings::penSizeChanged,
+    connect(&m_rPaintSettings, &PaintSettings::penSizeChanged,
                 this, &WorkAreaServerImpl::onActivePenSettingsChanged);
 
     // Connections with ActionManager
