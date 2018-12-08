@@ -4,8 +4,17 @@ import Common 1.0
 import ToolBarPlugin 1.0
 import WorkAreaPlugin 1.0
 
-Item {
+Flickable {
     id: _rootArea
+
+    contentWidth: _workArea.width * _scaler.currentScale
+    contentHeight: _workArea.height * _scaler.currentScale
+
+    ScrollBar.horizontal: ScrollBar {
+    }
+    ScrollBar.vertical: ScrollBar {
+    }
+    interactive: false
 
     WorkArea {
         id: _workArea
@@ -24,8 +33,8 @@ Item {
 
     Scaler {
         id: _scaler
-        anchors.fill: _rootArea
-
+        width: Math.max(_rootArea.contentWidth, _rootArea.width)
+        height: Math.max(_rootArea.contentHeight, _rootArea.height)
         scaleTransformObject: _scaleTransform
 
         minScale: ViewSettings.minScale
@@ -45,7 +54,8 @@ Item {
 
     Rectangle {
         id: _background
-        anchors.fill: _rootArea
+        width: _rootArea.contentWidth
+        height: _rootArea.contentHeight
         z: -1
         color: "lightgrey"
         opacity: 0.5
