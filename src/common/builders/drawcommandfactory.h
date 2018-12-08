@@ -1,7 +1,6 @@
 #ifndef DRAWCOMMANDFACTORY_H
 #define DRAWCOMMANDFACTORY_H
 #include "../commands/drawcommand.h"
-#include "../../toolbar/paintsettings/paintsettings.h"
 
 class DrawCommandFactory
 {

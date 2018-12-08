@@ -30,11 +30,12 @@ SOURCES += \
     src/common/commands/drawcommands/drawcurvecommand.cpp \
     src/common/strategies/drawcurvestrategy.cpp \
     src/common/shapes/splineshape.cpp \
-    src/toolbar/paintsettings/paintsettings.cpp \
+    src/toolbar/settings/paintsettings.cpp \
     src/toolbar/shapepicker/shapesmodel.cpp \
     src/common/builders/paintpenbuilder.cpp \
     src/toolbar/adaptors/actionmanageradaptor.cpp \
-    src/common/builders/drawcommandfactory.cpp
+    src/common/builders/drawcommandfactory.cpp \
+    src/toolbar/settings/viewsettings.cpp
 
 RESOURCES += qml.qrc
 
@@ -72,8 +73,11 @@ HEADERS += \
     src/common/strategies/drawcurvestrategy.h \
     src/common/shapes/splineshape.h \
     src/toolbar/toolbarplugin.h \
-    src/toolbar/paintsettings/paintsettings.h \
+    src/toolbar/settings/paintsettings.h \
     src/toolbar/shapepicker/shapesmodel.h \
     src/common/builders/paintpenbuilder.h \
     src/toolbar/adaptors/actionmanageradaptor.h \
-    src/common/builders/drawcommandfactory.h
+    src/common/builders/drawcommandfactory.h \
+    src/toolbar/settings/viewsettings.h
+
+DISTFILES +=

@@ -30,5 +30,7 @@
         <file>qml/Common/Scaler.qml</file>
         <file>qml/Workarea/qmldir</file>
         <file>qml/Workarea/Workarea.qml</file>
+        <file>qml/Toolbar/Viewsettings/qmldir</file>
+        <file>qml/Toolbar/Viewsettings/ZoomSpinBox.qml</file>
     </qresource>
 </RCC>

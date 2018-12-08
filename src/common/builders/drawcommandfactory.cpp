@@ -3,6 +3,7 @@
 #include "../commands/drawcommands/drawcirclecommand.h"
 #include "../commands/drawcommands/drawrectanglecommand.h"
 #include "../commands/drawcommands/drawlinecommand.h"
+#include "../../toolbar/settings/paintsettings.h"
 #include <QDebug>
 
 std::unique_ptr<DrawCommand> DrawCommandFactory::createActiveCommand(QPainter *painter) const

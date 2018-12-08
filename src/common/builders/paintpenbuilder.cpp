@@ -1,5 +1,5 @@
 #include "paintpenbuilder.h"
-#include "../../toolbar/paintsettings/paintsettings.h"
+#include "../../toolbar/settings/paintsettings.h"
 
 const QPen PaintPenBuilder::getActivePen() const
 {

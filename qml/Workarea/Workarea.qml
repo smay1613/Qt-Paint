@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import Common 1.0
+import ToolBarPlugin 1.0
 import WorkAreaPlugin 1.0
 
 Item {
@@ -25,11 +26,28 @@ Item {
         id: _scaler
         anchors.fill: _rootArea
 
-        source: _workArea
         scaleTransformObject: _scaleTransform
 
-        scaleFactor: 0.9
-        minScale: 0.3
-        maxScale: 5
+        minScale: ViewSettings.minScale
+        maxScale: ViewSettings.maxScale
+
+        onCurrentScaleChanged: {
+            ViewSettings.scale = currentScale;
+        }
+
+        Connections {
+            target: ViewSettings
+            onScaleChanged: {
+                _scaler.performScale(scale);
+            }
+        }
+    }
+
+    Rectangle {
+        id: _background
+        anchors.fill: _rootArea
+        z: -1
+        color: "lightgrey"
+        opacity: 0.5
     }
 }

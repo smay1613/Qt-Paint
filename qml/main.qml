@@ -14,6 +14,7 @@ ApplicationWindow {
 
     header: Pane {
         Material.elevation: 5
+
         contentItem: ScalableToolBar {
             id: _toolBar
         }

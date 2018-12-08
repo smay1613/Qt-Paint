@@ -4,6 +4,8 @@ import Toolbar.ColorPicker 1.0
 import Toolbar.PenSettings 1.0
 import Toolbar.ShapePicker 1.0
 import Toolbar.ActionPicker 1.0
+import Toolbar.Viewsettings 1.0
+//import Toolbar.ViewSettingsComponents 1.0
 
 Flow {
     id: _rootToolbar
@@ -22,5 +24,8 @@ Flow {
     }
     PenSizeTrackBar {
         id: _penSizeBar
+    }
+    ZoomBox {
+
     }
 }
