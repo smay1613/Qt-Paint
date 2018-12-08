@@ -32,5 +32,7 @@
         <file>qml/Workarea/Workarea.qml</file>
         <file>qml/Toolbar/Viewsettings/qmldir</file>
         <file>qml/Toolbar/Viewsettings/ZoomSpinBox.qml</file>
+        <file>qml/Toolbar/Viewsettings/ResolutionTumbler.qml</file>
+        <file>qml/Toolbar/Viewsettings/ResolutionModel.qml</file>
     </qresource>
 </RCC>

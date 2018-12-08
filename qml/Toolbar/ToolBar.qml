@@ -14,18 +14,21 @@ Flow {
     spacing: 15
 
     ColorBar {
-        id: _colorBar
+        objectName: "ColorBar"
     }
     ShapePicker {
-        id: _shapePicker
+        objectName: "ShapePicker"
     }
     ActionPicker {
-        id: _actionPicker
+        objectName: "ActionPicker"
     }
     PenSizeTrackBar {
-        id: _penSizeBar
+        objectName: "PenSizeBar"
     }
     ZoomBox {
+        objectName: "ZoomBox"
+    }
+    ResolutionTumbler {
 
     }
 }

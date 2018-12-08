@@ -1,2 +1,3 @@
 module Viewsettings
 ZoomBox 1.0 ZoomSpinBox.qml
+ResolutionTumbler 1.0 ResolutionTumbler.qml

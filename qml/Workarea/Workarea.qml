@@ -18,8 +18,8 @@ Flickable {
 
     WorkArea {
         id: _workArea
-        width: 1920
-        height: 1080
+        width: ViewSettings.resolutionWidth
+        height: ViewSettings.resolutionHeight
 
         transform: Scale {
             id: _scaleTransform

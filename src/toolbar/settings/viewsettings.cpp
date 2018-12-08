@@ -29,6 +29,32 @@ ViewSettings::ViewSettings()
 
 }
 
+size_t ViewSettings::resolutionWidth() const
+{
+    return m_resolution.first;
+}
+
+void ViewSettings::setResolutionWidth(const size_t &resolution)
+{
+    if (m_resolution.first != resolution) {
+        m_resolution.first = resolution;
+        emit resolutionWidthChanged(m_resolution.first);
+    }
+}
+
+size_t ViewSettings::resolutionHeight() const
+{
+    return m_resolution.second;
+}
+
+void ViewSettings::setResolutionHeight(const size_t &resolution)
+{
+    if (m_resolution.second != resolution) {
+        m_resolution.second = resolution;
+        emit resolutionHeightChanged(m_resolution.second);
+    }
+}
+
 float ViewSettings::maxScale() const
 {
     return m_maxScale;
