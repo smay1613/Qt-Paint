@@ -35,7 +35,9 @@ SOURCES += \
     src/common/builders/paintpenbuilder.cpp \
     src/toolbar/adaptors/actionmanageradaptor.cpp \
     src/common/builders/drawcommandfactory.cpp \
-    src/toolbar/settings/viewsettings.cpp
+    src/toolbar/settings/viewsettings.cpp \
+    src/toolbar/settings/connectionsettings.cpp \
+    src/common/clparsers/connectionargumentsparser.cpp
 
 RESOURCES += qml.qrc
 
@@ -78,6 +80,8 @@ HEADERS += \
     src/common/builders/paintpenbuilder.h \
     src/toolbar/adaptors/actionmanageradaptor.h \
     src/common/builders/drawcommandfactory.h \
-    src/toolbar/settings/viewsettings.h
+    src/toolbar/settings/viewsettings.h \
+    src/toolbar/settings/connectionsettings.h \
+    src/common/clparsers/connectionargumentsparser.h
 
 DISTFILES +=

@@ -4,6 +4,9 @@
 
 #include "src/toolbar/colorpicker/colorsmodel.h"
 
+#include "src/toolbar/settings/connectionsettings.h"
+#include "src/common/clparsers/connectionargumentsparser.h"
+
 #include "src/toolbar/toolbarplugin.h"
 #include "src/workarea/workareaplugin.h"
 
@@ -14,6 +17,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    ConnectionSettings connectionSettings {ConnectionArgumentsParser {app}};
 
     WorkAreaPlugin workAreaPlugin;
     workAreaPlugin.registerTypes("WorkAreaPlugin");
