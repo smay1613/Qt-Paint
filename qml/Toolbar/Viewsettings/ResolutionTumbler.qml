@@ -66,6 +66,7 @@ RowLayout {
 
         Component.onCompleted: {
             _tumbler.currentIndex = 2;
+            _tumbler.currentItemChanged();
         }
     }
     ResolutionModel {
