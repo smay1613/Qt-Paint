@@ -32,6 +32,7 @@ void DrawHistory::add(std::unique_ptr<ICommand> command)
 
     m_commandHistory.emplace_back(std::move(command));
     m_currentAction = std::prev(m_commandHistory.end());
+
     updateHash();
 }
 
@@ -74,13 +75,24 @@ bool DrawHistory::isOnStart() const
 
 uint64_t DrawHistory::hash() const
 {
-    return m_hash;
+    return m_totalHash;
+}
+
+std::vector<uint64_t> DrawHistory::commandsHashes() const
+{
+    return m_commandsHashes;
 }
 
 void DrawHistory::updateHash()
 {
-    m_hash = 0;
+    m_totalHash = 0;
+
+    std::vector<uint64_t> newHashes(m_commandHistory.size());
+
     for (const auto& command : *this) {
-        m_hash ^= qHash(command.get());
+        m_totalHash ^= qHash(command.get());
+        newHashes.emplace_back(qHash(command.get()));
     }
+
+    std::swap(m_commandsHashes, newHashes);
 }

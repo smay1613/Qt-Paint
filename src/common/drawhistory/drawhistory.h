@@ -27,6 +27,7 @@ public:
     bool isOnStart() const;
 
     uint64_t hash() const;
+    std::vector<uint64_t> commandsHashes() const;
 
 private:
     std::list<std::unique_ptr<ICommand>> m_commandHistory;
@@ -34,7 +35,9 @@ private:
     std::list<std::unique_ptr<ICommand>>::iterator m_currentAction;
 
     void updateHash();
-    uint64_t m_hash;
+
+    uint64_t m_totalHash;
+    std::vector<uint64_t> m_commandsHashes;
 };
 
 #endif // DRAWHISTORY_H
