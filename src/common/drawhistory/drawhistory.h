@@ -26,10 +26,15 @@ public:
     bool isOnTop() const;
     bool isOnStart() const;
 
+    uint64_t hash() const;
+
 private:
     std::list<std::unique_ptr<ICommand>> m_commandHistory;
 
     std::list<std::unique_ptr<ICommand>>::iterator m_currentAction;
+
+    void updateHash();
+    uint64_t m_hash;
 };
 
 #endif // DRAWHISTORY_H
