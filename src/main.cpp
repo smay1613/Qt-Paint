@@ -4,8 +4,8 @@
 
 #include "src/toolbar/colorpicker/colorsmodel.h"
 
-#include "src/toolbar/settings/connectionsettings.h"
-#include "src/common/clparsers/connectionargumentsparser.h"
+#include "src/networking/settings/connectionsettings.h"
+#include "src/networking/clparsers/connectionargumentsparser.h"
 
 #include "src/toolbar/toolbarplugin.h"
 #include "src/workarea/workareaplugin.h"

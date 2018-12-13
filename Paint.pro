@@ -36,8 +36,8 @@ SOURCES += \
     src/toolbar/adaptors/actionmanageradaptor.cpp \
     src/common/builders/drawcommandfactory.cpp \
     src/toolbar/settings/viewsettings.cpp \
-    src/toolbar/settings/connectionsettings.cpp \
-    src/common/clparsers/connectionargumentsparser.cpp
+    src/networking/clparsers/connectionargumentsparser.cpp \
+    src/networking/settings/connectionsettings.cpp
 
 RESOURCES += qml.qrc
 
@@ -81,7 +81,7 @@ HEADERS += \
     src/toolbar/adaptors/actionmanageradaptor.h \
     src/common/builders/drawcommandfactory.h \
     src/toolbar/settings/viewsettings.h \
-    src/toolbar/settings/connectionsettings.h \
-    src/common/clparsers/connectionargumentsparser.h
+    src/networking/clparsers/connectionargumentsparser.h \
+    src/networking/settings/connectionsettings.h
 
 DISTFILES +=

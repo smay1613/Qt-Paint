@@ -2,7 +2,7 @@
 #define CONNECTIONSETTINGS_H
 #include <QObject>
 #include <QHostAddress>
-#include "../../common/clparsers/connectionargumentsparser.h"
+#include "../clparsers/connectionargumentsparser.h"
 
 class ConnectionSettings : public QObject
 {
