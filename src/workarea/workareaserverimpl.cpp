@@ -6,6 +6,7 @@
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted {false},
       m_painter {nullptr},
+      m_historyHash {m_history},
       m_rActionManager {ActionManagerAdaptor::instance()},
       m_rPaintSettings {PaintSettings::instance()}
 {

@@ -37,7 +37,8 @@ SOURCES += \
     src/common/builders/drawcommandfactory.cpp \
     src/toolbar/settings/viewsettings.cpp \
     src/networking/clparsers/connectionargumentsparser.cpp \
-    src/networking/settings/connectionsettings.cpp
+    src/networking/settings/connectionsettings.cpp \
+    src/networking/hashers/historyhash.cpp
 
 RESOURCES += qml.qrc
 
@@ -82,6 +83,7 @@ HEADERS += \
     src/common/builders/drawcommandfactory.h \
     src/toolbar/settings/viewsettings.h \
     src/networking/clparsers/connectionargumentsparser.h \
-    src/networking/settings/connectionsettings.h
+    src/networking/settings/connectionsettings.h \
+    src/networking/hashers/historyhash.h
 
 DISTFILES +=

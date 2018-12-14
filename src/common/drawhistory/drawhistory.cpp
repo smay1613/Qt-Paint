@@ -11,7 +11,7 @@ void DrawHistory::undo()
 {
     if (!isEmpty() && !isOnStart()) {
         --m_currentAction;
-        updateHash();
+        emit historyChanged();
     }
 }
 
@@ -19,7 +19,7 @@ void DrawHistory::redo()
 {
     if (!isEmpty() && !isOnTop()) {
         ++m_currentAction;
-        updateHash();
+        emit historyChanged();
     }
 }
 
@@ -33,7 +33,7 @@ void DrawHistory::add(std::unique_ptr<ICommand> command)
     m_commandHistory.emplace_back(std::move(command));
     m_currentAction = std::prev(m_commandHistory.end());
 
-    updateHash();
+    emit historyChanged();
 }
 
 std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::begin() noexcept
@@ -51,11 +51,26 @@ std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::top() noexcept
     return m_commandHistory.end();
 }
 
+std::list<std::unique_ptr<ICommand>>::const_iterator DrawHistory::begin() const noexcept
+{
+    return  m_commandHistory.cbegin();
+}
+
+std::list<std::unique_ptr<ICommand>>::const_iterator DrawHistory::end() const noexcept
+{
+    return  m_commandHistory.cbegin();
+}
+
+size_t DrawHistory::size() const
+{
+    return m_commandHistory.size();
+}
+
 void DrawHistory::clear()
 {
     m_commandHistory.clear();
     m_currentAction = m_commandHistory.begin();
-    updateHash();
+    emit historyChanged();
 }
 
 bool DrawHistory::isEmpty() const
@@ -71,28 +86,4 @@ bool DrawHistory::isOnTop() const
 bool DrawHistory::isOnStart() const
 {
     return m_currentAction == std::prev(m_commandHistory.begin());
-}
-
-uint64_t DrawHistory::hash() const
-{
-    return m_totalHash;
-}
-
-std::vector<uint64_t> DrawHistory::commandsHashes() const
-{
-    return m_commandsHashes;
-}
-
-void DrawHistory::updateHash()
-{
-    m_totalHash = 0;
-
-    std::vector<uint64_t> newHashes(m_commandHistory.size());
-
-    for (const auto& command : *this) {
-        m_totalHash ^= qHash(command.get());
-        newHashes.emplace_back(qHash(command.get()));
-    }
-
-    std::swap(m_commandsHashes, newHashes);
 }

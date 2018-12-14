@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include "../common/drawhistory/drawhistory.h"
+#include "src/networking/hashers/historyhash.h"
 #include "../common/builders/drawcommandfactory.h"
 #include "../common/builders/paintpenbuilder.h"
 #include "../toolbar/adaptors/actionmanageradaptor.h"
@@ -53,6 +54,8 @@ private:
     std::unique_ptr<DrawCommand> m_activeCommand;
 
     DrawHistory m_history;
+    // TODO: move hash to server logic, add history const getter
+    HistoryHash m_historyHash;
 
     DrawCommandFactory m_commandBuilder;
     PaintPenBuilder m_penBuilder;

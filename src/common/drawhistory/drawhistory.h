@@ -6,8 +6,9 @@
 #include <QPen>
 #include "../commands/drawcommand.h"
 
-class DrawHistory : public IHistory
+class DrawHistory : public QObject, public IHistory
 {
+    Q_OBJECT
 public:
     DrawHistory();
 
@@ -20,24 +21,23 @@ public:
     std::list<std::unique_ptr<ICommand>>::iterator end() noexcept override;
     std::list<std::unique_ptr<ICommand>>::iterator top() noexcept override;
 
+    std::list<std::unique_ptr<ICommand>>::const_iterator begin() const noexcept override;
+    std::list<std::unique_ptr<ICommand>>::const_iterator end() const noexcept override;
+
+    size_t size() const override;
     void clear() override;
     bool isEmpty() const override;
 
     bool isOnTop() const;
     bool isOnStart() const;
 
-    uint64_t hash() const;
-    std::vector<uint64_t> commandsHashes() const;
+signals:
+    void historyChanged();
 
 private:
     std::list<std::unique_ptr<ICommand>> m_commandHistory;
 
     std::list<std::unique_ptr<ICommand>>::iterator m_currentAction;
-
-    void updateHash();
-
-    uint64_t m_totalHash;
-    std::vector<uint64_t> m_commandsHashes;
 };
 
 #endif // DRAWHISTORY_H

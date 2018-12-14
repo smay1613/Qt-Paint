@@ -19,8 +19,12 @@ public:
     virtual std::list<std::unique_ptr<ICommand>>::iterator end() noexcept = 0;
     virtual std::list<std::unique_ptr<ICommand>>::iterator top() noexcept = 0;
 
+    virtual std::list<std::unique_ptr<ICommand>>::const_iterator begin() const noexcept = 0;
+    virtual std::list<std::unique_ptr<ICommand>>::const_iterator end() const noexcept = 0;
+
     virtual bool isEmpty() const = 0;
     virtual void clear() = 0;
+    virtual size_t size() const = 0;
 };
 
 #endif // HISTORY_H
