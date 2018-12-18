@@ -1,7 +1,6 @@
 QT += quick
 CONFIG += c++14
-TEMPLATE = subdirs
-SUBDIRS = TCPServer/PaintServer
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -39,7 +38,9 @@ SOURCES += \
     src/toolbar/settings/viewsettings.cpp \
     src/networking/clparsers/connectionargumentsparser.cpp \
     src/networking/settings/connectionsettings.cpp \
-    src/networking/hashers/historyhash.cpp
+    src/networking/hashers/historyhash.cpp \
+    src/networking/packages/basicpackage.cpp \
+    src/networking/packages/clientpackages/introducingpackage.cpp
 
 RESOURCES += qml.qrc
 
@@ -85,6 +86,10 @@ HEADERS += \
     src/toolbar/settings/viewsettings.h \
     src/networking/clparsers/connectionargumentsparser.h \
     src/networking/settings/connectionsettings.h \
-    src/networking/hashers/historyhash.h
+    src/networking/hashers/historyhash.h \
+    src/networking/packages/ipackage.h \
+    src/networking/packages/packagetypes.h \
+    src/networking/packages/basicpackage.h \
+    src/networking/packages/clientpackages/introducingpackage.h
 
 DISTFILES +=
