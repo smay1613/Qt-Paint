@@ -39,8 +39,7 @@ SOURCES += \
     src/networking/clparsers/connectionargumentsparser.cpp \
     src/networking/settings/connectionsettings.cpp \
     src/networking/hashers/historyhash.cpp \
-    src/networking/packages/basicpackage.cpp \
-    src/networking/packages/clientpackages/introducingpackage.cpp
+    src/networking/packages/basicpackage.cpp
 
 RESOURCES += qml.qrc
 
