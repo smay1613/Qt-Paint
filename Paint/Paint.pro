@@ -89,6 +89,8 @@ HEADERS += \
     src/networking/packages/ipackage.h \
     src/networking/packages/packagetypes.h \
     src/networking/packages/basicpackage.h \
-    src/networking/packages/clientpackages/introducingpackage.h
+    src/networking/packages/clientpackages/introducingpackage.h \
+    src/networking/networkplugin.h \
+    src/networking/networkingtypes.h
 
 DISTFILES +=

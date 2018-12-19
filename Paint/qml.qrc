@@ -34,5 +34,10 @@
         <file>qml/Toolbar/Viewsettings/ZoomSpinBox.qml</file>
         <file>qml/Toolbar/Viewsettings/ResolutionTumbler.qml</file>
         <file>qml/Toolbar/Viewsettings/ResolutionModel.qml</file>
+        <file>resources/connectionicons/disconnected.png</file>
+        <file>resources/connectionicons/connected.png</file>
+        <file>qml/StatusBar/StatusBar.qml</file>
+        <file>qml/StatusBar/qmldir</file>
+        <file>qml/StatusBar/ConnectionStatusIcon.qml</file>
     </qresource>
 </RCC>

@@ -22,7 +22,7 @@ void PaintSettings::setCurrentPenSize(int currentPenSize)
     emit penSizeChanged(m_currentPenSize);
 }
 
-PaintSettings &PaintSettings::instance()
+PaintSettings& PaintSettings::instance()
 {
     static PaintSettings instance;
     return instance;

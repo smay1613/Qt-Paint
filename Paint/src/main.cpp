@@ -4,9 +4,7 @@
 
 #include "src/toolbar/colorpicker/colorsmodel.h"
 
-#include "src/networking/settings/connectionsettings.h"
-#include "src/networking/clparsers/connectionargumentsparser.h"
-
+#include "src/networking/networkplugin.h"
 #include "src/toolbar/toolbarplugin.h"
 #include "src/workarea/workareaplugin.h"
 
@@ -18,7 +16,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    ConnectionSettings connectionSettings {ConnectionArgumentsParser {app}};
+    NetworkPlugin networkPlugin {app};
+    networkPlugin.registerTypes("NetworkPlugin");
 
     WorkAreaPlugin workAreaPlugin;
     workAreaPlugin.registerTypes("WorkAreaPlugin");

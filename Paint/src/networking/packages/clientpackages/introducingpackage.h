@@ -5,7 +5,8 @@
 class IntroducingPackage : public BasicPackage
 {
 public:
-    IntroducingPackage(QDataStream &data, networking::PType type = networking::PType::INTRODUCING);
+    IntroducingPackage(QDataStream &data)
+        : BasicPackage (data, networking::PType::INTRODUCING) {}
 };
 
 #endif // INTRODUCINGPACKAGE_H
