@@ -22,6 +22,17 @@ Item {
 
     states: [
         State {
+            name: "connecting"
+            PropertyChanges {
+                target: _icon
+                source: _icon.resourcePath + "connecting.png"
+            }
+            PropertyChanges {
+                target: _colorOverlay
+                color: "yellow"
+            }
+        },
+        State {
             name: "connected"
             PropertyChanges {
                 target: _icon

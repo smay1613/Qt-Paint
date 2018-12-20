@@ -39,5 +39,6 @@
         <file>qml/StatusBar/StatusBar.qml</file>
         <file>qml/StatusBar/qmldir</file>
         <file>qml/StatusBar/ConnectionStatusIcon.qml</file>
+        <file>resources/connectionicons/connecting.png</file>
     </qresource>
 </RCC>

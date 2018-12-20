@@ -3,7 +3,7 @@ import NetworkPlugin 1.0
 
 Flow {
     id: _rootStatusBar
-    state: "disconnected"
+    state: ConnectionSettings.connectionState
 
     spacing: 10
 
@@ -15,6 +15,15 @@ Flow {
     }
 
     states: [
+        State {
+            name: "connecting"
+            PropertyChanges {
+                target: _connectionData
+                color: "yellow"
+                text: "Connecting to host" + ConnectionSettings.hostAddress + ":"
+                      + ConnectionSettings.port
+            }
+        },
         State {
             name: "connected"
             PropertyChanges {

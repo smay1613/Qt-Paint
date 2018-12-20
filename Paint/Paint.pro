@@ -39,7 +39,8 @@ SOURCES += \
     src/networking/clparsers/connectionargumentsparser.cpp \
     src/networking/settings/connectionsettings.cpp \
     src/networking/hashers/historyhash.cpp \
-    src/networking/packages/basicpackage.cpp
+    src/networking/packages/basicpackage.cpp \
+    src/networking/managers/connectionmanageradaptor.cpp
 
 RESOURCES += qml.qrc
 
@@ -91,6 +92,7 @@ HEADERS += \
     src/networking/packages/basicpackage.h \
     src/networking/packages/clientpackages/introducingpackage.h \
     src/networking/networkplugin.h \
-    src/networking/networkingtypes.h
+    src/networking/networkingtypes.h \
+    src/networking/managers/connectionmanageradaptor.h
 
 DISTFILES +=

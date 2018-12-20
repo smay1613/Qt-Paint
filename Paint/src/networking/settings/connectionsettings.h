@@ -11,6 +11,8 @@ class ConnectionSettings : public QObject
     Q_PROPERTY(networking::ConnectionMode connectionMode READ connectionMode NOTIFY connectionModeChanged)
     Q_PROPERTY(QString hostAddress READ hostAddressAdapted NOTIFY hostAddressChanged)
     Q_PROPERTY(quint16 port READ port NOTIFY portChanged)
+    Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
+    Q_PROPERTY(QString lastError READ lastError NOTIFY lastErrorChanged)
 
 public:
     static ConnectionSettings& instance();
@@ -21,17 +23,32 @@ public:
     QString hostAddressAdapted() const;
     quint16 port() const;
 
+    bool isConnected() const;
+    QString lastError() const;
+
+    QString connectionState() const;
+
 signals:
     void connectionModeChanged();
     void hostAddressChanged();
     void portChanged();
+    void connectionStateChanged();
+    void lastErrorChanged();
+
+public slots:
+    void onNetworkError(QString error);
+    void onConnectionChanged(QString state);
 
 private:
     ConnectionSettings() = default;
+    void connectSignals();
 
     networking::ConnectionMode m_connectionMode;
     QHostAddress m_hostAddress;
     quint16 m_port;
+
+    QString m_connectionState;
+    QString m_lastError;
 };
 
 #endif // CONNECTIONSETTINGS_H

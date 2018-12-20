@@ -1,4 +1,5 @@
 #include "connectionsettings.h"
+#include "../managers/connectionmanageradaptor.h"
 
 ConnectionSettings& ConnectionSettings::instance()
 {
@@ -17,6 +18,10 @@ void ConnectionSettings::initSettings(const ConnectionArgumentsParser &parser)
 
     m_port = {static_cast<quint16>(parser.portArgument().toUInt())};
     emit portChanged();
+
+    // TODO: ConnectionManagerAdaptor should live in another thread,
+    // but now it will be initialized after settings.
+    connectSignals();
 }
 
 networking::ConnectionMode ConnectionSettings::connectionMode() const
@@ -37,4 +42,39 @@ QString ConnectionSettings::hostAddressAdapted() const
 quint16 ConnectionSettings::port() const
 {
     return m_port;
+}
+
+QString ConnectionSettings::lastError() const
+{
+    return m_lastError;
+}
+
+void ConnectionSettings::onNetworkError(QString error)
+{
+    if (error != m_lastError) {
+        m_lastError = error;
+        emit lastErrorChanged();
+    }
+}
+
+void ConnectionSettings::onConnectionChanged(QString state)
+{
+    if (state != m_connectionState) {
+        m_connectionState = state;
+        emit connectionStateChanged();
+    }
+}
+
+void ConnectionSettings::connectSignals()
+{
+    auto& connectionManager = ConnectionManagerAdaptor::instance();
+    connect(&connectionManager, &ConnectionManagerAdaptor::connectionError,
+                this, &ConnectionSettings::onNetworkError);
+    connect(&connectionManager, &ConnectionManagerAdaptor::connectionStateChanged,
+                this, &ConnectionSettings::onConnectionChanged);
+}
+
+QString ConnectionSettings::connectionState() const
+{
+    return m_connectionState;
 }
