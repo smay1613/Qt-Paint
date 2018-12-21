@@ -72,9 +72,16 @@ void ConnectionSettings::connectSignals()
                 this, &ConnectionSettings::onNetworkError);
     connect(&connectionManager, &ConnectionManagerAdaptor::connectionStateChanged,
                 this, &ConnectionSettings::onConnectionChanged);
+    connect(&connectionManager, &ConnectionManagerAdaptor::reconnectionTimerStarted,
+                this, &ConnectionSettings::reconnectionStarted);
 }
 
 QString ConnectionSettings::connectionState() const
 {
     return m_connectionState;
+}
+
+int ConnectionSettings::reconnectionTime() const
+{
+    return ConnectionManagerAdaptor::ReconnectionTime;
 }

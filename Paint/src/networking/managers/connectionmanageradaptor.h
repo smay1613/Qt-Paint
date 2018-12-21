@@ -10,9 +10,12 @@ class ConnectionManagerAdaptor : public QObject
 public:
     static ConnectionManagerAdaptor& instance();
 
+    const static size_t ReconnectionTime = 10000 /*ms*/;
+
 signals:
     void connectionError(QString error);
     void connectionStateChanged(QString connected);
+    void reconnectionTimerStarted();
 
 public slots:
     void onSocketError(QAbstractSocket::SocketError socketError);

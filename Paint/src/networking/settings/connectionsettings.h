@@ -13,6 +13,7 @@ class ConnectionSettings : public QObject
     Q_PROPERTY(quint16 port READ port NOTIFY portChanged)
     Q_PROPERTY(QString connectionState READ connectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(QString lastError READ lastError NOTIFY lastErrorChanged)
+    Q_PROPERTY(int reconnectionTime READ reconnectionTime CONSTANT)
 
 public:
     static ConnectionSettings& instance();
@@ -27,6 +28,7 @@ public:
     QString lastError() const;
 
     QString connectionState() const;
+    int reconnectionTime() const;
 
 signals:
     void connectionModeChanged();
@@ -34,6 +36,8 @@ signals:
     void portChanged();
     void connectionStateChanged();
     void lastErrorChanged();
+
+    void reconnectionStarted();
 
 public slots:
     void onNetworkError(QString error);

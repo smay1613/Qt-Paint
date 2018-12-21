@@ -29,7 +29,7 @@ Item {
             }
             PropertyChanges {
                 target: _colorOverlay
-                color: "yellow"
+                color: "darkyellow"
             }
         },
         State {

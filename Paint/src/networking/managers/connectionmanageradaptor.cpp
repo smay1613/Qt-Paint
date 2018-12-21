@@ -1,8 +1,10 @@
 #include "connectionmanageradaptor.h"
+#include <QTimer>
 
 ConnectionManagerAdaptor::ConnectionManagerAdaptor()
     : m_rConnectionSettings {ConnectionSettings::instance()}
 {
+    connectSocketSignals();
     connectToPaintServer();
 }
 
@@ -16,6 +18,13 @@ void ConnectionManagerAdaptor::onSocketError(QAbstractSocket::SocketError socket
 {
     const auto error = networking::utils::UtilTools::socketEnumTostring(socketError);
     qCritical() << "Socket error happened: " << error;
+
+    // Each time socket error was recieved, we try to connect to server again.
+    // If connection was failed, we'll get in this slot again.
+    QTimer::singleShot(ReconnectionTime, this,
+                            &ConnectionManagerAdaptor::connectToPaintServer);
+
+    emit reconnectionTimerStarted();
     emit connectionError(error);
 }
 
@@ -45,11 +54,16 @@ void ConnectionManagerAdaptor::onSocketStateChanged(QAbstractSocket::SocketState
 
 void ConnectionManagerAdaptor::connectToPaintServer()
 {
+    qDebug() << "Connecting to server...";
+
+    m_socket.connectToHost(m_rConnectionSettings.hostAddress(),
+                           m_rConnectionSettings.port());
+}
+
+void ConnectionManagerAdaptor::connectSocketSignals()
+{
     connect(&m_socket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
                 this, &ConnectionManagerAdaptor::onSocketError);
     connect(&m_socket, &QAbstractSocket::stateChanged,
                 this, &ConnectionManagerAdaptor::onSocketStateChanged);
-
-    m_socket.connectToHost(m_rConnectionSettings.hostAddress(),
-                                m_rConnectionSettings.port());
 }
