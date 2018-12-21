@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import Common 1.0
 import NetworkPlugin 1.0
 
 Flow {
@@ -14,6 +15,12 @@ Flow {
     }
     Text {
         id: _connectionData
+        BasicTooltip {
+            // transforms text by adding space before uppercase letters (AddressInUseError -> Address In Use Error)
+            text: ConnectionSettings.lastError.replace(/([a-z])([A-Z])/g, '$1 $2')
+            visible: _rootStatusBar.state == "disconnected" && ConnectionSettings.lastError != ""
+            showOn: visible
+        }
     }
 
     Text {
