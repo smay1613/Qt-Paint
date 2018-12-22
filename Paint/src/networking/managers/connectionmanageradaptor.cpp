@@ -53,6 +53,20 @@ void ConnectionManagerAdaptor::onSocketStateChanged(QAbstractSocket::SocketState
     emit connectionStateChanged(state);
 }
 
+void ConnectionManagerAdaptor::onDataRecieved()
+{
+    QDataStream in {&m_socket};
+    in.startTransaction();
+
+    BasicPackage inputPackage;
+    in >> inputPackage;
+
+    if (!in.commitTransaction())
+        return;
+
+    handleServerResponse(inputPackage);
+}
+
 void ConnectionManagerAdaptor::onConnected()
 {
     sendIntroducingPackage();
@@ -73,7 +87,9 @@ void ConnectionManagerAdaptor::connectSocketSignals()
     connect(&m_socket, &QAbstractSocket::stateChanged,
                 this, &ConnectionManagerAdaptor::onSocketStateChanged);
     connect(&m_socket, &QAbstractSocket::connected,
-            this, &ConnectionManagerAdaptor::onConnected);
+                this, &ConnectionManagerAdaptor::onConnected);
+    connect(&m_socket, &QAbstractSocket::readyRead,
+                this, &ConnectionManagerAdaptor::onDataRecieved);
 }
 
 void ConnectionManagerAdaptor::sendIntroducingPackage()
@@ -83,4 +99,27 @@ void ConnectionManagerAdaptor::sendIntroducingPackage()
     IntroducingPackage package {data};
 
     m_socket.write(package.rawData());
+}
+
+void ConnectionManagerAdaptor::handleServerResponse(const IPackage &response)
+{
+    switch (response.type()) {
+        case networking::PType::INTRODUCING_INFO_RESPONSE: {
+            handleIntroducingResponse(response);
+            break;
+        }
+        default: {
+            qWarning() << "Invalid package recieved!";
+        }
+    }
+}
+
+void ConnectionManagerAdaptor::handleIntroducingResponse(const IPackage &response)
+{
+    auto status = response.data().toInt();
+
+    if (status == networking::Status::Failure) {
+        m_rConnectionSettings.setConnectionMode(networking::ConnectionMode::Slave);
+        qWarning() << "Introducing failed! Setting to slave...";
+    }
 }

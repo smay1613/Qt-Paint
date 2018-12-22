@@ -5,7 +5,8 @@ namespace networking {
 enum PType
 {
     INVALID,
-    INTRODUCING // gives info about client mode (slave/master)
+    INTRODUCING_INFO_REQUEST, // gives info about client mode (slave/master)
+    INTRODUCING_INFO_RESPONSE // result from server
 };
 
 }

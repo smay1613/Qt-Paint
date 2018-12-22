@@ -25,7 +25,7 @@ void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
     qDebug() << "Recieved package with type " << package.type();
 
     switch (package.type()) {
-        case networking::PType::INTRODUCING: {
+        case networking::PType::INTRODUCING_INFO_REQUEST: {
             handleIntroducingPackage(package, socket);
             break;
         }
@@ -38,10 +38,14 @@ void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
 void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *socket)
 {
     auto clientType = package.data().toInt();
-    if (static_cast<networking::ConnectionMode>(clientType) == networking::ConnectionMode::Master) {
+    auto result {networking::Status::Success};
+
+    if (clientType == networking::ConnectionMode::Master) {
         if (m_masterSocket) {
             qDebug() << "Socket added to the clients list, because there is another active master";
+
             m_clientSockets.emplace_back(socket); // we already have master socket, so adding to clients
+            result = networking::Status::Failure;
         } else {
             qDebug() << "Socket becomes master.";
             m_masterSocket = socket;
@@ -50,6 +54,9 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
         qDebug() << "Socket added to the clients list";
         m_clientSockets.emplace_back(socket);
     }
+
+    BasicPackage introducingSuccessPackage {{result}, networking::PType::INTRODUCING_INFO_RESPONSE};
+    socket->write(introducingSuccessPackage.rawData());
 }
 
 void PaintServer::onNewConnection()

@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include "../settings/connectionsettings.h"
+#include "../packages/ipackage.h"
 
 class ConnectionManagerAdaptor : public QObject
 {
@@ -21,6 +22,8 @@ public slots:
     void onSocketError(QAbstractSocket::SocketError socketError);
     void onSocketStateChanged(QAbstractSocket::SocketState socketState);
 
+    void onDataRecieved();
+
 private slots:
     void onConnected();
 
@@ -34,6 +37,9 @@ private:
     void connectSocketSignals();
 
     void sendIntroducingPackage();
+
+    void handleServerResponse(const IPackage& response);
+    void handleIntroducingResponse(const IPackage& response);
 
     ConnectionSettings& m_rConnectionSettings;
 };

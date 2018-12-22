@@ -9,7 +9,7 @@ class IntroducingPackage : public BasicPackage
 {
 public:
     IntroducingPackage(const QVariant& data)
-        : BasicPackage (data, networking::PType::INTRODUCING) {}
+        : BasicPackage (data, networking::PType::INTRODUCING_INFO_REQUEST) {}
 };
 
 #endif // INTRODUCINGPACKAGE_H

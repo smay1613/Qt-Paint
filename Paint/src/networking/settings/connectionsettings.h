@@ -30,6 +30,8 @@ public:
     QString connectionState() const;
     int reconnectionTime() const;
 
+    void setConnectionMode(const networking::ConnectionMode& connectionMode);
+
 signals:
     void connectionModeChanged();
     void hostAddressChanged();

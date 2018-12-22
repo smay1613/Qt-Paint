@@ -21,7 +21,7 @@ ApplicationWindow {
             id: _toolBar
         }
 
-        visible: ConnectionSettings.connectionMode.valueOf() === ConnectionMode.Master
+        visible: ConnectionSettings.connectionMode.valueOf() === Network.Master
     }
 
     footer: Pane {

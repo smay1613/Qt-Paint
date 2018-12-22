@@ -31,9 +31,12 @@ Flickable {
             z: -1
         }
 
-        Component.onCompleted: {
-            if (ConnectionSettings.connectionMode.valueOf() === ConnectionMode.Slave) {
-                _workArea.disableMouse();
+        Connections {
+            target: ConnectionSettings
+            onConnectionModeChanged: {
+                if (ConnectionSettings.connectionMode.valueOf() === Network.Slave) {
+                    _workArea.disableMouse();
+                }
             }
         }
     }

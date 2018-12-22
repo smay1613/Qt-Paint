@@ -12,6 +12,11 @@ enum ConnectionMode {
     Master
 };
 
+enum Status {
+    Success,
+    Failure
+};
+
 namespace utils {
 struct UtilTools {
     template<class T>
@@ -23,4 +28,5 @@ struct UtilTools {
 
 Q_ENUM_NS(ConnectionMode)
 }
+
 #endif // NETWORKINGTYPES_H

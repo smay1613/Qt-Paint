@@ -76,6 +76,14 @@ void ConnectionSettings::connectSignals()
                 this, &ConnectionSettings::reconnectionStarted);
 }
 
+void ConnectionSettings::setConnectionMode(const networking::ConnectionMode &connectionMode)
+{
+    if (m_connectionMode != connectionMode) {
+        m_connectionMode = connectionMode;
+        emit connectionModeChanged();
+    }
+}
+
 QString ConnectionSettings::connectionState() const
 {
     return m_connectionState;

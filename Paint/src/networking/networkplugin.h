@@ -28,7 +28,7 @@ public:
         qmlRegisterUncreatableMetaObject(networking::staticMetaObject,
                                             uri,
                                             1, 0,
-                                            "ConnectionMode",
+                                            "Network",
                                             "Error: only enums");
     }
 
