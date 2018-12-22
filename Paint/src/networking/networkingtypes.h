@@ -7,9 +7,9 @@ namespace networking
 {
 Q_NAMESPACE
 
-enum class ConnectionMode {
-    Client,
-    Server
+enum ConnectionMode {
+    Slave,
+    Master
 };
 
 namespace utils {

@@ -1,5 +1,6 @@
 #include "connectionmanageradaptor.h"
 #include <QTimer>
+#include "../packages/clientpackages/introducingpackage.h"
 
 ConnectionManagerAdaptor::ConnectionManagerAdaptor()
     : m_rConnectionSettings {ConnectionSettings::instance()}
@@ -34,8 +35,8 @@ void ConnectionManagerAdaptor::onSocketStateChanged(QAbstractSocket::SocketState
     QString state;
 
     switch (socketState) {
-        case QAbstractSocket::SocketState::ConnectedState:
-        case QAbstractSocket::SocketState::BoundState: {
+        case QAbstractSocket::SocketState::BoundState:
+        case QAbstractSocket::SocketState::ConnectedState: {
             state = "connected";
             break;
         }
@@ -52,6 +53,11 @@ void ConnectionManagerAdaptor::onSocketStateChanged(QAbstractSocket::SocketState
     emit connectionStateChanged(state);
 }
 
+void ConnectionManagerAdaptor::onConnected()
+{
+    sendIntroducingPackage();
+}
+
 void ConnectionManagerAdaptor::connectToPaintServer()
 {
     qDebug() << "Connecting to server...";
@@ -66,4 +72,15 @@ void ConnectionManagerAdaptor::connectSocketSignals()
                 this, &ConnectionManagerAdaptor::onSocketError);
     connect(&m_socket, &QAbstractSocket::stateChanged,
                 this, &ConnectionManagerAdaptor::onSocketStateChanged);
+    connect(&m_socket, &QAbstractSocket::connected,
+            this, &ConnectionManagerAdaptor::onConnected);
+}
+
+void ConnectionManagerAdaptor::sendIntroducingPackage()
+{
+    QVariant data {m_rConnectionSettings.connectionMode()};
+
+    IntroducingPackage package {data};
+
+    m_socket.write(package.rawData());
 }

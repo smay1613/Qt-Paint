@@ -9,8 +9,8 @@ ConnectionSettings& ConnectionSettings::instance()
 
 void ConnectionSettings::initSettings(const ConnectionArgumentsParser &parser)
 {
-    m_connectionMode = parser.modeArgument() == "master" ? networking::ConnectionMode::Server
-                                                         : networking::ConnectionMode::Client;
+    m_connectionMode = parser.modeArgument() == "master" ? networking::ConnectionMode::Master
+                                                         : networking::ConnectionMode::Slave;
     emit connectionModeChanged();
 
     m_hostAddress = QHostAddress {parser.hostArgument()};

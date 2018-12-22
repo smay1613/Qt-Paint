@@ -1,6 +1,7 @@
 #include "paintserver.h"
 #include <QTcpSocket>
 #include "packages/basicpackage.h"
+#include "networkingtypes.h"
 
 PaintServer::PaintServer(const QHostAddress &address, quint16 port)
     : m_masterSocket {nullptr},
@@ -14,6 +15,43 @@ PaintServer::PaintServer(const QHostAddress &address, quint16 port)
     connectSignals();
 }
 
+void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
+{
+    if (!socket) {
+        qWarning() << "Unable to handle null socket's package!";
+        return;
+    }
+
+    qDebug() << "Recieved package with type " << package.type();
+
+    switch (package.type()) {
+        case networking::PType::INTRODUCING: {
+            handleIntroducingPackage(package, socket);
+            break;
+        }
+        default: {
+            qWarning() << "Invalid package recieved!";
+        }
+    }
+}
+
+void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *socket)
+{
+    auto clientType = package.data().toInt();
+    if (static_cast<networking::ConnectionMode>(clientType) == networking::ConnectionMode::Master) {
+        if (m_masterSocket) {
+            qDebug() << "Socket added to the clients list, because there is another active master";
+            m_clientSockets.emplace_back(socket); // we already have master socket, so adding to clients
+        } else {
+            qDebug() << "Socket becomes master.";
+            m_masterSocket = socket;
+        }
+    } else {
+        qDebug() << "Socket added to the clients list";
+        m_clientSockets.emplace_back(socket);
+    }
+}
+
 void PaintServer::onNewConnection()
 {
     qDebug() << "New connection!";
@@ -24,23 +62,41 @@ void PaintServer::onNewConnection()
 void PaintServer::onReadyRead()
 {
     auto* senderObject = sender();
-    QTcpSocket* socket;
-    if (!senderObject || !(socket = qobject_cast<QTcpSocket*>(senderObject))) {
+    QTcpSocket* socket {qobject_cast<QTcpSocket*>(senderObject)};
+
+    if (!socket) {
         return;
     }
 
-    QDataStream in;
-
-    in.setDevice(socket);
-
+    QDataStream in {socket};
     in.startTransaction();
 
-    // TODO: something about package handling, maybe pipe
-    BasicPackage data;
-    in >> data;
+    BasicPackage inputPackage;
+    in >> inputPackage;
 
-    if (!in.commitTransaction()) {
+    if (!in.commitTransaction())
         return;
+
+    handlePackage(inputPackage, socket);
+}
+
+void PaintServer::onClientDisconnected()
+{
+    auto* senderObject = sender();
+    QTcpSocket* socket {qobject_cast<QTcpSocket*>(senderObject)};
+
+    if (!socket) {
+        return;
+    }
+
+    if (socket == m_masterSocket) {
+        socket->deleteLater();
+        m_masterSocket = nullptr;
+        qDebug() << "Master disconnected!";
+    } else {
+        std::remove(m_clientSockets.begin(), m_clientSockets.end(), socket);
+        socket->deleteLater();
+        qDebug() << "Slave disconnected!";
     }
 }
 
@@ -53,7 +109,7 @@ void PaintServer::connectSignals()
 void PaintServer::connectSocketSignals(QTcpSocket *socket)
 {
     connect(socket, &QAbstractSocket::disconnected,
-                socket, &QObject::deleteLater);
+                this, &PaintServer::onClientDisconnected);
     connect(socket, &QAbstractSocket::readyRead,
                 this, &PaintServer::onReadyRead);
 }

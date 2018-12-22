@@ -10,7 +10,7 @@ class ConnectionManagerAdaptor : public QObject
 public:
     static ConnectionManagerAdaptor& instance();
 
-    const static size_t ReconnectionTime = 10000 /*ms*/;
+    const static size_t ReconnectionTime = 5000 /*ms*/;
 
 signals:
     void connectionError(QString error);
@@ -21,6 +21,9 @@ public slots:
     void onSocketError(QAbstractSocket::SocketError socketError);
     void onSocketStateChanged(QAbstractSocket::SocketState socketState);
 
+private slots:
+    void onConnected();
+
 protected:
     QTcpSocket m_socket;
 
@@ -29,6 +32,8 @@ private:
 
     void connectToPaintServer();
     void connectSocketSignals();
+
+    void sendIntroducingPackage();
 
     ConnectionSettings& m_rConnectionSettings;
 };
