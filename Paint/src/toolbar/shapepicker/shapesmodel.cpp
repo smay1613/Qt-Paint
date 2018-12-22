@@ -11,7 +11,6 @@ ShapesModel::ShapesModel(QObject *parent)
         std::make_pair(PaintTypes::ShapeType::Rectangle, "rectangle.svg"),
         std::make_pair(PaintTypes::ShapeType::Circle, "ellipse.svg")
     };
-    qRegisterMetaType<PaintTypes::ShapeType>("PaintTypes::ShapeType");
 }
 
 int ShapesModel::rowCount(const QModelIndex &parent) const

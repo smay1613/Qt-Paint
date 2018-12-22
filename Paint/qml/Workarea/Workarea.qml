@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import Common 1.0
 import ToolBarPlugin 1.0
 import WorkAreaPlugin 1.0
+import NetworkPlugin 1.0
 
 Flickable {
     id: _rootArea
@@ -28,6 +29,12 @@ Flickable {
         BorderShadow {
             anchors.fill: _workArea
             z: -1
+        }
+
+        Component.onCompleted: {
+            if (ConnectionSettings.connectionMode.valueOf() === ConnectionMode.Slave) {
+                _workArea.disableMouse();
+            }
         }
     }
 

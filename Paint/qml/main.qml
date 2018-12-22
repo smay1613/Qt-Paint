@@ -5,6 +5,7 @@ import Toolbar 1.0
 import Common 1.0
 import Workarea 1.0
 import StatusBar 1.0
+import NetworkPlugin 1.0
 
 ApplicationWindow {
     id: _rootWindow
@@ -19,6 +20,8 @@ ApplicationWindow {
         contentItem: ScalableToolBar {
             id: _toolBar
         }
+
+        visible: ConnectionSettings.connectionMode.valueOf() === ConnectionMode.Master
     }
 
     footer: Pane {
@@ -31,6 +34,8 @@ ApplicationWindow {
 
     Workarea {
         width: _rootWindow.width
-        height: _rootWindow.height - _rootWindow.header.height - _rootWindow.footer.height
+        height: _rootWindow.height
+                - (_rootWindow.header.height * _rootWindow.header.visible) // only when visible
+                - _rootWindow.footer.height
     }
 }

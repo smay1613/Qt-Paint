@@ -25,6 +25,11 @@ public:
         qmlRegisterSingletonType<ConnectionSettings>(uri, 1, 0, "ConnectionSettings", connectionSettingsInstance);
 
         qRegisterMetaType<networking::ConnectionMode>("networking::ConnectionMode");
+        qmlRegisterUncreatableMetaObject(networking::staticMetaObject,
+                                            uri,
+                                            1, 0,
+                                            "ConnectionMode",
+                                            "Error: only enums");
     }
 
 private:

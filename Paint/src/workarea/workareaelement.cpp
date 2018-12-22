@@ -54,3 +54,8 @@ void WorkAreaElement::setDefaultPaintSettings()
 {
     m_painter->setRenderHint(QPainter::RenderHint::Antialiasing);
 }
+
+void WorkAreaElement::disableMouse()
+{
+    setAcceptedMouseButtons(Qt::NoButton);
+}

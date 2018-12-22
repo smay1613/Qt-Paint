@@ -11,6 +11,7 @@ public:
     explicit WorkAreaElement();
     void paint(QPainter* painter) override;
 
+    Q_INVOKABLE void disableMouse();
 signals:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
