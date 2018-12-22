@@ -1,9 +1,9 @@
-#include "workareaserverimpl.h"
+#include "workareaimpl.h"
 #include <QDebug>
 #include "../common/painttypes.h"
 #include "../common/commands/drawcommands/drawcurvecommand.h"
 
-WorkAreaServerImpl::WorkAreaServerImpl()
+WorkAreaImpl::WorkAreaImpl()
     : m_paintStarted {false},
       m_painter {nullptr},
       m_rActionManager {ActionManagerAdaptor::instance()},
@@ -15,7 +15,7 @@ WorkAreaServerImpl::WorkAreaServerImpl()
     connectSignals();
 }
 
-void WorkAreaServerImpl::submit()
+void WorkAreaImpl::submit()
 {
     if (m_activeCommand) {
         m_history.add(std::move(m_activeCommand));
@@ -24,14 +24,14 @@ void WorkAreaServerImpl::submit()
     updateActiveCommand();
 }
 
-void WorkAreaServerImpl::onMouseMoved(const QMouseEvent* event)
+void WorkAreaImpl::onMouseMoved(const QMouseEvent* event)
 {
     if (m_activeCommand && m_paintStarted) {
         m_activeCommand->execute(*event, m_paintStarted);
     }
 }
 
-void WorkAreaServerImpl::onMousePressed(const QMouseEvent* event)
+void WorkAreaImpl::onMousePressed(const QMouseEvent* event)
 {
     m_paintStarted = !m_paintStarted;
 
@@ -44,7 +44,7 @@ void WorkAreaServerImpl::onMousePressed(const QMouseEvent* event)
     }
 }
 
-void WorkAreaServerImpl::onMouseReleased(const QMouseEvent *event)
+void WorkAreaImpl::onMouseReleased(const QMouseEvent *event)
 {
     if (m_paintStarted) {
         onMousePressed(event);
@@ -53,7 +53,7 @@ void WorkAreaServerImpl::onMouseReleased(const QMouseEvent *event)
     }
 }
 
-void WorkAreaServerImpl::onPaint(QPainter *painter)
+void WorkAreaImpl::onPaint(QPainter *painter)
 {
     if (m_painter != painter) {
         updatePainter(painter);
@@ -72,63 +72,63 @@ void WorkAreaServerImpl::onPaint(QPainter *painter)
     }
 }
 
-void WorkAreaServerImpl::onActiveCommandSettingsChanged()
+void WorkAreaImpl::onActiveCommandSettingsChanged()
 {
     updateActiveCommand();
 }
 
-void WorkAreaServerImpl::onActivePenSettingsChanged()
+void WorkAreaImpl::onActivePenSettingsChanged()
 {
     updateActivePen();
 }
 
-void WorkAreaServerImpl::onUndoRequested()
+void WorkAreaImpl::onUndoRequested()
 {
     m_history.undo();
     updateActionsAvailability();
     emit updateRequested();
 }
 
-void WorkAreaServerImpl::onRedoRequested()
+void WorkAreaImpl::onRedoRequested()
 {
     m_history.redo();
     updateActionsAvailability();
     emit updateRequested();
 }
 
-void WorkAreaServerImpl::onClearRequested()
+void WorkAreaImpl::onClearRequested()
 {
     m_history.clear();
     updateActionsAvailability();
     emit updateRequested();
 }
 
-void WorkAreaServerImpl::connectSignals()
+void WorkAreaImpl::connectSignals()
 {
     // Connections with settings
     connect(&m_rPaintSettings, &PaintSettings::activeShapeTypeChanged,
-                this, &WorkAreaServerImpl::onActiveCommandSettingsChanged);
+                this, &WorkAreaImpl::onActiveCommandSettingsChanged);
     connect(&m_rPaintSettings, &PaintSettings::activeColorChanged,
-                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
+                this, &WorkAreaImpl::onActivePenSettingsChanged);
     connect(&m_rPaintSettings, &PaintSettings::penSizeChanged,
-                this, &WorkAreaServerImpl::onActivePenSettingsChanged);
+                this, &WorkAreaImpl::onActivePenSettingsChanged);
 
     // Connections with ActionManager
     connect(&m_rActionManager, &ActionManagerAdaptor::undoRequested,
-                this, &WorkAreaServerImpl::onUndoRequested);
+                this, &WorkAreaImpl::onUndoRequested);
     connect(&m_rActionManager, &ActionManagerAdaptor::redoRequested,
-                this, &WorkAreaServerImpl::onRedoRequested);
+                this, &WorkAreaImpl::onRedoRequested);
     connect(&m_rActionManager, &ActionManagerAdaptor::clearRequested,
-                this, &WorkAreaServerImpl::onClearRequested);
+                this, &WorkAreaImpl::onClearRequested);
 }
 
-void WorkAreaServerImpl::connectActiveCommand()
+void WorkAreaImpl::connectActiveCommand()
 {
     connect(m_activeCommand.get(), &DrawCommand::updateRequested,
-                    this, &WorkAreaServerImpl::updateRequested);
+                    this, &WorkAreaImpl::updateRequested);
 }
 
-void WorkAreaServerImpl::updatePainter(QPainter *painter)
+void WorkAreaImpl::updatePainter(QPainter *painter)
 {
     m_painter = painter;
     if (m_activeCommand) {
@@ -142,7 +142,7 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
     });
 }
 
-void WorkAreaServerImpl::updateActiveCommand()
+void WorkAreaImpl::updateActiveCommand()
 {
     m_activeCommand = m_commandBuilder.createActiveCommand(m_painter);
     updateActivePen();
@@ -153,14 +153,14 @@ void WorkAreaServerImpl::updateActiveCommand()
     }
 }
 
-void WorkAreaServerImpl::updateActivePen()
+void WorkAreaImpl::updateActivePen()
 {
     if (m_activeCommand) {
         m_activeCommand->setPen(m_penBuilder.getActivePen());
     }
 }
 
-void WorkAreaServerImpl::updateActionsAvailability()
+void WorkAreaImpl::updateActionsAvailability()
 {
     m_rActionManager.setUndoAvailable(!m_history.isEmpty() && !m_history.isOnStart());
     m_rActionManager.setRedoAvailable(!m_history.isEmpty() && !m_history.isOnTop());

@@ -2,7 +2,7 @@
 #define WORKAREA_H
 #include <QQuickPaintedItem>
 #include <memory>
-#include "workareaserverimpl.h"
+#include "workareaimpl.h"
 
 class WorkAreaElement : public QQuickPaintedItem
 {
@@ -22,7 +22,7 @@ private slots:
 private:
     void connectSignals();
     void setDefaultPaintSettings();
-    std::unique_ptr<WorkAreaServerImpl> m_workAreaBL;
+    std::unique_ptr<WorkAreaImpl> m_workAreaBL;
     QPainter* m_painter;
 };
 

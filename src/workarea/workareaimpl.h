@@ -1,5 +1,5 @@
-#ifndef WORKAREASERVERIMPL_H
-#define WORKAREASERVERIMPL_H
+#ifndef WORKAREAIMPL_H
+#define WORKAREAIMPL_H
 #include <QObject>
 #include <QPainter>
 #include <QMouseEvent>
@@ -9,11 +9,11 @@
 #include "../toolbar/adaptors/actionmanageradaptor.h"
 #include "../toolbar/settings/paintsettings.h"
 
-class WorkAreaServerImpl : public QObject
+class WorkAreaImpl : public QObject
 {
     Q_OBJECT
 public:
-    WorkAreaServerImpl();
+    WorkAreaImpl();
     void paint(QPainter* painter);
 
     void submit();
@@ -61,4 +61,4 @@ private:
     PaintSettings& m_rPaintSettings;
 };
 
-#endif // WORKAREASERVERIMPL_H
+#endif // WORKAREAIMPL_H

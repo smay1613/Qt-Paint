@@ -16,7 +16,6 @@ SOURCES += \
     src/main.cpp \
     src/toolbar/colorpicker/colorsmodel.cpp \
     src/workarea/workareaelement.cpp \
-    src/workarea/workareaserverimpl.cpp \
     src/common/commands/drawcommands/drawlinecommand.cpp \
     src/common/commands/drawcommand.cpp \
     src/common/shapes/boundedshape.cpp \
@@ -35,7 +34,8 @@ SOURCES += \
     src/common/builders/paintpenbuilder.cpp \
     src/toolbar/adaptors/actionmanageradaptor.cpp \
     src/common/builders/drawcommandfactory.cpp \
-    src/toolbar/settings/viewsettings.cpp
+    src/toolbar/settings/viewsettings.cpp \
+    src/workarea/workareaimpl.cpp
 
 RESOURCES += qml.qrc
 
@@ -54,7 +54,6 @@ HEADERS += \
     src/toolbar/colorpicker/colorsmodel.h \
     src/workarea/workareaplugin.h \
     src/workarea/workareaelement.h \
-    src/workarea/workareaserverimpl.h \
     src/common/commands/drawcommands/drawlinecommand.h \
     src/common/commands/command.h \
     src/common/commands/drawcommand.h \
@@ -78,6 +77,7 @@ HEADERS += \
     src/common/builders/paintpenbuilder.h \
     src/toolbar/adaptors/actionmanageradaptor.h \
     src/common/builders/drawcommandfactory.h \
-    src/toolbar/settings/viewsettings.h
+    src/toolbar/settings/viewsettings.h \
+    src/workarea/workareaimpl.h
 
 DISTFILES +=
