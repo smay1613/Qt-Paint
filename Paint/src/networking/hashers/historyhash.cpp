@@ -1,11 +1,18 @@
 #include "historyhash.h"
 
-HistoryHash::HistoryHash(const DrawHistory& history)
-    : m_rHistory {history},
-      m_totalHash {0}
+HistoryHash::HistoryHash()
+      : m_pHistory {nullptr},
+        m_totalHash {0}
 {
-    connect(&m_rHistory, &DrawHistory::historyChanged,
-                this, &HistoryHash::onHistoryChanged);
+}
+
+void HistoryHash::trackHistory(DrawHistory *history)
+{
+    m_pHistory = history; // here should be a disconnect...but hope it will work
+    if (m_pHistory != nullptr) {
+        connect(m_pHistory, &DrawHistory::historyChanged,
+                    this, &HistoryHash::onHistoryChanged);
+    }
 }
 
 void HistoryHash::onHistoryChanged()
@@ -17,9 +24,9 @@ void HistoryHash::updateHash()
 {
     m_totalHash = 0;
 
-    std::vector<uint64_t> newHashes(m_rHistory.size());
+    std::vector<uint64_t> newHashes(m_pHistory->size());
 
-    for (const auto& command : m_rHistory) {
+    for (const auto& command : *m_pHistory) {
         m_totalHash ^= qHash(command.get());
         newHashes.emplace_back(qHash(command.get()));
     }

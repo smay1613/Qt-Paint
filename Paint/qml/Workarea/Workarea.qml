@@ -30,15 +30,6 @@ Flickable {
             anchors.fill: _workArea
             z: -1
         }
-
-        Connections {
-            target: ConnectionSettings
-            onConnectionModeChanged: {
-                if (ConnectionSettings.connectionMode.valueOf() === Network.Slave) {
-                    _workArea.disableMouse();
-                }
-            }
-        }
     }
 
     Scaler {

@@ -40,7 +40,10 @@ SOURCES += \
     src/networking/settings/connectionsettings.cpp \
     src/networking/hashers/historyhash.cpp \
     src/networking/packages/basicpackage.cpp \
-    src/networking/managers/connectionmanageradaptor.cpp
+    src/networking/managers/connectionmanageradaptor.cpp \
+    src/workarea/workareaimpl.cpp \
+    src/workarea/workareaclientimpl.cpp \
+    src/networking/managers/clientservermanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -93,6 +96,9 @@ HEADERS += \
     src/networking/packages/clientpackages/introducingpackage.h \
     src/networking/networkplugin.h \
     src/networking/networkingtypes.h \
-    src/networking/managers/connectionmanageradaptor.h
+    src/networking/managers/connectionmanageradaptor.h \
+    src/workarea/workareaimpl.h \
+    src/workarea/workareaclientimpl.h \
+    src/networking/managers/clientservermanager.h
 
 DISTFILES +=

@@ -123,3 +123,8 @@ void ConnectionManagerAdaptor::handleIntroducingResponse(const IPackage &respons
         qWarning() << "Introducing failed! Setting to slave...";
     }
 }
+
+ClientServerManager &ConnectionManagerAdaptor::clientServerManager()
+{
+    return m_clientServerManager;
+}

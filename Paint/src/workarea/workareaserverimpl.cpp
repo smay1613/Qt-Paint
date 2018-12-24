@@ -2,11 +2,10 @@
 #include <QDebug>
 #include "../common/painttypes.h"
 #include "../common/commands/drawcommands/drawcurvecommand.h"
+#include "src/networking/managers/connectionmanageradaptor.h"
 
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted {false},
-      m_painter {nullptr},
-      m_historyHash {m_history},
       m_rActionManager {ActionManagerAdaptor::instance()},
       m_rPaintSettings {PaintSettings::instance()}
 {
@@ -14,6 +13,8 @@ WorkAreaServerImpl::WorkAreaServerImpl()
     updateActivePen();
 
     connectSignals();
+
+    ConnectionManagerAdaptor::instance().clientServerManager().setHistory(&m_history);
 }
 
 void WorkAreaServerImpl::submit()
@@ -54,25 +55,6 @@ void WorkAreaServerImpl::onMouseReleased(const QMouseEvent *event)
     }
 }
 
-void WorkAreaServerImpl::onPaint(QPainter *painter)
-{
-    if (m_painter != painter) {
-        updatePainter(painter);
-    }
-
-    for (const auto& command : m_history) {
-        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.get())) {
-            m_painter->setPen(drawCommand->pen());
-        }
-        command->execute();
-    }
-
-    if (m_activeCommand) {
-        m_painter->setPen(m_activeCommand->pen());
-        m_activeCommand->execute();
-    }
-}
-
 void WorkAreaServerImpl::onActiveCommandSettingsChanged()
 {
     updateActiveCommand();
@@ -87,21 +69,21 @@ void WorkAreaServerImpl::onUndoRequested()
 {
     m_history.undo();
     updateActionsAvailability();
-    emit updateRequested();
+    emit WorkAreaImpl::updateRequested();
 }
 
 void WorkAreaServerImpl::onRedoRequested()
 {
     m_history.redo();
     updateActionsAvailability();
-    emit updateRequested();
+    emit WorkAreaImpl::updateRequested();
 }
 
 void WorkAreaServerImpl::onClearRequested()
 {
     m_history.clear();
     updateActionsAvailability();
-    emit updateRequested();
+    emit WorkAreaImpl::updateRequested();
 }
 
 void WorkAreaServerImpl::connectSignals()

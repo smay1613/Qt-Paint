@@ -11,7 +11,6 @@ public:
     explicit WorkAreaElement();
     void paint(QPainter* painter) override;
 
-    Q_INVOKABLE void disableMouse();
 signals:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
@@ -23,7 +22,7 @@ private slots:
 private:
     void connectSignals();
     void setDefaultPaintSettings();
-    std::unique_ptr<WorkAreaServerImpl> m_workAreaBL;
+    std::unique_ptr<WorkAreaImpl> m_workAreaBL;
     QPainter* m_painter;
 };
 

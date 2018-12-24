@@ -39,13 +39,13 @@ void WorkAreaElement::connectSignals()
     }
 
     connect(this, &WorkAreaElement::mousePressEvent,
-                    m_workAreaBL.get(), &WorkAreaServerImpl::onMousePressed);
+                    m_workAreaBL.get(), &WorkAreaImpl::onMousePressed);
     connect(this, &WorkAreaElement::mouseMoveEvent,
-                    m_workAreaBL.get(), &WorkAreaServerImpl::onMouseMoved);
+                    m_workAreaBL.get(), &WorkAreaImpl::onMouseMoved);
     connect(this, &WorkAreaElement::mouseReleaseEvent,
-                    m_workAreaBL.get(), &WorkAreaServerImpl::onMouseReleased);
+                    m_workAreaBL.get(), &WorkAreaImpl::onMouseReleased);
 
-    connect(m_workAreaBL.get(), &WorkAreaServerImpl::updateRequested,
+    connect(m_workAreaBL.get(), &WorkAreaImpl::updateRequested,
                     this, &WorkAreaElement::onUpdateRequested);
 
 }
@@ -53,9 +53,4 @@ void WorkAreaElement::connectSignals()
 void WorkAreaElement::setDefaultPaintSettings()
 {
     m_painter->setRenderHint(QPainter::RenderHint::Antialiasing);
-}
-
-void WorkAreaElement::disableMouse()
-{
-    setAcceptedMouseButtons(Qt::NoButton);
 }

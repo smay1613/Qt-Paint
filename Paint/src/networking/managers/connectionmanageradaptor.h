@@ -4,6 +4,7 @@
 #include <QTcpSocket>
 #include "../settings/connectionsettings.h"
 #include "../packages/ipackage.h"
+#include "clientservermanager.h"
 
 class ConnectionManagerAdaptor : public QObject
 {
@@ -12,6 +13,8 @@ public:
     static ConnectionManagerAdaptor& instance();
 
     const static size_t ReconnectionTime = 5000 /*ms*/;
+
+    ClientServerManager& clientServerManager();
 
 signals:
     void connectionError(QString error);
@@ -42,6 +45,8 @@ private:
     void handleIntroducingResponse(const IPackage& response);
 
     ConnectionSettings& m_rConnectionSettings;
+
+    ClientServerManager m_clientServerManager;
 };
 
 #endif // CONNECTIONMANAGER_H

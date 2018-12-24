@@ -6,7 +6,9 @@ class HistoryHash : public QObject
 {
     Q_OBJECT
 public:
-    HistoryHash(const DrawHistory& history);
+    HistoryHash();
+
+    void trackHistory(DrawHistory* history);
 
     uint64_t totalHash() const;
     std::vector<uint64_t> commandHashes() const;
@@ -17,7 +19,7 @@ public slots:
 private:
     void updateHash();
 
-    const DrawHistory& m_rHistory;
+    DrawHistory* m_pHistory;
     uint64_t m_totalHash;
     std::vector<uint64_t> m_commandHashes;
 };
