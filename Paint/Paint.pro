@@ -43,7 +43,8 @@ SOURCES += \
     src/networking/managers/connectionmanageradaptor.cpp \
     src/workarea/workareaimpl.cpp \
     src/workarea/workareaclientimpl.cpp \
-    src/networking/managers/clientservermanager.cpp
+    src/networking/managers/clientservermanager.cpp \
+    src/common/commands/drawcommandmemento.cpp
 
 RESOURCES += qml.qrc
 
@@ -99,6 +100,7 @@ HEADERS += \
     src/networking/managers/connectionmanageradaptor.h \
     src/workarea/workareaimpl.h \
     src/workarea/workareaclientimpl.h \
-    src/networking/managers/clientservermanager.h
+    src/networking/managers/clientservermanager.h \
+    src/common/commands/drawcommandmemento.h
 
 DISTFILES +=

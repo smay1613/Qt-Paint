@@ -2,6 +2,7 @@
 #define BASICSHAPE_H
 #include <QRect>
 #include <QLine>
+#include <QMetaType>
 
 class BoundedShape
 {
@@ -17,5 +18,7 @@ public:
 protected:
     QLine m_diagonal;
 };
+
+Q_DECLARE_METATYPE(BoundedShape)
 
 #endif // BASICSHAPE_H

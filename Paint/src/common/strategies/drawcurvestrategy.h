@@ -6,10 +6,10 @@
 class DrawCurveStrategy : public IDrawStrategy
 {
 public:
-    DrawCurveStrategy() = default;
-
     void drawRequest(QPainter* painter) override;
     void mouseTouch(const QMouseEvent &state, bool paintStarted) override;
+
+    QVariant getData() const override;
 
 private:
     SplineShape m_spline;

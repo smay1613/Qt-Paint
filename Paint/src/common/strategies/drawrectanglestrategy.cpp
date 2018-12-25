@@ -13,3 +13,8 @@ void DrawRectangleStrategy::mouseTouch(const QMouseEvent &state, bool paintStart
         m_bounds.setEnd(state.pos());
     }
 }
+
+QVariant DrawRectangleStrategy::getData() const
+{
+    return QVariant::fromValue(m_bounds);
+}

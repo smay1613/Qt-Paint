@@ -14,3 +14,8 @@ void DrawCircleStrategy::mouseTouch(const QMouseEvent& state, bool paintStarted)
         m_bounds.setEnd(state.pos());
     }
 }
+
+QVariant DrawCircleStrategy::getData() const
+{
+    return QVariant::fromValue(m_bounds);
+}

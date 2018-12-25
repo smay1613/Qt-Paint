@@ -16,3 +16,8 @@ void DrawLineStrategy::mouseTouch(const QMouseEvent &state, bool paintStarted)
         m_line.setEnd(state.pos());
     }
 }
+
+QVariant DrawLineStrategy::getData() const
+{
+    return QVariant::fromValue(m_line);
+}

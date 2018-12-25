@@ -3,7 +3,8 @@
 #include "../packages/clientpackages/introducingpackage.h"
 
 ConnectionManagerAdaptor::ConnectionManagerAdaptor()
-    : m_rConnectionSettings {ConnectionSettings::instance()}
+    : m_rConnectionSettings {ConnectionSettings::instance()},
+      m_clientServerManager {m_socket}
 {
     connectSocketSignals();
     connectToPaintServer();

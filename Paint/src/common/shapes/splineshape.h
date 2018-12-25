@@ -1,6 +1,5 @@
 #ifndef SPLINESHAPE_H
 #define SPLINESHAPE_H
-#include <list>
 #include <QPoint>
 #include <QPainterPath>
 
@@ -18,5 +17,7 @@ private:
     const size_t m_segmentPointCount;
     bool m_isEmpty;
 };
+
+Q_DECLARE_METATYPE(SplineShape)
 
 #endif // SPLINESHAPE_H

@@ -12,3 +12,8 @@ void DrawCurveStrategy::mouseTouch(const QMouseEvent& state, bool paintStarted)
         m_spline.addPoint(state.pos());
     }
 }
+
+QVariant DrawCurveStrategy::getData() const
+{
+    return QVariant::fromValue(m_spline);
+}

@@ -7,6 +7,7 @@
 #include <memory>
 #include "../painttypes.h"
 #include "../strategies/drawstrategy.h"
+#include "drawcommandmemento.h"
 
 class DrawCommand : public QObject, public ICommand
 {
@@ -23,6 +24,9 @@ public:
 
     QPen pen() const;
     void setPen(const QPen &pen);
+
+    DrawCommandMemento getMemento() const;
+    void retrieveMemento(DrawCommandMemento memento);
 
 signals:
     void updateRequested();

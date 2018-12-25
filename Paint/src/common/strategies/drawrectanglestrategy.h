@@ -6,10 +6,10 @@
 class DrawRectangleStrategy : public IDrawStrategy
 {
 public:
-    DrawRectangleStrategy() = default;
-    virtual void drawRequest(QPainter* painter);
-    virtual void mouseTouch(const QMouseEvent& state, bool paintStarted) override;
+    void drawRequest(QPainter* painter) override;
+    void mouseTouch(const QMouseEvent& state, bool paintStarted) override;
 
+    QVariant getData() const override;
 private:
     BoundedShape m_bounds;
 };

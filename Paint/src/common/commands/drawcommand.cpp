@@ -47,3 +47,9 @@ void DrawCommand::setPen(const QPen &pen)
 {
     m_pen = pen;
 }
+
+DrawCommandMemento DrawCommand::getMemento() const
+{
+    auto strategyData = m_drawStrategy->getData();
+    return DrawCommandMemento {strategyData, m_pen};
+}
