@@ -1,7 +1,7 @@
 #include "paintserver.h"
 #include <QTcpSocket>
-#include "packages/basicpackage.h"
 #include "networkingtypes.h"
+#include "packages/basicpackage.h"
 
 PaintServer::PaintServer(const QHostAddress &address, quint16 port)
     : m_masterSocket {nullptr},
@@ -27,6 +27,10 @@ void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
     switch (package.type()) {
         case networking::PType::INTRODUCING_INFO_REQUEST: {
             handleIntroducingPackage(package, socket);
+            break;
+        }
+        case networking::PType::ACTIVE_COMMAND: {
+            handleActiveCommandPackage(package);
             break;
         }
         default: {
@@ -57,6 +61,13 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
 
     BasicPackage introducingSuccessPackage {{result}, networking::PType::INTRODUCING_INFO_RESPONSE};
     socket->write(introducingSuccessPackage.rawData());
+}
+
+void PaintServer::handleActiveCommandPackage(const IPackage &package)
+{
+    for (auto& client : m_clientSockets) {
+        client->write(package.rawData());
+    }
 }
 
 void PaintServer::onNewConnection()

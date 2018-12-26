@@ -29,3 +29,13 @@ const QRect BoundedShape::getRect() const
 
     return QRect {topLeft, bottomRight};
 }
+
+QDataStream& operator>>(QDataStream &stream, BoundedShape& shape)
+{
+    return stream >> shape.m_diagonal;
+}
+
+QDataStream& operator<<(QDataStream &stream, const BoundedShape& shape)
+{
+    return stream << shape.m_diagonal;
+}

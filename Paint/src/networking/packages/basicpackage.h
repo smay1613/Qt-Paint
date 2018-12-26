@@ -21,6 +21,7 @@
  * and then it will extract QVariant data and fill she raw data (conversion QVariant->ByteArray).
  * Package data can be used by data() method that will create new QVariant based on raw data.
  *
+ * NOTE: Data placed in QVariant must provide Datastream << and >> operator!
 */
 
 class BasicPackage : public IPackage
@@ -33,7 +34,7 @@ public:
     networking::PType type() const override;
     QVariant data() const override;
 
-    QByteArray rawData() const;
+    QByteArray rawData() const override;
 
     friend QDataStream& operator>> (QDataStream& stream, BasicPackage& package);
 

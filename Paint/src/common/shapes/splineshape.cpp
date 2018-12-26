@@ -28,3 +28,13 @@ const QPainterPath SplineShape::getPath() const
 {
     return m_activePath;
 }
+
+QDataStream& operator<<(QDataStream &stream, const SplineShape& shape)
+{
+    return stream << shape.m_activePath;
+}
+
+QDataStream& operator>>(QDataStream &stream, SplineShape& shape)
+{
+    return stream >> shape.m_activePath;
+}

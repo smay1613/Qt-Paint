@@ -24,6 +24,7 @@ private:
     void connectSocketSignals(QTcpSocket* socket);
 
     void handleIntroducingPackage(const IPackage& package, QTcpSocket *socket);
+    void handleActiveCommandPackage(const IPackage& package);
 
     QTcpServer m_server;
 

@@ -12,6 +12,8 @@ public:
     void setEnd(const QPoint& endPoint);
     const QLine getLine() const;
 
+    friend QDataStream& operator>> (QDataStream& stream, LineShape& shape);
+    friend QDataStream& operator<< (QDataStream& stream, const LineShape& shape);
 private:
     QLine m_line;
 };

@@ -15,6 +15,9 @@ public:
 
     const QRect getRect() const;
 
+    friend QDataStream& operator>> (QDataStream& stream, BoundedShape& package);
+    friend QDataStream& operator<< (QDataStream& stream, const BoundedShape& package);
+
 protected:
     QLine m_diagonal;
 };

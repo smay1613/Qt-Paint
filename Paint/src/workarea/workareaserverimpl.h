@@ -19,6 +19,9 @@ public:
     void onMousePressed(const QMouseEvent* event) override;
     void onMouseReleased(const QMouseEvent* event) override;
 
+signals:
+    void activeCommandChanged(DrawCommandMemento activeCommand);
+
 private slots:
     void onActiveCommandSettingsChanged();
     void onActivePenSettingsChanged();

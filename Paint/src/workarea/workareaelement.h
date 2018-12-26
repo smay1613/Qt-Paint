@@ -2,7 +2,7 @@
 #define WORKAREA_H
 #include <QQuickPaintedItem>
 #include <memory>
-#include "workareaserverimpl.h"
+#include "workareaimpl.h"
 
 class WorkAreaElement : public QQuickPaintedItem
 {

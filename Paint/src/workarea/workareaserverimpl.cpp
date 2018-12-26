@@ -15,6 +15,7 @@ WorkAreaServerImpl::WorkAreaServerImpl()
     connectSignals();
 
     ConnectionManagerAdaptor::instance().clientServerManager().setHistory(&m_history);
+
 }
 
 void WorkAreaServerImpl::submit()
@@ -30,6 +31,7 @@ void WorkAreaServerImpl::onMouseMoved(const QMouseEvent* event)
 {
     if (m_activeCommand && m_paintStarted) {
         m_activeCommand->execute(*event, m_paintStarted);
+        emit activeCommandChanged(m_activeCommand->getMemento());
     }
 }
 
@@ -39,6 +41,7 @@ void WorkAreaServerImpl::onMousePressed(const QMouseEvent* event)
 
     if (m_activeCommand) {
         m_activeCommand->execute(*event, !m_paintStarted);
+        emit activeCommandChanged(m_activeCommand->getMemento());
     }
 
     if (!m_paintStarted) {
@@ -103,6 +106,11 @@ void WorkAreaServerImpl::connectSignals()
                 this, &WorkAreaServerImpl::onRedoRequested);
     connect(&m_rActionManager, &ActionManagerAdaptor::clearRequested,
                 this, &WorkAreaServerImpl::onClearRequested);
+
+    // Connections with client-server manager
+    auto& clientServer = ConnectionManagerAdaptor::instance().clientServerManager();
+    connect(this, &WorkAreaServerImpl::activeCommandChanged,
+                &clientServer, &ClientServerManager::onActiveCommandChanged);
 }
 
 void WorkAreaServerImpl::connectActiveCommand()
@@ -131,6 +139,7 @@ void WorkAreaServerImpl::updateActiveCommand()
     updateActivePen();
     if (m_activeCommand) {
         connectActiveCommand();
+        emit activeCommandChanged(m_activeCommand->getMemento());
     } else {
         qCritical() << "Active command is nullptr!";
     }
@@ -140,6 +149,7 @@ void WorkAreaServerImpl::updateActivePen()
 {
     if (m_activeCommand) {
         m_activeCommand->setPen(m_penBuilder.getActivePen());
+        emit activeCommandChanged(m_activeCommand->getMemento());
     }
 }
 

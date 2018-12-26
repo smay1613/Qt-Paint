@@ -14,3 +14,13 @@ const QLine LineShape::getLine() const
 {
     return m_line;
 }
+
+QDataStream& operator<<(QDataStream &stream, const LineShape& shape)
+{
+    return stream << shape.m_line;
+}
+
+QDataStream& operator>>(QDataStream &stream, LineShape& shape)
+{
+    return stream >> shape.m_line;
+}

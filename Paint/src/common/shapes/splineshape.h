@@ -10,6 +10,8 @@ public:
     void addPoint(const QPoint& point);
     const QPainterPath getPath() const;
 
+    friend QDataStream& operator>> (QDataStream& stream, SplineShape& shape);
+    friend QDataStream& operator<< (QDataStream& stream, const SplineShape& shape);
 private:
     size_t m_pointsCount;
     QPainterPath m_activePath;

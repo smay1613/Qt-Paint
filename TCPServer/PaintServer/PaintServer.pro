@@ -1,4 +1,4 @@
-QT -= gui
+QT += gui # only for types to be able for reading!
 QT += network
 
 CONFIG += c++14 console
@@ -19,6 +19,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += ../../Paint/src/networking
+
+INCLUDEPATH += ../../Paint/src/common/commands \
+               ../../Paint/src/common/shapes
+
+#Export data for registering as metatype for reading
+HEADERS += \
+           ../../Paint/src/common/commands/drawcommandmemento.h \
+           ../../Paint/src/common/shapes/lineshape.h \
+           ../../Paint/src/common/shapes/splineshape.h \
+           ../../Paint/src/common/shapes/boundedshape.h
+SOURCES += \
+           ../../Paint/src/common/commands/drawcommandmemento.cpp \
+           ../../Paint/src/common/shapes/lineshape.cpp \
+           ../../Paint/src/common/shapes/splineshape.cpp \
+           ../../Paint/src/common/shapes/boundedshape.cpp
 
 SOURCES += \
         main.cpp \

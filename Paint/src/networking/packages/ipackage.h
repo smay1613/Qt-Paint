@@ -9,6 +9,7 @@ public:
     virtual ~IPackage() = default;
     virtual networking::PType type() const = 0;
     virtual QVariant data() const = 0;
+    virtual QByteArray rawData() const = 0;
 };
 
 #endif // IPACKAGE_H
