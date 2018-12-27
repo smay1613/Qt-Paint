@@ -7,7 +7,7 @@ class DrawCommandMemento
 {
 public:
     DrawCommandMemento() = default;
-    DrawCommandMemento(const QVariant& strategy, const QPen& pen);
+    DrawCommandMemento(QVariant strategy, QPen pen);
 
     friend QDataStream& operator>> (QDataStream& stream, DrawCommandMemento& memento);
     friend QDataStream& operator<< (QDataStream& stream, const DrawCommandMemento& memento);

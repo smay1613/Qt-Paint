@@ -1,8 +1,8 @@
 #include "drawcommandmemento.h"
 
-DrawCommandMemento::DrawCommandMemento(const QVariant &strategy, const QPen &pen)
-    : m_strategyVariant {strategy},
-      m_pen {pen}
+DrawCommandMemento::DrawCommandMemento(QVariant strategy, QPen pen)
+    : m_strategyVariant {std::move(strategy)},
+      m_pen {std::move(pen)}
 {
 }
 
