@@ -30,7 +30,9 @@ void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
             break;
         }
         case networking::PType::ACTIVE_COMMAND: {
-            handleActiveCommandPackage(package);
+            if (socket == m_masterSocket) { // only the master can send active command!
+                handleActiveCommandPackage(package);
+            }
             break;
         }
         default: {
@@ -65,6 +67,7 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
 
 void PaintServer::handleActiveCommandPackage(const IPackage &package)
 {
+    // resend active command package to all clients
     for (auto& client : m_clientSockets) {
         client->write(package.rawData());
     }
@@ -89,7 +92,9 @@ void PaintServer::onReadyRead()
     QDataStream in {socket};
     in.startTransaction();
 
-    BasicPackage inputPackage;
+    BasicPackage inputPackage {networking::PType::INVALID,
+                                   QIODevice::OpenModeFlag::ReadWrite}; // for using as for reading,
+                                                                        // as for resending
     in >> inputPackage;
 
     if (!in.commitTransaction())
