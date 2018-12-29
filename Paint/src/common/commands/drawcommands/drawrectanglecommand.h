@@ -6,6 +6,7 @@ class DrawRectangleCommand : public DrawCommand
 {
 public:
     explicit DrawRectangleCommand(QPainter* painter);
+    PaintTypes::ShapeType type() const;
 };
 
 #endif // DRAWRECTANGLECOMMAND_H

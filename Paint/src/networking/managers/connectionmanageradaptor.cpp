@@ -110,7 +110,7 @@ void ConnectionManagerAdaptor::handleServerResponse(const IPackage &response)
             break;
         }
         default: {
-            qWarning() << "Invalid package recieved!";
+            m_clientServerManager.handlePackage(response);
         }
     }
 }

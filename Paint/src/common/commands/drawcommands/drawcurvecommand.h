@@ -6,6 +6,8 @@ class DrawCurveCommand : public DrawCommand
 {
 public:
     explicit DrawCurveCommand(QPainter* painter);
+
+    PaintTypes::ShapeType type() const;
 };
 
 #endif // DRAWCURVECOMMAND_H

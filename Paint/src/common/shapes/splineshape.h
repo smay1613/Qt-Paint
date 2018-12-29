@@ -16,7 +16,7 @@ private:
     size_t m_pointsCount;
     QPainterPath m_activePath;
 
-    const size_t m_segmentPointCount;
+    static const size_t m_segmentPointCount = 3;
     bool m_isEmpty;
 };
 

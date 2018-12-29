@@ -6,7 +6,7 @@ namespace PaintTypes
 {
 Q_NAMESPACE
 
-enum class ShapeType {
+enum ShapeType {
     Line,
     Curve,
     Circle,

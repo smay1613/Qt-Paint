@@ -10,6 +10,7 @@ public:
     void mouseTouch(const QMouseEvent &state, bool paintStarted) override;
 
     QVariant getData() const override;
+    void setData(const QVariant& data) override;
 private:
     BoundedShape m_bounds;
 };

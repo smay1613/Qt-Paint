@@ -6,6 +6,8 @@ class DrawLineCommand : public DrawCommand
 {
 public:
     explicit DrawLineCommand(QPainter* painter);
+
+    PaintTypes::ShapeType type() const;
 };
 
 #endif // DRAWLINECOMMAND_H

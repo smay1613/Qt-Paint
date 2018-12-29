@@ -19,3 +19,8 @@ QVariant DrawCircleStrategy::getData() const
 {
     return QVariant::fromValue(m_bounds);
 }
+
+void DrawCircleStrategy::setData(const QVariant &data)
+{
+    m_bounds = data.value<BoundedShape>();
+}

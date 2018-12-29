@@ -27,7 +27,11 @@ void DrawCommand::execute(const QMouseEvent& mouseState, bool paintStarted)
 void DrawCommand::execute()
 {
     if (m_painter && m_painter->isActive()) {
-        m_drawStrategy->drawRequest(m_painter);
+        if (m_drawStrategy) {
+            m_drawStrategy->drawRequest(m_painter);
+        } else {
+            qWarning() << "DrawLineCommand::execute - drawStrategy is null!";
+        }
     } else {
         qWarning() << "DrawLineCommand::draw - painter is not active!";
     }
@@ -51,5 +55,11 @@ void DrawCommand::setPen(const QPen &pen)
 DrawCommandMemento DrawCommand::getMemento() const
 {
     auto strategyData = m_drawStrategy->getData();
-    return DrawCommandMemento {strategyData, m_pen};
+    return DrawCommandMemento {strategyData, m_pen, type()};
+}
+
+void DrawCommand::retrieveMemento(DrawCommandMemento memento)
+{
+    m_pen = memento.m_pen;
+    m_drawStrategy->setData(memento.m_strategyVariant);
 }

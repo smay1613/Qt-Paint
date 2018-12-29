@@ -2,7 +2,6 @@
 #define WORKAREASERVERIMPL_H
 #include <QMouseEvent>
 #include "workareaimpl.h"
-#include "../common/builders/drawcommandfactory.h"
 #include "../common/builders/paintpenbuilder.h"
 #include "../toolbar/adaptors/actionmanageradaptor.h"
 #include "../toolbar/settings/paintsettings.h"
@@ -20,7 +19,7 @@ public:
     void onMouseReleased(const QMouseEvent* event) override;
 
 signals:
-    void activeCommandChanged(DrawCommandMemento activeCommand);
+    void activeCommandChanged(const DrawCommandMemento& activeCommandMemento);
 
 private slots:
     void onActiveCommandSettingsChanged();
@@ -43,7 +42,6 @@ private:
 
     bool m_paintStarted;
 
-    DrawCommandFactory m_commandBuilder;
     PaintPenBuilder m_penBuilder;
 
     ActionManagerAdaptor& m_rActionManager;

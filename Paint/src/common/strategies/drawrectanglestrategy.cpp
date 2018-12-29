@@ -18,3 +18,8 @@ QVariant DrawRectangleStrategy::getData() const
 {
     return QVariant::fromValue(m_bounds);
 }
+
+void DrawRectangleStrategy::setData(const QVariant &data)
+{
+    m_bounds = data.value<BoundedShape>();
+}

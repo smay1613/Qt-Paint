@@ -14,6 +14,7 @@ public:
     virtual void mouseTouch(const QMouseEvent& state, bool paintStarted) = 0;
 
     virtual QVariant getData() const = 0;
+    virtual void setData(const QVariant& data) = 0;
 };
 
 #endif // DRAWSTRATEGY_H

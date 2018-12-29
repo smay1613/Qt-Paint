@@ -3,7 +3,6 @@
 
 SplineShape::SplineShape() :
     m_pointsCount {0},
-    m_segmentPointCount {3},
     m_isEmpty(true)
 {
 

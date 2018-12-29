@@ -10,7 +10,7 @@ public:
     void mouseTouch(const QMouseEvent &state, bool paintStarted) override;
 
     QVariant getData() const override;
-
+    void setData(const QVariant& data) override;
 private:
     SplineShape m_spline;
 };

@@ -6,6 +6,8 @@ class DrawCircleCommand : public DrawCommand
 {
 public:
     explicit DrawCircleCommand(QPainter* painter);
+
+    PaintTypes::ShapeType type() const;
 };
 
 #endif // DRAWCIRCLECOMMAND_H

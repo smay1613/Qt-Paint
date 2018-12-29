@@ -3,7 +3,6 @@
 WorkAreaImpl::WorkAreaImpl()
     : m_painter {nullptr}
 {
-
 }
 
 void WorkAreaImpl::onPaint(QPainter *painter)

@@ -6,11 +6,16 @@
 #include "../../toolbar/settings/paintsettings.h"
 #include <QDebug>
 
-std::unique_ptr<DrawCommand> DrawCommandFactory::createActiveCommand(QPainter *painter) const
+std::unique_ptr<DrawCommand> DrawCommandFactory::createActiveCommandFromSettings(QPainter *painter) const
 {
     PaintTypes::ShapeType activeShapeType = PaintSettings::instance().activeShapeType();
 
-    switch(activeShapeType)
+    return createCommandByType(painter, activeShapeType);
+}
+
+std::unique_ptr<DrawCommand> DrawCommandFactory::createCommandByType(QPainter *painter, PaintTypes::ShapeType type) const
+{
+    switch(type)
     {
         case PaintTypes::ShapeType::Circle:
             return std::make_unique<DrawCircleCommand>(painter);

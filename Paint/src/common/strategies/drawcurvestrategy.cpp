@@ -17,3 +17,8 @@ QVariant DrawCurveStrategy::getData() const
 {
     return QVariant::fromValue(m_spline);
 }
+
+void DrawCurveStrategy::setData(const QVariant& data)
+{
+    m_spline = data.value<SplineShape>();
+}

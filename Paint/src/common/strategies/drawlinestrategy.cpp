@@ -21,3 +21,8 @@ QVariant DrawLineStrategy::getData() const
 {
     return QVariant::fromValue(m_line);
 }
+
+void DrawLineStrategy::setData(const QVariant &data)
+{
+    m_line = data.value<LineShape>();
+}

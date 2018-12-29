@@ -6,3 +6,8 @@ DrawCircleCommand::DrawCircleCommand(QPainter* painter)
     : DrawCommand (painter, std::make_unique<DrawCircleStrategy>())
 {
 }
+
+PaintTypes::ShapeType DrawCircleCommand::type() const
+{
+    return PaintTypes::ShapeType::Circle;
+}

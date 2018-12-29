@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <memory>
 #include "../common/drawhistory/drawhistory.h"
+#include "../common/builders/drawcommandfactory.h"
 
 class WorkAreaImpl : public QObject
 {
@@ -29,6 +30,8 @@ protected:
     std::unique_ptr<DrawCommand> m_activeCommand;
 
     DrawHistory m_history;
+
+    DrawCommandFactory m_commandBuilder;
 };
 
 #endif // WORKAREAIMPL_H

@@ -18,6 +18,7 @@ signals:
 
 private slots:
     void onUpdateRequested();
+    void onConnectionModeChanged(); // changes the implementation at runtime!
 
 private:
     void connectSignals();

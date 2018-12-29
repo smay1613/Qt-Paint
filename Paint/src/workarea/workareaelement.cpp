@@ -4,11 +4,17 @@
 #include <QPoint>
 #include <memory>
 #include "workareaserverimpl.h"
+#include "workareaclientimpl.h"
+#include "src/networking/settings/connectionsettings.h"
 
 WorkAreaElement::WorkAreaElement() :
-    m_workAreaBL {std::make_unique<WorkAreaServerImpl>()},
     m_painter {nullptr}
 {
+    if (ConnectionSettings::instance().connectionMode() == networking::ConnectionMode::Master) {
+        m_workAreaBL = std::make_unique<WorkAreaServerImpl>();
+    } else {
+        m_workAreaBL = std::make_unique<WorkAreaClientImpl>();
+    }
     setAcceptedMouseButtons(Qt::LeftButton);
     setAntialiasing(true);
     setRenderTarget(FramebufferObject);
@@ -31,6 +37,20 @@ void WorkAreaElement::onUpdateRequested()
     update({QPoint {0, 0}, size().toSize()});
 }
 
+void WorkAreaElement::onConnectionModeChanged()
+{
+    switch (ConnectionSettings::instance().connectionMode()) {
+        case networking::ConnectionMode::Master: {
+            m_workAreaBL = std::make_unique<WorkAreaServerImpl>();
+            break;
+        }
+        case networking::ConnectionMode::Slave: {
+            m_workAreaBL = std::make_unique<WorkAreaClientImpl>();
+            break;
+        }
+    }
+}
+
 void WorkAreaElement::connectSignals()
 {
     if (!m_workAreaBL) {
@@ -47,6 +67,9 @@ void WorkAreaElement::connectSignals()
 
     connect(m_workAreaBL.get(), &WorkAreaImpl::updateRequested,
                     this, &WorkAreaElement::onUpdateRequested);
+
+    connect(&ConnectionSettings::instance(), &ConnectionSettings::connectionModeChanged,
+                this, &WorkAreaElement::onConnectionModeChanged);
 
 }
 

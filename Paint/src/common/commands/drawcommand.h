@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QMouseEvent>
 #include <memory>
-#include "../painttypes.h"
 #include "../strategies/drawstrategy.h"
 #include "drawcommandmemento.h"
 
@@ -26,6 +25,8 @@ public:
     void setPen(const QPen &pen);
 
     DrawCommandMemento getMemento() const;
+    virtual PaintTypes::ShapeType type() const = 0;
+
     void retrieveMemento(DrawCommandMemento memento);
 
 signals:

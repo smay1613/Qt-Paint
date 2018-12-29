@@ -67,9 +67,10 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
 
 void PaintServer::handleActiveCommandPackage(const IPackage &package)
 {
+    const auto& rawData = package.rawData();
     // resend active command package to all clients
-    for (auto& client : m_clientSockets) {
-        client->write(package.rawData());
+    for (auto client : m_clientSockets) {
+        client->write(rawData);
     }
 }
 
@@ -117,7 +118,7 @@ void PaintServer::onClientDisconnected()
         m_masterSocket = nullptr;
         qDebug() << "Master disconnected!";
     } else {
-        std::remove(m_clientSockets.begin(), m_clientSockets.end(), socket);
+        m_clientSockets.erase(std::remove(m_clientSockets.begin(), m_clientSockets.end(), socket));
         socket->deleteLater();
         qDebug() << "Slave disconnected!";
     }
