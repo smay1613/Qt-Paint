@@ -91,17 +91,21 @@ void PaintServer::onReadyRead()
     }
 
     QDataStream in {socket};
-    in.startTransaction();
 
-    BasicPackage inputPackage {networking::PType::INVALID,
-                                   QIODevice::OpenModeFlag::ReadWrite}; // for using as for reading,
-                                                                        // as for resending
-    in >> inputPackage;
+    forever {
+        in.startTransaction();
 
-    if (!in.commitTransaction())
-        return;
+        BasicPackage inputPackage {networking::PType::INVALID,
+                                    QIODevice::OpenModeFlag::ReadWrite}; // for using as for reading,
+                                                                         // as for resending
+        in >> inputPackage;
 
-    handlePackage(inputPackage, socket);
+        if (!in.commitTransaction()) {
+            break;
+        }
+
+        handlePackage(inputPackage, socket);
+    }
 }
 
 void PaintServer::onClientDisconnected()

@@ -57,15 +57,19 @@ void ConnectionManagerAdaptor::onSocketStateChanged(QAbstractSocket::SocketState
 void ConnectionManagerAdaptor::onDataRecieved()
 {
     QDataStream in {&m_socket};
-    in.startTransaction();
 
-    BasicPackage inputPackage;
-    in >> inputPackage;
+    forever {
+        in.startTransaction();
 
-    if (!in.commitTransaction())
-        return;
+        BasicPackage inputPackage;
+        in >> inputPackage;
 
-    handleServerResponse(inputPackage);
+        if (!in.commitTransaction()) {
+            break;
+        }
+
+        handleServerResponse(inputPackage);
+    }
 }
 
 void ConnectionManagerAdaptor::onConnected()
