@@ -1,7 +1,7 @@
 #ifndef CLIENTSERVERMANAGER_H
 #define CLIENTSERVERMANAGER_H
 #include <QTcpSocket>
-#include "src/networking/hashers/historyhash.h"
+#include "src/networking/workers/historyworker.h"
 #include "src/common/drawhistory/drawhistory.h"
 #include "src/common/commands/drawcommandmemento.h"
 #include "src/networking/packages/ipackage.h"
@@ -12,7 +12,7 @@ class ClientServerManager : public QObject
 public:
     explicit ClientServerManager(QTcpSocket& socket);
 
-    void setHistory(DrawHistory *history);
+    void track(DrawHistory& history);
 
     void handlePackage(const IPackage& package);
 
@@ -26,7 +26,7 @@ private:
     void sendActiveCommand(const DrawCommandMemento& commandMemento);
     void handleActiveCommandPackage(const IPackage& package);
 
-    HistoryHash m_historyHash;
+    HistoryWorker m_historyWorker;
     QTcpSocket& m_rSocket;
 };
 

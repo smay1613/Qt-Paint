@@ -6,9 +6,15 @@ enum PType
 {
     INVALID,
     INTRODUCING_INFO_REQUEST, // gives info about client mode (slave/master)
-    INTRODUCING_INFO_RESPONSE, // result from server
+    INTRODUCING_INFO_RESPONSE,
 
-    ACTIVE_COMMAND
+    ACTIVE_COMMAND,
+
+    HISTORY_HASH_UPDATE, // changes in history
+    COMMAND_HASHES_REQUEST,
+    COMMAND_HASHES_RESPONSE,
+
+    COMMANDS_REQUEST
 };
 
 }

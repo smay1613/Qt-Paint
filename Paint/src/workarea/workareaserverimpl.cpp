@@ -14,8 +14,7 @@ WorkAreaServerImpl::WorkAreaServerImpl()
 
     connectSignals();
 
-    ConnectionManagerAdaptor::instance().clientServerManager().setHistory(&m_history);
-
+    ConnectionManagerAdaptor::instance().clientServerManager().track(m_history);
 }
 
 void WorkAreaServerImpl::submit()

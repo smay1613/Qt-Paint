@@ -1,27 +1,21 @@
 #ifndef HISTORYHASH_H
 #define HISTORYHASH_H
-#include "src/common/drawhistory/drawhistory.h"
+#include "../../common/drawhistory/history.h"
+#include <QVector>
 
-class HistoryHash : public QObject
+class HistoryHash
 {
-    Q_OBJECT
 public:
-    HistoryHash();
-
-    void trackHistory(DrawHistory* history);
-
     uint64_t totalHash() const;
-    std::vector<uint64_t> commandHashes() const;
+    QVector<quint64> commandHashes() const;
 
-public slots:
-    void onHistoryChanged();
+    void calculate(const IHistory& history);
 
 private:
-    void updateHash();
+    void updateHash(const IHistory& history);
 
-    DrawHistory* m_pHistory;
     uint64_t m_totalHash;
-    std::vector<uint64_t> m_commandHashes;
+    QVector<quint64> m_commandHashes;
 };
 
 #endif // HISTORYHASH_H

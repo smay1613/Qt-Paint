@@ -14,6 +14,7 @@ public:
 
     const static size_t ReconnectionTime = 5000 /*ms*/;
 
+    // FIXME: Breaking Law of Demeter
     ClientServerManager& clientServerManager();
 
 signals:

@@ -1,14 +1,15 @@
 #include "clientservermanager.h"
 #include "src/networking/packages/basicpackage.h"
 
-ClientServerManager::ClientServerManager(QTcpSocket &socket)
+ClientServerManager::ClientServerManager(QTcpSocket& socket)
     : m_rSocket {socket}
 {
+    m_historyWorker.addClient(&m_rSocket);
 }
 
-void ClientServerManager::setHistory(DrawHistory* history)
+void ClientServerManager::track(DrawHistory& history)
 {
-    m_historyHash.trackHistory(history);
+    m_historyWorker.track(history);
 }
 
 void ClientServerManager::handlePackage(const IPackage &package)
@@ -16,6 +17,13 @@ void ClientServerManager::handlePackage(const IPackage &package)
     switch (package.type()) {
         case networking::PType::ACTIVE_COMMAND: {
             handleActiveCommandPackage(package);
+            break;
+        }
+        case networking::PType::HISTORY_HASH_UPDATE:
+        case networking::PType::COMMAND_HASHES_REQUEST:
+        case networking::PType::COMMAND_HASHES_RESPONSE:
+        case networking::PType::COMMANDS_REQUEST: {
+            m_historyWorker.handleHistoryAction(package);
             break;
         }
         default: {

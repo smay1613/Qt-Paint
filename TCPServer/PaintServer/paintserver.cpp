@@ -12,6 +12,7 @@ PaintServer::PaintServer(const QHostAddress &address, quint16 port)
         qCritical() << "Cannot initialize server!";
         qCritical() << "Server not started.";
     }
+    m_historyWorker.track(m_localHistory);
     connectSignals();
 }
 
@@ -35,6 +36,15 @@ void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
             }
             break;
         }
+        case networking::PType::HISTORY_HASH_UPDATE:
+        case networking::PType::COMMAND_HASHES_REQUEST:
+        case networking::PType::COMMAND_HASHES_RESPONSE:
+        case networking::PType::COMMANDS_REQUEST: {
+            if (socket == m_masterSocket) {
+                m_historyWorker.handleHistoryAction(package);
+            }
+            break;
+        }
         default: {
             qWarning() << "Invalid package recieved!";
         }
@@ -55,6 +65,7 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
         } else {
             qDebug() << "Socket becomes master.";
             m_masterSocket = socket;
+            m_historyWorker.addClient(m_masterSocket);
         }
     } else {
         qDebug() << "Socket added to the clients list";

@@ -44,7 +44,8 @@ SOURCES += \
     src/workarea/workareaimpl.cpp \
     src/workarea/workareaclientimpl.cpp \
     src/networking/managers/clientservermanager.cpp \
-    src/common/commands/drawcommandmemento.cpp
+    src/common/commands/drawcommandmemento.cpp \
+    src/networking/workers/historyworker.cpp
 
 RESOURCES += qml.qrc
 
@@ -101,6 +102,7 @@ HEADERS += \
     src/workarea/workareaimpl.h \
     src/workarea/workareaclientimpl.h \
     src/networking/managers/clientservermanager.h \
-    src/common/commands/drawcommandmemento.h
+    src/common/commands/drawcommandmemento.h \
+    src/networking/workers/historyworker.h
 
 DISTFILES +=

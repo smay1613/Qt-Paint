@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += ../../Paint/src/networking
+INCLUDEPATH += ../../Paint/src/common
 
 INCLUDEPATH += ../../Paint/src/common/commands \
                ../../Paint/src/common/shapes
@@ -34,6 +35,14 @@ SOURCES += \
            ../../Paint/src/common/shapes/lineshape.cpp \
            ../../Paint/src/common/shapes/splineshape.cpp \
            ../../Paint/src/common/shapes/boundedshape.cpp
+
+HEADERS += ../../Paint/src/common/drawhistory/drawhistory.h
+SOURCES += ../../Paint/src/common/drawhistory/drawhistory.cpp
+
+HEADERS += ../../Paint/src/networking/workers/historyworker.h \
+           ../../Paint/src/networking/hashers/historyhash.h
+SOURCES += ../../Paint/src/networking/workers/historyworker.cpp \
+           ../../Paint/src/networking/hashers/historyhash.cpp
 
 SOURCES += \
         main.cpp \

@@ -18,6 +18,8 @@ void registerMetaTypes() {
 
     qRegisterMetaType<LineShape>("LineShape");
     qRegisterMetaTypeStreamOperators<LineShape>("LineShape");
+
+    qRegisterMetaTypeStreamOperators<QVector<quint64>>("QVector<quint64>");
 }
 
 int main(int argc, char *argv[])

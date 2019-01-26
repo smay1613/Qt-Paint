@@ -1,42 +1,28 @@
 #include "historyhash.h"
+#include <QHash>
 
-HistoryHash::HistoryHash()
-      : m_pHistory {nullptr},
-        m_totalHash {0}
-{
-}
-
-void HistoryHash::trackHistory(DrawHistory *history)
-{
-    m_pHistory = history; // here should be a disconnect...but hope it will work
-    if (m_pHistory != nullptr) {
-        connect(m_pHistory, &DrawHistory::historyChanged,
-                    this, &HistoryHash::onHistoryChanged);
-    }
-}
-
-void HistoryHash::onHistoryChanged()
-{
-    updateHash();
-}
-
-void HistoryHash::updateHash()
+void HistoryHash::updateHash(const IHistory& history)
 {
     m_totalHash = 0;
 
-    std::vector<uint64_t> newHashes(m_pHistory->size());
+    QVector<quint64> newHashes (static_cast<int>(history.size()));
 
-    for (const auto& command : *m_pHistory) {
+    for (const auto& command : history) {
         m_totalHash ^= qHash(command.get());
-        newHashes.emplace_back(qHash(command.get()));
+        newHashes.append(qHash(command.get()));
     }
 
-    std::swap(m_commandHashes, newHashes);
+    m_commandHashes.swap(newHashes);
 }
 
-std::vector<uint64_t> HistoryHash::commandHashes() const
+QVector<quint64> HistoryHash::commandHashes() const
 {
     return m_commandHashes;
+}
+
+void HistoryHash::calculate(const IHistory& history)
+{
+    updateHash(history);
 }
 
 uint64_t HistoryHash::totalHash() const

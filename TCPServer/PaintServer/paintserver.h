@@ -4,6 +4,8 @@
 #include <QDataStream>
 #include <vector>
 #include "packages/ipackage.h"
+#include "drawhistory/drawhistory.h"
+#include "workers/historyworker.h"
 
 class PaintServer : public QObject
 {
@@ -33,6 +35,9 @@ private:
 
     QHostAddress m_listenAddress;
     quint16 m_listenPort;
+
+    HistoryWorker m_historyWorker;
+    DrawHistory m_localHistory;
 };
 
 #endif // PAINTSERVER_H

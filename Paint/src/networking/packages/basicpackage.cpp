@@ -6,11 +6,11 @@ BasicPackage::BasicPackage(networking::PType type, const QIODevice::OpenModeFlag
       m_type {type},
       m_mode {openMode}
 {
+    m_translationStream << static_cast<qint32>(m_type);
     Q_ASSERT_X((openMode == QIODevice::OpenModeFlag::WriteOnly
                 || openMode == QIODevice::OpenModeFlag::ReadOnly
                 || openMode == QIODevice::OpenModeFlag::ReadWrite), "BasicPackage::BasicPackage(type, openMode)",
                                                                     "INVALID MODE PROVIDED!");
-    m_translationStream << static_cast<qint32>(m_type);
 }
 
 BasicPackage::BasicPackage(const QVariant &data, networking::PType type)
