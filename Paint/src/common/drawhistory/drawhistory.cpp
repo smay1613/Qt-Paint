@@ -53,12 +53,12 @@ std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::top() noexcept
 
 std::list<std::unique_ptr<ICommand>>::const_iterator DrawHistory::begin() const noexcept
 {
-    return  m_commandHistory.cbegin();
+    return m_commandHistory.cbegin();
 }
 
 std::list<std::unique_ptr<ICommand>>::const_iterator DrawHistory::end() const noexcept
 {
-    return  m_commandHistory.cbegin();
+    return m_commandHistory.cend();
 }
 
 size_t DrawHistory::size() const
