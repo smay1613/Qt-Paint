@@ -6,7 +6,6 @@ BasicPackage::BasicPackage(networking::PType type, const QIODevice::OpenModeFlag
       m_type {type},
       m_mode {openMode}
 {
-    m_translationStream << static_cast<qint32>(m_type);
     Q_ASSERT_X((openMode == QIODevice::OpenModeFlag::WriteOnly
                 || openMode == QIODevice::OpenModeFlag::ReadOnly
                 || openMode == QIODevice::OpenModeFlag::ReadWrite), "BasicPackage::BasicPackage(type, openMode)",
@@ -16,7 +15,7 @@ BasicPackage::BasicPackage(networking::PType type, const QIODevice::OpenModeFlag
 BasicPackage::BasicPackage(const QVariant &data, networking::PType type)
     : BasicPackage(type, QIODevice::OpenModeFlag::WriteOnly)
 {
-    m_translationStream << data;
+    m_translationStream << static_cast<qint32>(m_type) << data;
 }
 
 networking::PType BasicPackage::type() const
