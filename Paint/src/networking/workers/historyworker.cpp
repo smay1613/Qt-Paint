@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QVector>
 #include "../packages/basicpackage.h"
+#include "../../common/commands/drawcommand.h"
 
 void HistoryWorker::track(DrawHistory& history)
 {
@@ -72,7 +73,11 @@ void HistoryWorker::handleHistoryAction(const IPackage& package)
             break;
         }
         case networking::PType::COMMANDS_REQUEST: {
-            // TODO
+            handleCommandsRequest(package);
+            break;
+        }
+        case networking::PType::COMMANDS_RESPONSE: {
+            handleCommandsResponse(package);
             break;
         }
         default: {
@@ -98,6 +103,29 @@ void HistoryWorker::handleHistoryHashesResponse(const IPackage& response) const
     }
 }
 
+void HistoryWorker::handleCommandsRequest(const IPackage& request) const
+{
+    const auto fromPosition = request.data().value<size_t>();
+
+    QList<DrawCommandMemento> commands;
+    commands.reserve(static_cast<int>(m_pHistory->size() - fromPosition));
+
+    for (auto i = std::next(m_pHistory->begin(), static_cast<long>(fromPosition));
+         i != m_pHistory->end();
+         ++i) {
+        const auto command = dynamic_cast<DrawCommand*>(i->get());
+        commands.append(command->getMemento());
+    }
+
+    sendCommands(commands);
+}
+
+void HistoryWorker::handleCommandsResponse(const IPackage& response) const
+{
+    QList<DrawCommandMemento> newCommands {response.data().value<QList<DrawCommandMemento>>()};
+    // TODO
+}
+
 void HistoryWorker::sendCommandHashes() const
 {
     BasicPackage package {QVariant::fromValue(m_historyHash.commandHashes()),
@@ -110,6 +138,13 @@ void HistoryWorker::sendCommandRequest(size_t fromPosition) const
     BasicPackage package {QVariant::fromValue(fromPosition),
                             networking::PType::COMMANDS_REQUEST};
 
+    notifyClient(package);
+}
+
+void HistoryWorker::sendCommands(const QList<DrawCommandMemento>& commands) const
+{
+    BasicPackage package {QVariant::fromValue(commands),
+                            networking::PType::COMMANDS_RESPONSE};
     notifyClient(package);
 }
 
