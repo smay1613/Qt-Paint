@@ -1,15 +1,11 @@
 #include "drawcommand.h"
+#include "../builders/drawstrategyfactory.h"
 #include <QDebug>
 
-DrawCommand::DrawCommand(QPainter* painter)
-                : m_painter(painter)
-{
-
-}
-
-DrawCommand::DrawCommand(QPainter *painter, std::unique_ptr<IDrawStrategy> strategy)
+DrawCommand::DrawCommand(QPainter* painter, PaintTypes::ShapeType type)
                 : m_painter {painter},
-                  m_drawStrategy {std::move(strategy)}
+                  m_type {type},
+                  m_drawStrategy {DrawStrategyFactory::createDrawStrategy(type)}
 {
 
 }
@@ -54,8 +50,13 @@ void DrawCommand::setPen(const QPen &pen)
 
 DrawCommandMemento DrawCommand::getMemento() const
 {
-    auto strategyData = m_drawStrategy->getData();
-    return DrawCommandMemento {strategyData, m_pen, type()};
+    auto strategyData = m_drawStrategy ? m_drawStrategy->getData() : QVariant {};
+    return DrawCommandMemento {strategyData, m_pen, m_type};
+}
+
+PaintTypes::ShapeType DrawCommand::type() const
+{
+    return m_type;
 }
 
 void DrawCommand::retrieveMemento(DrawCommandMemento memento)

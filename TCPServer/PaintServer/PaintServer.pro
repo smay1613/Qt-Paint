@@ -27,14 +27,28 @@ INCLUDEPATH += ../../Paint/src/common/commands \
 #Export data for registering as metatype for reading
 HEADERS += \
            ../../Paint/src/common/commands/drawcommandmemento.h \
+           ../../Paint/src/common/commands/drawcommand.h \
+           ../../Paint/src/common/builders/drawstrategyfactory.h \
            ../../Paint/src/common/shapes/lineshape.h \
            ../../Paint/src/common/shapes/splineshape.h \
            ../../Paint/src/common/shapes/boundedshape.h
 SOURCES += \
            ../../Paint/src/common/commands/drawcommandmemento.cpp \
+           ../../Paint/src/common/commands/drawcommand.cpp \
+           ../../Paint/src/common/builders/drawstrategyfactory.cpp \
            ../../Paint/src/common/shapes/lineshape.cpp \
            ../../Paint/src/common/shapes/splineshape.cpp \
            ../../Paint/src/common/shapes/boundedshape.cpp
+
+HEADERS +=  ../../Paint/src/common/strategies/drawcirclestrategy.h \
+            ../../Paint/src/common/strategies/drawcurvestrategy.h \
+            ../../Paint/src/common/strategies/drawlinestrategy.h \
+            ../../Paint/src/common/strategies/drawrectanglestrategy.h \
+
+SOURCES +=  ../../Paint/src/common/strategies/drawcirclestrategy.cpp \
+            ../../Paint/src/common/strategies/drawcurvestrategy.cpp \
+            ../../Paint/src/common/strategies/drawlinestrategy.cpp \
+            ../../Paint/src/common/strategies/drawrectanglestrategy.cpp \
 
 HEADERS += ../../Paint/src/common/drawhistory/drawhistory.h
 SOURCES += ../../Paint/src/common/drawhistory/drawhistory.cpp

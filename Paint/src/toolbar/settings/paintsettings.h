@@ -2,7 +2,6 @@
 #define PAINTSETTINGS_H
 #include <QObject>
 #include <QColor>
-#include <QQmlEngine>
 #include "../../common/painttypes.h"
 
 class PaintSettings : public QObject

@@ -1,7 +1,6 @@
 #include "workareaserverimpl.h"
 #include <QDebug>
 #include "../common/painttypes.h"
-#include "../common/commands/drawcommands/drawcurvecommand.h"
 #include "src/networking/managers/connectionmanageradaptor.h"
 
 WorkAreaServerImpl::WorkAreaServerImpl()

@@ -17,17 +17,13 @@ SOURCES += \
     src/toolbar/colorpicker/colorsmodel.cpp \
     src/workarea/workareaelement.cpp \
     src/workarea/workareaserverimpl.cpp \
-    src/common/commands/drawcommands/drawlinecommand.cpp \
     src/common/commands/drawcommand.cpp \
     src/common/shapes/boundedshape.cpp \
     src/common/shapes/lineshape.cpp \
     src/common/strategies/drawlinestrategy.cpp \
     src/common/drawhistory/drawhistory.cpp \
-    src/common/commands/drawcommands/drawrectanglecommand.cpp \
     src/common/strategies/drawrectanglestrategy.cpp \
-    src/common/commands/drawcommands/drawcirclecommand.cpp \
     src/common/strategies/drawcirclestrategy.cpp \
-    src/common/commands/drawcommands/drawcurvecommand.cpp \
     src/common/strategies/drawcurvestrategy.cpp \
     src/common/shapes/splineshape.cpp \
     src/toolbar/settings/paintsettings.cpp \
@@ -45,7 +41,8 @@ SOURCES += \
     src/workarea/workareaclientimpl.cpp \
     src/networking/managers/clientservermanager.cpp \
     src/common/commands/drawcommandmemento.cpp \
-    src/networking/workers/historyworker.cpp
+    src/networking/workers/historyworker.cpp \
+    src/common/builders/drawstrategyfactory.cpp
 
 RESOURCES += qml.qrc
 
@@ -103,6 +100,7 @@ HEADERS += \
     src/workarea/workareaclientimpl.h \
     src/networking/managers/clientservermanager.h \
     src/common/commands/drawcommandmemento.h \
-    src/networking/workers/historyworker.h
+    src/networking/workers/historyworker.h \
+    src/common/builders/drawstrategyfactory.h
 
 DISTFILES +=

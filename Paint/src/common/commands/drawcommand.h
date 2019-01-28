@@ -12,8 +12,7 @@ class DrawCommand : public QObject, public ICommand
 {
     Q_OBJECT
 public:
-    explicit DrawCommand(QPainter* painter);
-    DrawCommand(QPainter* painter, std::unique_ptr<IDrawStrategy> strategy);
+    explicit DrawCommand(QPainter* painter, PaintTypes::ShapeType type = PaintTypes::ShapeType::Invalid);
     virtual ~DrawCommand() = default;
 
     virtual void execute(const QMouseEvent& mouseState, bool paintStarted);
@@ -25,17 +24,18 @@ public:
     void setPen(const QPen &pen);
 
     DrawCommandMemento getMemento() const;
-    virtual PaintTypes::ShapeType type() const = 0;
+    PaintTypes::ShapeType type() const;
 
     void retrieveMemento(DrawCommandMemento memento);
 
 signals:
     void updateRequested();
 
-protected:
+private:
     QPainter* m_painter;
     QPen m_pen;
-    std::unique_ptr<IDrawStrategy> m_drawStrategy;
+    PaintTypes::ShapeType m_type;
+    std::unique_ptr<IDrawStrategy> m_drawStrategy;    
 };
 
 #endif // DRAWCOMMAND_H
