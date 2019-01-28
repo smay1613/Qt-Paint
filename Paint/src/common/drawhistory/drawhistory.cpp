@@ -36,6 +36,18 @@ void DrawHistory::add(std::unique_ptr<ICommand> command)
     emit historyChanged();
 }
 
+void DrawHistory::pop()
+{
+    if (!isEmpty()) {
+        const auto wasOnTop = isOnTop();
+        m_commandHistory.erase(std::prev(top()));
+        if (wasOnTop) {
+            m_currentAction = std::prev(m_commandHistory.end());
+        }
+        emit historyChanged();
+    }
+}
+
 std::list<std::unique_ptr<ICommand>>::iterator DrawHistory::begin() noexcept
 {
     return m_commandHistory.begin();

@@ -5,7 +5,6 @@
 class DrawCommandFactory
 {
 public:
-    static std::unique_ptr<DrawCommand> createActiveCommandFromSettings(QPainter* painter);
     static std::unique_ptr<DrawCommand> createCommandByType(QPainter* painter, PaintTypes::ShapeType type);
 };
 

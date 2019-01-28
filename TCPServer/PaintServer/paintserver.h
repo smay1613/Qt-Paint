@@ -36,7 +36,9 @@ private:
     QHostAddress m_listenAddress;
     quint16 m_listenPort;
 
-    HistoryWorker m_historyWorker;
+    HistoryWorker m_masterHistoryWorker;
+    HistoryWorker m_clientHistoryWorker;
+
     DrawHistory m_localHistory;
 };
 

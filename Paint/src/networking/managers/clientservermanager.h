@@ -18,6 +18,7 @@ public:
 
 signals:
     void activeCommandRecieved(DrawCommandMemento command);
+    void commandsRecieved();
 
 public slots:
     void onActiveCommandChanged(const DrawCommandMemento &command);

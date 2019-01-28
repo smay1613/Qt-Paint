@@ -12,7 +12,8 @@ PaintServer::PaintServer(const QHostAddress &address, quint16 port)
         qCritical() << "Cannot initialize server!";
         qCritical() << "Server not started.";
     }
-    m_historyWorker.track(m_localHistory);
+    m_masterHistoryWorker.track(m_localHistory);
+    m_clientHistoryWorker.track(m_localHistory);
     connectSignals();
 }
 
@@ -39,9 +40,17 @@ void PaintServer::handlePackage(const IPackage &package, QTcpSocket *socket)
         case networking::PType::HISTORY_HASH_UPDATE:
         case networking::PType::COMMAND_HASHES_REQUEST:
         case networking::PType::COMMAND_HASHES_RESPONSE:
-        case networking::PType::COMMANDS_REQUEST: {
+        case networking::PType::COMMANDS_REQUEST:
+        case networking::PType::COMMANDS_RESPONSE: {
             if (socket == m_masterSocket) {
-                m_historyWorker.handleHistoryAction(package);
+                qDebug() << "<master history action>";
+                m_masterHistoryWorker.handleHistoryAction(package);
+                if (package.type() == networking::PType::COMMANDS_RESPONSE) {
+                    m_clientHistoryWorker.update();
+                }
+            } else {
+                qDebug() << "<slave history action>";
+                m_clientHistoryWorker.handleHistoryAction(package);
             }
             break;
         }
@@ -61,15 +70,17 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
             qDebug() << "Socket added to the clients list, because there is another active master";
 
             m_clientSockets.emplace_back(socket); // we already have master socket, so adding to clients
+            m_clientHistoryWorker.addClient(socket);
             result = networking::Status::Failure;
         } else {
             qDebug() << "Socket becomes master.";
             m_masterSocket = socket;
-            m_historyWorker.addClient(m_masterSocket);
+            m_masterHistoryWorker.addClient(m_masterSocket);
         }
     } else {
         qDebug() << "Socket added to the clients list";
         m_clientSockets.emplace_back(socket);
+        m_clientHistoryWorker.addClient(socket);
     }
 
     BasicPackage introducingSuccessPackage {{result}, networking::PType::INTRODUCING_INFO_RESPONSE};
@@ -129,10 +140,12 @@ void PaintServer::onClientDisconnected()
     }
 
     if (socket == m_masterSocket) {
+        m_masterHistoryWorker.removeClient(m_masterSocket);
         socket->deleteLater();
         m_masterSocket = nullptr;
         qDebug() << "Master disconnected!";
     } else {
+        m_clientHistoryWorker.removeClient(socket);
         m_clientSockets.erase(std::remove(m_clientSockets.begin(), m_clientSockets.end(), socket));
         socket->deleteLater();
         qDebug() << "Slave disconnected!";

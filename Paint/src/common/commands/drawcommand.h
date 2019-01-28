@@ -26,7 +26,7 @@ public:
     DrawCommandMemento getMemento() const;
     PaintTypes::ShapeType type() const;
 
-    void retrieveMemento(DrawCommandMemento memento);
+    void retrieveMemento(const DrawCommandMemento& memento);
 
 signals:
     void updateRequested();

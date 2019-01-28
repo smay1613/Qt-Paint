@@ -2,6 +2,7 @@
 #define HISTORYWORKER_H
 #include "../../common/drawhistory/drawhistory.h"
 #include "../hashers/historyhash.h"
+#include <set>
 #include <QTcpSocket>
 
 class IPackage;
@@ -10,13 +11,13 @@ class HistoryWorker : public QObject
 {
     Q_OBJECT
 public:
-
     void track(DrawHistory& history);
 
     void addClient(QTcpSocket* socket);
-    void removeClient();
+    void removeClient(QTcpSocket* socket);
 
     void handleHistoryAction(const IPackage& package);
+    void update();
 
 private slots:
     void onHistoryChanged();
@@ -46,7 +47,7 @@ private:
     DrawHistory* m_pHistory;
     HistoryHash m_historyHash;
 
-    QTcpSocket* m_client;
+    std::set<QTcpSocket*> m_clients;
 };
 
 #endif // HISTORYWORKER_H

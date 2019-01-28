@@ -16,7 +16,7 @@ void DrawCommand::execute(const QMouseEvent& mouseState, bool paintStarted)
         m_drawStrategy->mouseTouch(mouseState, paintStarted);
         emit updateRequested();
     } else {
-        qWarning() << "DrawLineCommand::execute - drawStrategy is null!";
+        qWarning() << "Execute - drawStrategy is null!";
     }
 }
 
@@ -26,10 +26,10 @@ void DrawCommand::execute()
         if (m_drawStrategy) {
             m_drawStrategy->drawRequest(m_painter);
         } else {
-            qWarning() << "DrawLineCommand::execute - drawStrategy is null!";
+            qWarning() << "DrawCommand::execute - drawStrategy is null!";
         }
     } else {
-        qWarning() << "DrawLineCommand::draw - painter is not active!";
+        qWarning() << "DrawCommand::draw - painter is not active!";
     }
 }
 
@@ -59,7 +59,7 @@ PaintTypes::ShapeType DrawCommand::type() const
     return m_type;
 }
 
-void DrawCommand::retrieveMemento(DrawCommandMemento memento)
+void DrawCommand::retrieveMemento(const DrawCommandMemento& memento)
 {
     m_pen = memento.m_pen;
     m_drawStrategy->setData(memento.m_strategyVariant);

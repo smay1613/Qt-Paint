@@ -16,6 +16,7 @@ public:
     void redo() override;
 
     void add(std::unique_ptr<ICommand> command) override;
+    void pop() override;
 
     std::list<std::unique_ptr<ICommand>>::iterator begin() noexcept override;
     std::list<std::unique_ptr<ICommand>>::iterator end() noexcept override;

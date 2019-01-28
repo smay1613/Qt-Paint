@@ -1,8 +1,10 @@
 #include "historyworker.h"
 #include <QObject>
 #include <QVector>
+#include <QSignalBlocker>
 #include "../packages/basicpackage.h"
 #include "../../common/commands/drawcommand.h"
+#include "../../common/builders/drawcommandfactory.h"
 
 void HistoryWorker::track(DrawHistory& history)
 {
@@ -14,13 +16,13 @@ void HistoryWorker::track(DrawHistory& history)
 void HistoryWorker::addClient(QTcpSocket* socket)
 {
     if (socket) {
-        m_client = socket;
+        m_clients.insert(socket);
     }
 }
 
-void HistoryWorker::removeClient()
+void HistoryWorker::removeClient(QTcpSocket* socket)
 {
-    m_client = nullptr;
+   m_clients.erase(socket);
 }
 
 bool HistoryWorker::isValidHash(uint64_t hash) const
@@ -39,6 +41,10 @@ int HistoryWorker::getHashesDiffPosition(const QVector<quint64>& newHashes) cons
     int diffPosition {currentSize != newSize ?
                                              minSize
                                              : -1};
+
+    if (!newHashes.size()) {
+      diffPosition = 0;
+    }
 
     for (int i = 0; i < minSize; ++i) {
         if (newHashes.at(i) != currentHashes.at(i)) {
@@ -86,6 +92,11 @@ void HistoryWorker::handleHistoryAction(const IPackage& package)
     }
 }
 
+void HistoryWorker::update()
+{
+    onHistoryChanged();
+}
+
 void HistoryWorker::handleHistoryHashesRequest(const IPackage& request) const
 {
     Q_UNUSED(request)
@@ -123,7 +134,18 @@ void HistoryWorker::handleCommandsRequest(const IPackage& request) const
 void HistoryWorker::handleCommandsResponse(const IPackage& response) const
 {
     QList<DrawCommandMemento> newCommands {response.data().value<QList<DrawCommandMemento>>()};
-    // TODO
+
+    QSignalBlocker historyUpdateBlocker {m_pHistory};
+
+    for (int i = 0; i < newCommands.size() && i < static_cast<int>(m_pHistory->size()); ++i) {
+       m_pHistory->pop();
+    }
+    for (auto commandMemento : newCommands) {
+        auto command = DrawCommandFactory::createCommandByType(nullptr,
+                                                               commandMemento.type());
+        command->retrieveMemento(commandMemento);
+        m_pHistory->add(std::move(command));
+    }
 }
 
 void HistoryWorker::sendCommandHashes() const
@@ -150,8 +172,8 @@ void HistoryWorker::sendCommands(const QList<DrawCommandMemento>& commands) cons
 
 void HistoryWorker::notifyClient(const IPackage& data) const
 {
-    if (m_client) {
-        m_client->write(data.rawData());
+    for (const auto client : m_clients) {
+        client->write(data.rawData());
     }
 }
 

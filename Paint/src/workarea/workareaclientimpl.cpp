@@ -33,10 +33,17 @@ void WorkAreaClientImpl::onActiveCommandRecieved(const DrawCommandMemento& comma
     emit updateRequested();
 }
 
+void WorkAreaClientImpl::onCommandsRecieved()
+{
+    updatePainter(m_painter);
+}
+
 void WorkAreaClientImpl::connectSignals()
 {
     const auto& clientServer = ConnectionManagerAdaptor::instance().clientServerManager();
 
     connect(&clientServer, &ClientServerManager::activeCommandRecieved,
                 this, &WorkAreaClientImpl::onActiveCommandRecieved);
+    connect(&clientServer, &ClientServerManager::commandsRecieved,
+                this, &WorkAreaClientImpl::onCommandsRecieved);
 }

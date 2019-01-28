@@ -12,8 +12,6 @@ WorkAreaServerImpl::WorkAreaServerImpl()
     updateActivePen();
 
     connectSignals();
-
-    ConnectionManagerAdaptor::instance().clientServerManager().track(m_history);
 }
 
 void WorkAreaServerImpl::submit()
@@ -70,21 +68,18 @@ void WorkAreaServerImpl::onUndoRequested()
 {
     m_history.undo();
     updateActionsAvailability();
-    emit WorkAreaImpl::updateRequested();
 }
 
 void WorkAreaServerImpl::onRedoRequested()
 {
     m_history.redo();
     updateActionsAvailability();
-    emit WorkAreaImpl::updateRequested();
 }
 
 void WorkAreaServerImpl::onClearRequested()
 {
     m_history.clear();
     updateActionsAvailability();
-    emit WorkAreaImpl::updateRequested();
 }
 
 void WorkAreaServerImpl::connectSignals()
@@ -133,7 +128,8 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
 
 void WorkAreaServerImpl::updateActiveCommand()
 {
-    m_activeCommand = m_commandBuilder.createActiveCommandFromSettings(m_painter);
+    m_activeCommand = m_commandBuilder.createCommandByType(m_painter,
+                                                           PaintSettings::instance().activeShapeType());
     updateActivePen();
     if (m_activeCommand) {
         connectActiveCommand();

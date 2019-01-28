@@ -22,8 +22,12 @@ void ClientServerManager::handlePackage(const IPackage &package)
         case networking::PType::HISTORY_HASH_UPDATE:
         case networking::PType::COMMAND_HASHES_REQUEST:
         case networking::PType::COMMAND_HASHES_RESPONSE:
-        case networking::PType::COMMANDS_REQUEST: {
+        case networking::PType::COMMANDS_REQUEST:
+        case networking::PType::COMMANDS_RESPONSE: {
             m_historyWorker.handleHistoryAction(package);
+            if (package.type() == networking::PType::COMMANDS_RESPONSE) {
+                emit commandsRecieved();
+            }
             break;
         }
         default: {

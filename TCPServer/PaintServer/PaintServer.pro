@@ -28,6 +28,7 @@ INCLUDEPATH += ../../Paint/src/common/commands \
 HEADERS += \
            ../../Paint/src/common/commands/drawcommandmemento.h \
            ../../Paint/src/common/commands/drawcommand.h \
+           ../../Paint/src/common/builders/drawcommandfactory.h \
            ../../Paint/src/common/builders/drawstrategyfactory.h \
            ../../Paint/src/common/shapes/lineshape.h \
            ../../Paint/src/common/shapes/splineshape.h \
@@ -36,6 +37,7 @@ SOURCES += \
            ../../Paint/src/common/commands/drawcommandmemento.cpp \
            ../../Paint/src/common/commands/drawcommand.cpp \
            ../../Paint/src/common/builders/drawstrategyfactory.cpp \
+           ../../Paint/src/common/builders/drawcommandfactory.cpp \
            ../../Paint/src/common/shapes/lineshape.cpp \
            ../../Paint/src/common/shapes/splineshape.cpp \
            ../../Paint/src/common/shapes/boundedshape.cpp

@@ -14,6 +14,7 @@ public:
 
 private slots:
     void onActiveCommandRecieved(const DrawCommandMemento& commandMemento);
+    void onCommandsRecieved();
 
 private:
     void connectSignals();

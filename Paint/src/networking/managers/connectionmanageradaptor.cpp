@@ -129,7 +129,7 @@ void ConnectionManagerAdaptor::handleIntroducingResponse(const IPackage &respons
     }
 }
 
-ClientServerManager &ConnectionManagerAdaptor::clientServerManager()
+ClientServerManager& ConnectionManagerAdaptor::clientServerManager()
 {
     return m_clientServerManager;
 }

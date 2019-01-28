@@ -1,11 +1,16 @@
 #include "workareaimpl.h"
+#include "src/networking/managers/connectionmanageradaptor.h"
 
 WorkAreaImpl::WorkAreaImpl()
     : m_painter {nullptr}
 {
+    auto& clientServer = ConnectionManagerAdaptor::instance().clientServerManager();
+    clientServer.track(m_history);
+    connect(&m_history, &DrawHistory::historyChanged,
+                this, &WorkAreaImpl::updateRequested);
 }
 
-void WorkAreaImpl::onPaint(QPainter *painter)
+void WorkAreaImpl::onPaint(QPainter* painter)
 {
     if (m_painter != painter) {
         updatePainter(painter);
