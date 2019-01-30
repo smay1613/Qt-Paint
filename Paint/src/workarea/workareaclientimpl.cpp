@@ -36,6 +36,7 @@ void WorkAreaClientImpl::onActiveCommandRecieved(const DrawCommandMemento& comma
 void WorkAreaClientImpl::onCommandsRecieved()
 {
     updatePainter(m_painter);
+    emit updateRequested();
 }
 
 void WorkAreaClientImpl::connectSignals()
