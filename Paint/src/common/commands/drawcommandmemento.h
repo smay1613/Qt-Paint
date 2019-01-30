@@ -13,6 +13,8 @@ public:
     friend QDataStream& operator>> (QDataStream& stream, DrawCommandMemento& memento);
     friend QDataStream& operator<< (QDataStream& stream, const DrawCommandMemento& memento);
 
+    size_t getHash() const;
+
     friend class DrawCommand;
 
     PaintTypes::ShapeType type() const;

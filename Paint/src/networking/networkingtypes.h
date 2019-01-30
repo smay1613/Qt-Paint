@@ -2,6 +2,7 @@
 #define NETWORKINGTYPES_H
 #include <QObject>
 #include <QVariant>
+#include <QDataStream>
 
 namespace networking
 {
@@ -22,6 +23,13 @@ struct UtilTools {
     template<class T>
     static QString socketEnumTostring(const T socketError) {
         return QVariant::fromValue(socketError).toString();
+    }
+
+    static QByteArray qVariantToByteArray(const QVariant& var) {
+        QByteArray rawData;
+        QDataStream stream {&rawData, QIODevice::WriteOnly};
+        stream << var;
+        return rawData;
     }
 };
 }

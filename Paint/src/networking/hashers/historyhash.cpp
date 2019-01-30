@@ -1,15 +1,19 @@
 #include "historyhash.h"
-#include <QHash>
+#include "../../common/commands/drawcommand.h"
 
 void HistoryHash::updateHash(const IHistory& history)
 {
     m_totalHash = 0;
 
-    QVector<quint64> newHashes (static_cast<int>(history.size()));
+    QVector<quint64> newHashes;
+    newHashes.reserve(static_cast<int>(history.size()));
 
     for (const auto& command : history) {
-        m_totalHash ^= qHash(command.get());
-        newHashes.append(qHash(command.get()));
+        const auto drawCommand = dynamic_cast<DrawCommand*>(command.get());
+        const auto& memento = drawCommand->getMemento();
+        const auto hash = memento.getHash();
+        m_totalHash ^= hash;
+        newHashes.push_back(hash);
     }
 
     m_commandHashes.swap(newHashes);
