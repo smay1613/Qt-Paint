@@ -40,5 +40,6 @@
         <file>qml/StatusBar/qmldir</file>
         <file>qml/StatusBar/ConnectionStatusIcon.qml</file>
         <file>resources/connectionicons/connecting.png</file>
+        <file>qml/Common/ButtonBackground.qml</file>
     </qresource>
 </RCC>

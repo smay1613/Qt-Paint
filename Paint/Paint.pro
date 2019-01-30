@@ -62,7 +62,6 @@ HEADERS += \
     src/workarea/workareaplugin.h \
     src/workarea/workareaelement.h \
     src/workarea/workareaserverimpl.h \
-    src/common/commands/drawcommands/drawlinecommand.h \
     src/common/commands/command.h \
     src/common/commands/drawcommand.h \
     src/common/painttypes.h \
@@ -72,11 +71,8 @@ HEADERS += \
     src/common/strategies/drawlinestrategy.h \
     src/common/drawhistory/history.h \
     src/common/drawhistory/drawhistory.h \
-    src/common/commands/drawcommands/drawrectanglecommand.h \
     src/common/strategies/drawrectanglestrategy.h \
-    src/common/commands/drawcommands/drawcirclecommand.h \
     src/common/strategies/drawcirclestrategy.h \
-    src/common/commands/drawcommands/drawcurvecommand.h \
     src/common/strategies/drawcurvestrategy.h \
     src/common/shapes/splineshape.h \
     src/toolbar/toolbarplugin.h \

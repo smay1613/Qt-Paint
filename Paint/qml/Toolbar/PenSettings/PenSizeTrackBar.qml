@@ -12,7 +12,7 @@ ColumnLayout {
 
     Slider {
         id: _sizeSlider
-        Layout.preferredHeight: 30
+        Layout.preferredHeight: 20
 
         from: PaintSettings.penSizeMin
         to: PaintSettings.penSizeMax

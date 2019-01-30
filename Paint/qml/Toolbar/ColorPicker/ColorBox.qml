@@ -2,8 +2,8 @@ import QtQuick 2.11
 import Common 1.0
 
 Rectangle {
-    width: 20
-    height: 20
+    width: 15
+    height: 15
     radius: width / 6
     color: display // displayRole used
 

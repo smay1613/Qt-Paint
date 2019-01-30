@@ -7,7 +7,7 @@ RowLayout {
     objectName: "PaintConfigurationBarRowLayout"
 
     Layout.leftMargin: 5
-    spacing: 15 // just some magic!
+    spacing: 15
 
     ColumnLayout {
         id: _activeColorBox
@@ -16,8 +16,8 @@ RowLayout {
         Layout.topMargin: 5
 
         Rectangle {
-            Layout.preferredWidth: 30  // magic here too
-            Layout.preferredHeight: 30
+            Layout.preferredWidth: 25
+            Layout.preferredHeight: 25
 
             Layout.alignment: Qt.AlignHCenter
 

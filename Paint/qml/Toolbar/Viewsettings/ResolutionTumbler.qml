@@ -9,7 +9,7 @@ RowLayout {
 
     Tumbler {
         id: _tumbler
-        Layout.preferredHeight: visibleItemCount * 20
+        Layout.preferredHeight: visibleItemCount * 18
 
         property var lastActive
 
@@ -38,8 +38,9 @@ RowLayout {
 
         delegate: Rectangle {
             id: _brick
-            radius: 5
+            radius: 3
             border.color: "lightgrey"
+            opacity: 1.0 - Math.abs(Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 2)
             Text {
                 anchors.right: _brick.right
                 font.pointSize: 10

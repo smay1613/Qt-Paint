@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.3
 
 Grid {
@@ -17,6 +17,9 @@ Grid {
             _dataRepeater.setActive(index);
         }
     }
+
+    horizontalItemAlignment: Grid.AlignHCenter
+    verticalItemAlignment: Grid.AlignVCenter
 
     columns: model ? model.rowCount() / 2
                    : 1

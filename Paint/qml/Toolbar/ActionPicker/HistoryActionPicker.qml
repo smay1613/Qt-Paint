@@ -12,7 +12,8 @@ RowLayout {
     property string resourcePath: "qrc:/resources/actionicons/"
 
     RoundButton {
-        Material.background: Material.LightGreen
+        id: _undoButton
+        background: ButtonBackground {}
         enabled: ActionManager.undoAvailable
         contentItem: ActionBox {
             source: resourcePath + "undo.svg"
@@ -32,7 +33,7 @@ RowLayout {
         }
     }
     RoundButton {
-        Material.background: Material.LightGreen
+        background: ButtonBackground {}
         enabled: ActionManager.redoAvailable
         contentItem: ActionBox {
             source: resourcePath + "redo.svg"
@@ -52,6 +53,7 @@ RowLayout {
         }
     }
     RoundButton {
+        background: ButtonBackground {}
         contentItem: ActionBox {
             source: resourcePath + "clear.svg"
         }
