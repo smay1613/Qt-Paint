@@ -70,7 +70,7 @@ std::list<std::unique_ptr<ICommand>>::const_iterator DrawHistory::begin() const 
 
 std::list<std::unique_ptr<ICommand>>::const_iterator DrawHistory::end() const noexcept
 {
-    return m_commandHistory.cend();
+    return std::next(m_currentAction);
 }
 
 size_t DrawHistory::size() const

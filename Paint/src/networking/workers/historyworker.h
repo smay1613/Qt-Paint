@@ -26,9 +26,9 @@ private:
     void sendHashUpdate() const;
     void sendCommandHashes() const;
     void sendCommandRequest(size_t fromPosition) const;
-    void sendCommands(const QList<DrawCommandMemento>& commands) const;
+    void sendCommands(const QList<DrawCommandMemento>& commands, quint64 fromPosition) const;
 
-    void notifyClient(const IPackage& data) const;
+    void notifyClients(const IPackage& data) const;
 
     void requestCommandHashes() const;
 
@@ -45,7 +45,7 @@ private:
     int getHashesDiffPosition(const QVector<quint64>& newHashes) const;
 
     DrawHistory* m_pHistory;
-    HistoryHash m_historyHash;
+    mutable HistoryHash m_historyHash;
 
     std::set<QTcpSocket*> m_clients;
 };

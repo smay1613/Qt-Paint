@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 #include "settings/connectionsettings.h"
 #include "clparsers/connectionargumentsparser.h"
+#include "../common/commands/drawcommandmemento.h"
 
 class NetworkPlugin : public QQmlExtensionPlugin
 {
@@ -30,6 +31,9 @@ public:
                                             1, 0,
                                             "Network",
                                             "Error: only enums");
+
+        qRegisterMetaTypeStreamOperators<QVector<quint64>>("QVector<quint64>");
+        qRegisterMetaTypeStreamOperators<QPair<QList<DrawCommandMemento>, quint64>>("QPair<QList<DrawCommandMemento>, quint64>");
     }
 
 private:

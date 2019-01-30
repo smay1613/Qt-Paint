@@ -43,7 +43,7 @@ int HistoryWorker::getHashesDiffPosition(const QVector<quint64>& newHashes) cons
                                              : -1};
 
     if (!newHashes.size()) {
-      diffPosition = 0;
+        diffPosition = 0;
     }
 
     for (int i = 0; i < minSize; ++i) {
@@ -60,7 +60,7 @@ void HistoryWorker::requestCommandHashes() const
 {
     BasicPackage package {QVariant::fromValue(true), // dummy data
                             networking::PType::COMMAND_HASHES_REQUEST};
-    notifyClient(package);
+    notifyClients(package);
 }
 
 void HistoryWorker::handleHistoryAction(const IPackage& package)
@@ -128,31 +128,40 @@ void HistoryWorker::handleCommandsRequest(const IPackage& request) const
         commands.append(command->getMemento());
     }
 
-    sendCommands(commands);
+    sendCommands(commands, fromPosition);
 }
 
 void HistoryWorker::handleCommandsResponse(const IPackage& response) const
 {
-    QList<DrawCommandMemento> newCommands {response.data().value<QList<DrawCommandMemento>>()};
+    const auto& responseData = response.data().value<QPair<QList<DrawCommandMemento>, quint64>>();
+
+    QList<DrawCommandMemento> newCommands {responseData.first};
+    size_t fromPosition {responseData.second};
 
     QSignalBlocker historyUpdateBlocker {m_pHistory};
 
-    for (int i = 0; i < newCommands.size() && i < static_cast<int>(m_pHistory->size()); ++i) {
-       m_pHistory->pop();
+    if (fromPosition < m_pHistory->size()) {
+        const auto toDeleteCount {m_pHistory->size() - fromPosition};
+        for (size_t i = 0; i < toDeleteCount; ++i) {
+            m_pHistory->pop();
+        }
     }
+
     for (auto commandMemento : newCommands) {
         auto command = DrawCommandFactory::createCommandByType(nullptr,
                                                                commandMemento.type());
         command->retrieveMemento(commandMemento);
         m_pHistory->add(std::move(command));
     }
+
+    m_historyHash.calculate(*m_pHistory);
 }
 
 void HistoryWorker::sendCommandHashes() const
 {
     BasicPackage package {QVariant::fromValue(m_historyHash.commandHashes()),
                             networking::PType::COMMAND_HASHES_RESPONSE};
-    notifyClient(package);
+    notifyClients(package);
 }
 
 void HistoryWorker::sendCommandRequest(size_t fromPosition) const
@@ -160,17 +169,18 @@ void HistoryWorker::sendCommandRequest(size_t fromPosition) const
     BasicPackage package {QVariant::fromValue(fromPosition),
                             networking::PType::COMMANDS_REQUEST};
 
-    notifyClient(package);
+    notifyClients(package);
 }
 
-void HistoryWorker::sendCommands(const QList<DrawCommandMemento>& commands) const
+void HistoryWorker::sendCommands(const QList<DrawCommandMemento>& commands, quint64 fromPosition) const
 {
-    BasicPackage package {QVariant::fromValue(commands),
+    const auto commandsAndPosition {qMakePair(commands, fromPosition)};
+    BasicPackage package {QVariant::fromValue(commandsAndPosition),
                             networking::PType::COMMANDS_RESPONSE};
-    notifyClient(package);
+    notifyClients(package);
 }
 
-void HistoryWorker::notifyClient(const IPackage& data) const
+void HistoryWorker::notifyClients(const IPackage& data) const
 {
     for (const auto client : m_clients) {
         client->write(data.rawData());
@@ -195,5 +205,5 @@ void HistoryWorker::sendHashUpdate() const
 {
     BasicPackage package {QVariant::fromValue(m_historyHash.totalHash()),
                             networking::PType::HISTORY_HASH_UPDATE};
-    notifyClient(package);
+    notifyClients(package);
 }

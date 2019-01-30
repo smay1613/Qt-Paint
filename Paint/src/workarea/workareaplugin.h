@@ -27,9 +27,6 @@ public:
 
         qRegisterMetaType<LineShape>("LineShape");
         qRegisterMetaTypeStreamOperators<LineShape>("LineShape");
-
-        qRegisterMetaTypeStreamOperators<QVector<quint64>>("QVector<quint64>");
-        qRegisterMetaTypeStreamOperators<QList<DrawCommandMemento>>("QList<DrawCommandMemento>");
     }
 };
 
