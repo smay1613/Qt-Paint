@@ -69,18 +69,15 @@ void PaintServer::handleIntroducingPackage(const IPackage &package, QTcpSocket *
         if (m_masterSocket) {
             qDebug() << "Socket added to the clients list, because there is another active master";
 
-            m_clientSockets.emplace_back(socket); // we already have master socket, so adding to clients
-            m_clientHistoryWorker.addClient(socket);
+            addClient(socket); // we already have master socket, so adding to clients
             result = networking::Status::Failure;
         } else {
             qDebug() << "Socket becomes master.";
-            m_masterSocket = socket;
-            m_masterHistoryWorker.addClient(m_masterSocket);
+            setMaster(socket);
         }
     } else {
         qDebug() << "Socket added to the clients list";
-        m_clientSockets.emplace_back(socket);
-        m_clientHistoryWorker.addClient(socket);
+        addClient(socket);
     }
 
     BasicPackage introducingSuccessPackage {{result}, networking::PType::INTRODUCING_INFO_RESPONSE};
@@ -150,6 +147,28 @@ void PaintServer::onClientDisconnected()
         m_clientSockets.erase(std::remove(m_clientSockets.begin(), m_clientSockets.end(), socket));
         socket->deleteLater();
         qDebug() << "Slave disconnected!";
+    }
+}
+
+void PaintServer::addClient(QTcpSocket *socket)
+{
+    if (socket) {
+        m_clientSockets.emplace_back(socket);
+        m_clientHistoryWorker.addClient(socket);
+        if (!m_localHistory.isEmpty()) {
+            m_clientHistoryWorker.startSynchronization(socket);
+        }
+    }
+}
+
+void PaintServer::setMaster(QTcpSocket *socket)
+{
+    if (socket) {
+        m_masterSocket = socket;
+        m_masterHistoryWorker.addClient(m_masterSocket);
+        if (!m_localHistory.isEmpty()) {
+            m_masterHistoryWorker.startSynchronization(m_masterSocket);
+        }
     }
 }
 

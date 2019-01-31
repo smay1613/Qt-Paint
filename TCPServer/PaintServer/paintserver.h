@@ -22,6 +22,9 @@ public slots:
     void onClientDisconnected();
 
 private:
+    void addClient(QTcpSocket* socket);
+    void setMaster(QTcpSocket* socket);
+
     void connectSignals();
     void connectSocketSignals(QTcpSocket* socket);
 

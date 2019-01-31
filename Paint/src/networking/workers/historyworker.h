@@ -18,12 +18,14 @@ public:
 
     void handleHistoryAction(const IPackage& package);
     void update();
+    void startSynchronization(QTcpSocket* socket);
 
 private slots:
     void onHistoryChanged();
 
 private:
     void sendHashUpdate() const;
+    void sendHashUpdate(QTcpSocket* socket) const;
     void sendCommandHashes() const;
     void sendCommandRequest(size_t fromPosition) const;
     void sendCommands(const QList<DrawCommandMemento>& commands, quint64 fromPosition) const;

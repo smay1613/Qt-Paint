@@ -21,6 +21,7 @@ signals:
     void connectionError(QString error);
     void connectionStateChanged(QString connected);
     void reconnectionTimerStarted();
+    void synchronizationRequested();
 
 public slots:
     void onSocketError(QAbstractSocket::SocketError socketError);

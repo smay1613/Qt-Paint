@@ -15,13 +15,13 @@ public:
     void track(DrawHistory& history);
 
     void handlePackage(const IPackage& package);
-
 signals:
     void activeCommandRecieved(DrawCommandMemento command);
     void commandsRecieved();
 
 public slots:
     void onActiveCommandChanged(const DrawCommandMemento &command);
+    void onSynchronizationRequested();
 
 private:    
     void sendActiveCommand(const DrawCommandMemento& commandMemento);

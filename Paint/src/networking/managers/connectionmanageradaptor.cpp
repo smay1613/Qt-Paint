@@ -8,6 +8,8 @@ ConnectionManagerAdaptor::ConnectionManagerAdaptor()
 {
     connectSocketSignals();
     connectToPaintServer();
+    connect(this, &ConnectionManagerAdaptor::synchronizationRequested, // FIXME: Move to CLmanager
+                &m_clientServerManager, &ClientServerManager::onSynchronizationRequested);
 }
 
 ConnectionManagerAdaptor& ConnectionManagerAdaptor::instance()
@@ -127,6 +129,10 @@ void ConnectionManagerAdaptor::handleIntroducingResponse(const IPackage &respons
     if (status == networking::Status::Failure) {
         m_rConnectionSettings.setConnectionMode(networking::ConnectionMode::Slave);
         qWarning() << "Introducing failed! Setting to slave...";
+    }
+
+    if (m_rConnectionSettings.connectionMode() == networking::ConnectionMode::Master) {
+        emit synchronizationRequested();
     }
 }
 

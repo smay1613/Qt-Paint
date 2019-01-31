@@ -97,6 +97,13 @@ void HistoryWorker::update()
     onHistoryChanged();
 }
 
+void HistoryWorker::startSynchronization(QTcpSocket* socket)
+{
+    if (socket) {
+        sendHashUpdate(socket);
+    }
+}
+
 void HistoryWorker::handleHistoryHashesRequest(const IPackage& request) const
 {
     Q_UNUSED(request)
@@ -207,4 +214,13 @@ void HistoryWorker::sendHashUpdate() const
     BasicPackage package {QVariant::fromValue(m_historyHash.totalHash()),
                             networking::PType::HISTORY_HASH_UPDATE};
     notifyClients(package);
+}
+
+void HistoryWorker::sendHashUpdate(QTcpSocket* socket) const
+{
+    BasicPackage package {QVariant::fromValue(m_historyHash.totalHash()),
+                            networking::PType::HISTORY_HASH_UPDATE};
+    if (socket) {
+        socket->write(package.rawData());
+    }
 }

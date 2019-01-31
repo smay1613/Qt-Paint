@@ -1,5 +1,6 @@
 #include "clientservermanager.h"
 #include "src/networking/packages/basicpackage.h"
+#include "connectionmanageradaptor.h"
 
 ClientServerManager::ClientServerManager(QTcpSocket& socket)
     : m_rSocket {socket}
@@ -41,6 +42,11 @@ void ClientServerManager::onActiveCommandChanged(const DrawCommandMemento& comma
     if (m_rSocket.state() == QAbstractSocket::ConnectedState) { // QNativeSocketEngine::write() must be called only in QAbstractSocket::ConnectedState
         sendActiveCommand(command);
     }
+}
+
+void ClientServerManager::onSynchronizationRequested()
+{
+    m_historyWorker.startSynchronization(&m_rSocket);
 }
 
 void ClientServerManager::sendActiveCommand(const DrawCommandMemento& commandMemento)
