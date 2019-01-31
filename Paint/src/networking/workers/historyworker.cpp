@@ -124,8 +124,9 @@ void HistoryWorker::handleCommandsRequest(const IPackage& request) const
     for (auto i = std::next(m_pHistory->begin(), static_cast<long>(fromPosition));
          i != m_pHistory->end();
          ++i) {
-        const auto command = dynamic_cast<DrawCommand*>(i->get());
-        commands.append(command->getMemento());
+        if (const auto command = dynamic_cast<DrawCommand*>(i->get())) {
+            commands.append(command->getMemento());
+        }
     }
 
     sendCommands(commands, fromPosition);

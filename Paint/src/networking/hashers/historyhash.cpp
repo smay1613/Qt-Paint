@@ -9,11 +9,12 @@ void HistoryHash::updateHash(const IHistory& history)
     newHashes.reserve(static_cast<int>(history.size()));
 
     for (const auto& command : history) {
-        const auto drawCommand = dynamic_cast<DrawCommand*>(command.get());
-        const auto& memento = drawCommand->getMemento();
-        const auto hash = memento.getHash();
-        m_totalHash ^= hash;
-        newHashes.push_back(hash);
+        if (const auto drawCommand = dynamic_cast<DrawCommand*>(command.get())) {
+            const auto& memento = drawCommand->getMemento();
+            const auto hash = memento.getHash();
+            m_totalHash ^= hash;
+            newHashes.push_back(hash);
+        }
     }
 
     m_commandHashes.swap(newHashes);
