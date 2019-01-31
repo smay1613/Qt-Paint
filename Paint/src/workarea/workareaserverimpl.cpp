@@ -1,7 +1,7 @@
 #include "workareaserverimpl.h"
 #include <QDebug>
 #include "../common/painttypes.h"
-#include "src/networking/managers/connectionmanageradaptor.h"
+#include "src/networking/managers/clientservermanager.h"
 
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted {false},
@@ -101,7 +101,7 @@ void WorkAreaServerImpl::connectSignals()
                 this, &WorkAreaServerImpl::onClearRequested);
 
     // Connections with client-server manager
-    auto& clientServer = ConnectionManagerAdaptor::instance().clientServerManager();
+    auto& clientServer = ClientServerManager::instance();
     connect(this, &WorkAreaServerImpl::activeCommandChanged,
                 &clientServer, &ClientServerManager::onActiveCommandChanged);
 }

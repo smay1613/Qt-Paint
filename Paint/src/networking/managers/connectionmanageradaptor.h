@@ -4,7 +4,6 @@
 #include <QTcpSocket>
 #include "../settings/connectionsettings.h"
 #include "../packages/ipackage.h"
-#include "clientservermanager.h"
 
 class ConnectionManagerAdaptor : public QObject
 {
@@ -13,9 +12,6 @@ public:
     static ConnectionManagerAdaptor& instance();
 
     const static size_t ReconnectionTime = 5000 /*ms*/;
-
-    // FIXME: Breaking Law of Demeter
-    ClientServerManager& clientServerManager();
 
 signals:
     void connectionError(QString error);
@@ -37,6 +33,7 @@ private:
 
     void connectToPaintServer();
     void connectSocketSignals();
+    void initClientServer();
 
     void sendIntroducingPackage();
 
@@ -44,8 +41,6 @@ private:
     void handleIntroducingResponse(const IPackage& response);
 
     ConnectionSettings& m_rConnectionSettings;
-
-    ClientServerManager m_clientServerManager;
     QTcpSocket m_socket;
 };
 

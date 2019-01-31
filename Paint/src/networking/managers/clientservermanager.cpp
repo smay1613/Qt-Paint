@@ -2,10 +2,24 @@
 #include "src/networking/packages/basicpackage.h"
 #include "connectionmanageradaptor.h"
 
-ClientServerManager::ClientServerManager(QTcpSocket& socket)
-    : m_rSocket {socket}
+ClientServerManager::ClientServerManager()
+    : m_pSocket {nullptr}
 {
-    m_historyWorker.addClient(&m_rSocket);
+}
+
+ClientServerManager &ClientServerManager::instance()
+{
+    static ClientServerManager instance;
+    return instance;
+}
+
+void ClientServerManager::setSocket(QTcpSocket* socket)
+{
+    if (socket != m_pSocket && socket) {
+         m_historyWorker.removeClient(m_pSocket);
+         m_pSocket = socket;
+         m_historyWorker.addClient(socket);
+    }
 }
 
 void ClientServerManager::track(DrawHistory& history)
@@ -39,14 +53,14 @@ void ClientServerManager::handlePackage(const IPackage &package)
 
 void ClientServerManager::onActiveCommandChanged(const DrawCommandMemento& command)
 {
-    if (m_rSocket.state() == QAbstractSocket::ConnectedState) { // QNativeSocketEngine::write() must be called only in QAbstractSocket::ConnectedState
+    if (m_pSocket && m_pSocket->state() == QAbstractSocket::ConnectedState) { // QNativeSocketEngine::write() must be called only in QAbstractSocket::ConnectedState
         sendActiveCommand(command);
     }
 }
 
 void ClientServerManager::onSynchronizationRequested()
 {
-    m_historyWorker.startSynchronization(&m_rSocket);
+    m_historyWorker.startSynchronization(m_pSocket);
 }
 
 void ClientServerManager::sendActiveCommand(const DrawCommandMemento& commandMemento)
@@ -54,7 +68,9 @@ void ClientServerManager::sendActiveCommand(const DrawCommandMemento& commandMem
     BasicPackage package {QVariant::fromValue (commandMemento),
                               networking::PType::ACTIVE_COMMAND};
 
-    m_rSocket.write(package.rawData());
+    if (m_pSocket) {
+        m_pSocket->write(package.rawData());
+    }
 }
 
 void ClientServerManager::handleActiveCommandPackage(const IPackage& package)

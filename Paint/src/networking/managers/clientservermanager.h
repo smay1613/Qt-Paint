@@ -10,8 +10,9 @@ class ClientServerManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientServerManager(QTcpSocket& socket);
+    static ClientServerManager& instance();
 
+    void setSocket(QTcpSocket* socket);
     void track(DrawHistory& history);
 
     void handlePackage(const IPackage& package);
@@ -23,12 +24,13 @@ public slots:
     void onActiveCommandChanged(const DrawCommandMemento &command);
     void onSynchronizationRequested();
 
-private:    
+private:
+    ClientServerManager();
     void sendActiveCommand(const DrawCommandMemento& commandMemento);
     void handleActiveCommandPackage(const IPackage& package);
 
     HistoryWorker m_historyWorker;
-    QTcpSocket& m_rSocket;
+    QTcpSocket* m_pSocket;
 };
 
 #endif // CLIENTSERVERMANAGER_H

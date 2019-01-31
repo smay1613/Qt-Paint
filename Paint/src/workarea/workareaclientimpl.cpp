@@ -1,5 +1,5 @@
 #include "workareaclientimpl.h"
-#include "src/networking/managers/connectionmanageradaptor.h"
+#include "src/networking/managers/clientservermanager.h"
 #include "../common/builders/drawcommandfactory.h"
 
 WorkAreaClientImpl::WorkAreaClientImpl()
@@ -41,7 +41,7 @@ void WorkAreaClientImpl::onCommandsRecieved()
 
 void WorkAreaClientImpl::connectSignals()
 {
-    const auto& clientServer = ConnectionManagerAdaptor::instance().clientServerManager();
+    const auto& clientServer = ClientServerManager::instance();
 
     connect(&clientServer, &ClientServerManager::activeCommandRecieved,
                 this, &WorkAreaClientImpl::onActiveCommandRecieved);

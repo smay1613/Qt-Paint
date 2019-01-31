@@ -1,10 +1,10 @@
 #include "workareaimpl.h"
-#include "src/networking/managers/connectionmanageradaptor.h"
+#include "src/networking/managers/clientservermanager.h"
 
 WorkAreaImpl::WorkAreaImpl()
     : m_painter {nullptr}
 {
-    auto& clientServer = ConnectionManagerAdaptor::instance().clientServerManager();
+    auto& clientServer = ClientServerManager::instance();
     clientServer.track(m_history);
     connect(&m_history, &DrawHistory::historyChanged,
                 this, &WorkAreaImpl::updateRequested);

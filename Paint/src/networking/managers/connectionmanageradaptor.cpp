@@ -1,15 +1,14 @@
 #include "connectionmanageradaptor.h"
 #include <QTimer>
 #include "../packages/basicpackage.h"
+#include "clientservermanager.h"
 
 ConnectionManagerAdaptor::ConnectionManagerAdaptor()
-    : m_rConnectionSettings {ConnectionSettings::instance()},
-      m_clientServerManager {m_socket}
+    : m_rConnectionSettings {ConnectionSettings::instance()}
 {
     connectSocketSignals();
     connectToPaintServer();
-    connect(this, &ConnectionManagerAdaptor::synchronizationRequested, // FIXME: Move to CLmanager
-                &m_clientServerManager, &ClientServerManager::onSynchronizationRequested);
+    initClientServer();
 }
 
 ConnectionManagerAdaptor& ConnectionManagerAdaptor::instance()
@@ -98,6 +97,16 @@ void ConnectionManagerAdaptor::connectSocketSignals()
                 this, &ConnectionManagerAdaptor::onConnected);
     connect(&m_socket, &QAbstractSocket::readyRead,
                 this, &ConnectionManagerAdaptor::onDataRecieved);
+
+}
+
+void ConnectionManagerAdaptor::initClientServer()
+{
+    auto& clientServer {ClientServerManager::instance()};
+    clientServer.setSocket(&m_socket);
+
+    connect(this, &ConnectionManagerAdaptor::synchronizationRequested,
+                &clientServer, &ClientServerManager::onSynchronizationRequested);
 }
 
 void ConnectionManagerAdaptor::sendIntroducingPackage()
@@ -117,7 +126,7 @@ void ConnectionManagerAdaptor::handleServerResponse(const IPackage &response)
             break;
         }
         default: {
-            m_clientServerManager.handlePackage(response);
+            ClientServerManager::instance().handlePackage(response);
         }
     }
 }
@@ -134,9 +143,4 @@ void ConnectionManagerAdaptor::handleIntroducingResponse(const IPackage &respons
     if (m_rConnectionSettings.connectionMode() == networking::ConnectionMode::Master) {
         emit synchronizationRequested();
     }
-}
-
-ClientServerManager& ConnectionManagerAdaptor::clientServerManager()
-{
-    return m_clientServerManager;
 }
