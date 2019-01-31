@@ -1,6 +1,6 @@
 #include "connectionmanageradaptor.h"
 #include <QTimer>
-#include "../packages/clientpackages/introducingpackage.h"
+#include "../packages/basicpackage.h"
 
 ConnectionManagerAdaptor::ConnectionManagerAdaptor()
     : m_rConnectionSettings {ConnectionSettings::instance()},
@@ -101,7 +101,7 @@ void ConnectionManagerAdaptor::sendIntroducingPackage()
 {
     QVariant data {m_rConnectionSettings.connectionMode()};
 
-    IntroducingPackage package {data};
+    BasicPackage package {data, networking::PType::INTRODUCING_INFO_REQUEST};
 
     m_socket.write(package.rawData());
 }
