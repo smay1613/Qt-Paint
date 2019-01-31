@@ -31,9 +31,6 @@ public slots:
 private slots:
     void onConnected();
 
-protected:
-    QTcpSocket m_socket;
-
 private:
     ConnectionManagerAdaptor();
 
@@ -48,6 +45,7 @@ private:
     ConnectionSettings& m_rConnectionSettings;
 
     ClientServerManager m_clientServerManager;
+    QTcpSocket m_socket;
 };
 
 #endif // CONNECTIONMANAGER_H

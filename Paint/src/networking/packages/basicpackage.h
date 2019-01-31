@@ -46,7 +46,7 @@ public:
     // Will do nothing in case if mode is WriteOnly.
     friend QDataStream& operator>> (QDataStream& stream, BasicPackage& package);
 
-protected:
+private:
     QByteArray m_rawData;
     QDataStream m_translationStream;
 
