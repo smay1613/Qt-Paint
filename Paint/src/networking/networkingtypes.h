@@ -28,6 +28,7 @@ struct UtilTools {
     static QByteArray qVariantToByteArray(const QVariant& var) {
         QByteArray rawData;
         QDataStream stream {&rawData, QIODevice::WriteOnly};
+        stream.setVersion(QDataStream::Qt_5_9);
         stream << var;
         return rawData;
     }

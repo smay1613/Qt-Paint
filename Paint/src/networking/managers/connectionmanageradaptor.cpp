@@ -57,6 +57,7 @@ void ConnectionManagerAdaptor::onSocketStateChanged(QAbstractSocket::SocketState
 void ConnectionManagerAdaptor::onDataRecieved()
 {
     QDataStream in {&m_socket};
+    in.setVersion(QDataStream::Qt_5_9);
 
     forever {
         in.startTransaction();

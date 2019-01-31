@@ -113,6 +113,7 @@ void PaintServer::onReadyRead()
     }
 
     QDataStream in {socket};
+    in.setVersion(QDataStream::Qt_5_9);
 
     forever {
         in.startTransaction();
