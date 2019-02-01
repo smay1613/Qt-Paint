@@ -49,6 +49,7 @@ void WorkAreaElement::onConnectionModeChanged()
             break;
         }
     }
+    connectSignals();
 }
 
 void WorkAreaElement::connectSignals()
