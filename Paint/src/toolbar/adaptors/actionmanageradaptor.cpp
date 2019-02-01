@@ -2,8 +2,9 @@
 #include <QDebug>
 
 ActionManagerAdaptor::ActionManagerAdaptor()
-        : m_undoAvailable(false),
-          m_redoAvailable(false)
+        : m_undoAvailable {false},
+          m_redoAvailable {false},
+          m_pHistory {nullptr}
 {
 
 }
@@ -38,8 +39,8 @@ ActionManagerAdaptor &ActionManagerAdaptor::instance()
 
 void ActionManagerAdaptor::undo()
 {
-    if (m_undoAvailable) {
-        undoRequested();
+    if (m_undoAvailable && m_pHistory) {
+        m_pHistory->undo();
     } else {
         qWarning() << "Undo is not available!";
     }
@@ -47,8 +48,8 @@ void ActionManagerAdaptor::undo()
 
 void ActionManagerAdaptor::redo()
 {
-    if (m_redoAvailable) {
-        redoRequested();
+    if (m_redoAvailable && m_pHistory) {
+        m_pHistory->redo();
     } else {
         qWarning() << "Redo is not available!";
     }
@@ -56,6 +57,23 @@ void ActionManagerAdaptor::redo()
 
 void ActionManagerAdaptor::clear()
 {
-    clearRequested();
+    if (m_pHistory) {
+        m_pHistory->clear();
+    }
+}
+
+void ActionManagerAdaptor::trackHistory(DrawHistory* history)
+{
+    if (history) {
+        m_pHistory = history;
+        connect(m_pHistory, &DrawHistory::historyChanged,
+                    this, &ActionManagerAdaptor::updateHistoryAvailability);
+    }
+}
+
+void ActionManagerAdaptor::updateHistoryAvailability()
+{
+    setUndoAvailable(!m_pHistory->isEmpty() && !m_pHistory->isOnStart());
+    setRedoAvailable(!m_pHistory->isEmpty() && !m_pHistory->isOnTop());
 }
 

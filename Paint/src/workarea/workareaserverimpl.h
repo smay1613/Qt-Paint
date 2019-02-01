@@ -25,10 +25,6 @@ private slots:
     void onActiveCommandSettingsChanged();
     void onActivePenSettingsChanged();
 
-    void onUndoRequested();
-    void onRedoRequested();
-    void onClearRequested();
-
 private:
     void connectSignals();
     void connectActiveCommand();
@@ -38,13 +34,10 @@ private:
     void updateActiveCommand();
     void updateActivePen();
 
-    void updateActionsAvailability();
-
     bool m_paintStarted;
 
     PaintPenBuilder m_penBuilder;
 
-    ActionManagerAdaptor& m_rActionManager;
     PaintSettings& m_rPaintSettings;
 };
 

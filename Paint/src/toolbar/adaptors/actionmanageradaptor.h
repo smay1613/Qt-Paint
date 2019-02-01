@@ -1,13 +1,14 @@
 #ifndef ACTIONMANAGERADAPTOR_H
 #define ACTIONMANAGERADAPTOR_H
 #include <QObject>
+#include "src/common/drawhistory/drawhistory.h"
 
 class ActionManagerAdaptor : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool undoAvailable READ undoAvailable WRITE setUndoAvailable NOTIFY undoAvailabilityChanged)
-    Q_PROPERTY(bool redoAvailable READ redoAvailable WRITE setRedoAvailable NOTIFY redoAvailabilityChanged)
+    Q_PROPERTY(bool undoAvailable READ undoAvailable NOTIFY undoAvailabilityChanged)
+    Q_PROPERTY(bool redoAvailable READ redoAvailable NOTIFY redoAvailabilityChanged)
 public:
     static ActionManagerAdaptor& instance();
 
@@ -15,11 +16,13 @@ public:
     Q_INVOKABLE void redo();
     Q_INVOKABLE void clear();
 
-    bool undoAvailable() const;
-    void setUndoAvailable(bool undoAvailable);
+    void trackHistory(DrawHistory* history);
 
+    bool undoAvailable() const;
     bool redoAvailable() const;
-    void setRedoAvailable(bool redoAvailable);
+
+private slots:
+    void updateHistoryAvailability();
 
 signals:
     void undoRequested();
@@ -32,8 +35,13 @@ signals:
 private:
     ActionManagerAdaptor();
 
+    void setUndoAvailable(bool undoAvailable);
+    void setRedoAvailable(bool redoAvailable);
+
     bool m_undoAvailable;
     bool m_redoAvailable;
+
+    DrawHistory* m_pHistory;
 };
 
 #endif // ACTIONMANAGERADAPTOR_H

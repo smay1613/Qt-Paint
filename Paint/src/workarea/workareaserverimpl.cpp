@@ -5,7 +5,6 @@
 
 WorkAreaServerImpl::WorkAreaServerImpl()
     : m_paintStarted {false},
-      m_rActionManager {ActionManagerAdaptor::instance()},
       m_rPaintSettings {PaintSettings::instance()}
 {
     updateActiveCommand();
@@ -18,7 +17,6 @@ void WorkAreaServerImpl::submit()
 {
     if (m_activeCommand) {
         m_history.add(std::move(m_activeCommand));
-        updateActionsAvailability();
     }
     updateActiveCommand();
 }
@@ -64,24 +62,6 @@ void WorkAreaServerImpl::onActivePenSettingsChanged()
     updateActivePen();
 }
 
-void WorkAreaServerImpl::onUndoRequested()
-{
-    m_history.undo();
-    updateActionsAvailability();
-}
-
-void WorkAreaServerImpl::onRedoRequested()
-{
-    m_history.redo();
-    updateActionsAvailability();
-}
-
-void WorkAreaServerImpl::onClearRequested()
-{
-    m_history.clear();
-    updateActionsAvailability();
-}
-
 void WorkAreaServerImpl::connectSignals()
 {
     // Connections with settings
@@ -92,18 +72,13 @@ void WorkAreaServerImpl::connectSignals()
     connect(&m_rPaintSettings, &PaintSettings::penSizeChanged,
                 this, &WorkAreaServerImpl::onActivePenSettingsChanged);
 
-    // Connections with ActionManager
-    connect(&m_rActionManager, &ActionManagerAdaptor::undoRequested,
-                this, &WorkAreaServerImpl::onUndoRequested);
-    connect(&m_rActionManager, &ActionManagerAdaptor::redoRequested,
-                this, &WorkAreaServerImpl::onRedoRequested);
-    connect(&m_rActionManager, &ActionManagerAdaptor::clearRequested,
-                this, &WorkAreaServerImpl::onClearRequested);
-
     // Connections with client-server manager
     auto& clientServer = ClientServerManager::instance();
     connect(this, &WorkAreaServerImpl::activeCommandChanged,
                 &clientServer, &ClientServerManager::onActiveCommandChanged);
+
+    auto& actionManager = ActionManagerAdaptor::instance();
+    actionManager.trackHistory(&m_history);
 }
 
 void WorkAreaServerImpl::connectActiveCommand()
@@ -145,10 +120,4 @@ void WorkAreaServerImpl::updateActivePen()
         m_activeCommand->setPen(m_penBuilder.getActivePen());
         emit activeCommandChanged(m_activeCommand->getMemento());
     }
-}
-
-void WorkAreaServerImpl::updateActionsAvailability()
-{
-    m_rActionManager.setUndoAvailable(!m_history.isEmpty() && !m_history.isOnStart());
-    m_rActionManager.setRedoAvailable(!m_history.isEmpty() && !m_history.isOnTop());
 }
