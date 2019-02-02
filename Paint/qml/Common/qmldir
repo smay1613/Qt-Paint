@@ -4,3 +4,4 @@ BasicTooltip 1.0 BasicTooltip.qml
 BorderShadow 1.0 BorderShadow.qml
 Scaler 1.0 Scaler.qml
 ButtonBackground 1.0 ButtonBackground.qml
+ToolBarItem 1.0 BorderedToolbarItem.qml

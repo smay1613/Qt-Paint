@@ -12,11 +12,14 @@ RoundButton {
 
     property alias shapeType: _image.type
 
-    contentItem: Image {
+    Image {
         id: _image
+        anchors.centerIn: _rootButton
+        width: 30
+        height: 30
         property var type: model.type
-        sourceSize.width: 25
-        sourceSize.height: 25
+        sourceSize.width: width
+        sourceSize.height: height
         source: model.display
     }
 
