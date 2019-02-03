@@ -64,3 +64,8 @@ void DrawCommand::retrieveMemento(const DrawCommandMemento& memento)
     m_pen = memento.m_pen;
     m_drawStrategy->setData(memento.m_strategyVariant);
 }
+
+QPainter* DrawCommand::painter() const
+{
+    return m_painter;
+}

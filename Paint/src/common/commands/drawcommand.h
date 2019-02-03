@@ -19,6 +19,7 @@ public:
     virtual void execute() override;
 
     void setPainter(QPainter *painter);
+    QPainter* painter() const;
 
     QPen pen() const;
     void setPen(const QPen &pen);

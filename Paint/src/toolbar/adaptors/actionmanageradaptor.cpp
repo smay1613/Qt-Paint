@@ -1,4 +1,5 @@
 #include "actionmanageradaptor.h"
+#include "src/common/helpers/imagesaver.h"
 #include <QDebug>
 
 ActionManagerAdaptor::ActionManagerAdaptor()
@@ -60,6 +61,11 @@ void ActionManagerAdaptor::clear()
     if (m_pHistory) {
         m_pHistory->clear();
     }
+}
+
+bool ActionManagerAdaptor::save(QString path)
+{
+    return m_pHistory ? ImageSaver::save(*m_pHistory, path) : false;
 }
 
 void ActionManagerAdaptor::trackHistory(DrawHistory* history)

@@ -42,7 +42,8 @@ SOURCES += \
     src/networking/managers/clientservermanager.cpp \
     src/common/commands/drawcommandmemento.cpp \
     src/networking/workers/historyworker.cpp \
-    src/common/builders/drawstrategyfactory.cpp
+    src/common/builders/drawstrategyfactory.cpp \
+    src/common/helpers/imagesaver.cpp
 
 RESOURCES += qml.qrc
 
@@ -96,6 +97,7 @@ HEADERS += \
     src/networking/managers/clientservermanager.h \
     src/common/commands/drawcommandmemento.h \
     src/networking/workers/historyworker.h \
-    src/common/builders/drawstrategyfactory.h
+    src/common/builders/drawstrategyfactory.h \
+    src/common/helpers/imagesaver.h
 
 DISTFILES +=

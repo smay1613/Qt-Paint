@@ -41,5 +41,10 @@
         <file>qml/StatusBar/ConnectionStatusIcon.qml</file>
         <file>resources/connectionicons/connecting.png</file>
         <file>qml/Common/ButtonBackground.qml</file>
+        <file>qml/Toolbar/ActionPicker/SaveButton.qml</file>
+        <file>resources/actionicons/save.svg</file>
+        <file>qml/Common/BorderedItem.qml</file>
+        <file>qml/Common/BorderedToolbarItem.qml</file>
+        <file>qml/Toolbar/ActionPicker/ImageSaveDialog.qml</file>
     </qresource>
 </RCC>

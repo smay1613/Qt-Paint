@@ -10,8 +10,11 @@ Flow {
     id: _rootToolbar
     objectName: "ToolBarFlow"
 
-    spacing: 15
+    spacing: 5
 
+    SaveButton {
+
+    }
     ColorBar {
         objectName: "ColorBar"
     }
