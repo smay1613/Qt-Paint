@@ -58,8 +58,18 @@ ToolBarItem {
     ImageSaveDialog {
         id: _saveDialog
         onAccepted: {
-            ActionManager.save(_saveDialog.fileUrl);
+            if (ActionManager.save(_saveDialog.fileUrl)) {
+                _resultAnimator.state = "success";
+            } else {
+                _resultAnimator.state = "fail";
+            }
         }
+    }
+
+    ResultAnimator {
+        id: _resultAnimator
+        anchors.fill: _rootSaveButton
+        radius: 5
     }
 
     BasicTooltip {

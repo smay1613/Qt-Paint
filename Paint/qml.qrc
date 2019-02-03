@@ -46,5 +46,8 @@
         <file>qml/Common/BorderedItem.qml</file>
         <file>qml/Common/BorderedToolbarItem.qml</file>
         <file>qml/Toolbar/ActionPicker/ImageSaveDialog.qml</file>
+        <file>qml/Common/ResultAnimator.qml</file>
+        <file>resources/states/checked.svg</file>
+        <file>resources/states/failed.svg</file>
     </qresource>
 </RCC>
