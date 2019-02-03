@@ -6,3 +6,4 @@ Scaler 1.0 Scaler.qml
 ButtonBackground 1.0 ButtonBackground.qml
 ToolBarItem 1.0 BorderedToolbarItem.qml
 ResultAnimator 1.0 ResultAnimator.qml
+Carousel 1.0 ThreeItemsCarousel.qml

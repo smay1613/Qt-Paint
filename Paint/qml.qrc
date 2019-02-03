@@ -49,5 +49,7 @@
         <file>qml/Common/ResultAnimator.qml</file>
         <file>resources/states/checked.svg</file>
         <file>resources/states/failed.svg</file>
+        <file>qml/Common/BaseCarousel.qml</file>
+        <file>qml/Common/ThreeItemsCarousel.qml</file>
     </qresource>
 </RCC>
