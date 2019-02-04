@@ -8,6 +8,13 @@
 #include "../strategies/drawstrategy.h"
 #include "drawcommandmemento.h"
 
+/*! \brief This class is a container that encapsulates the IDrawStrategy implementation. \see DrawStrategyFactory#createDrawStrategy
+ *  \details The main purpose of this class is to hide all drawing implementation from a user by ICommand interface.
+ *  IHistory will operate ICommand object that will delegate requests to the IDrawStrategy and user will not
+ *  know about the 'underneath' of the command. So, this class works as a "shell".
+ *  Also it provides the DrawCommandMemento for exchanging command via network.
+*/
+
 class DrawCommand : public QObject, public ICommand
 {
     Q_OBJECT

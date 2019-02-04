@@ -14,6 +14,7 @@ public:
 private:
     void updateHash(const IHistory& history);
 
+    //! Total hash is a XOR of command hashes
     uint64_t m_totalHash;
     QVector<quint64> m_commandHashes;
 };

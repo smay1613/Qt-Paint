@@ -63,7 +63,7 @@ void ActionManagerAdaptor::clear()
     }
 }
 
-bool ActionManagerAdaptor::save(QString path)
+bool ActionManagerAdaptor::save(const QString& path)
 {
     return m_pHistory ? ImageSaver::save(*m_pHistory, path) : false;
 }

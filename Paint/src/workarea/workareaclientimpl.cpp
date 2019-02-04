@@ -26,7 +26,7 @@ void WorkAreaClientImpl::onActiveCommandRecieved(const DrawCommandMemento& comma
 {
     if (!m_activeCommand ||
             (m_activeCommand && m_activeCommand->type() != commandMemento.type())) {
-        m_activeCommand = m_commandBuilder.createCommandByType(m_painter, commandMemento.type());
+        m_activeCommand = DrawCommandFactory::createCommandByType(m_painter, commandMemento.type());
     }
 
     m_activeCommand->retrieveMemento(commandMemento);

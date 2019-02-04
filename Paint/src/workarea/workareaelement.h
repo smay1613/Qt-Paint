@@ -4,6 +4,12 @@
 #include <memory>
 #include "workareaimpl.h"
 
+/*! \class WorkAreaElement
+    \brief QML element used for drawing.
+    \details All drawings related things are encapsulated in WorkAreaImpl,
+    because it must change it's behavior dynamically based on connection mode.
+*/
+
 class WorkAreaElement : public QQuickPaintedItem
 {
     Q_OBJECT
@@ -18,7 +24,8 @@ signals:
 
 private slots:
     void onUpdateRequested();
-    void onConnectionModeChanged(); // changes the implementation at runtime!
+    //! Changes the implementation at runtime
+    void onConnectionModeChanged();
 
 private:
     void connectSignals();
