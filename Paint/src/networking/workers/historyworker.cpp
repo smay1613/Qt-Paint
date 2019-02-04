@@ -155,7 +155,7 @@ void HistoryWorker::handleCommandsResponse(const IPackage& response) const
         }
     }
 
-    for (auto commandMemento : newCommands) {
+    for (const auto& commandMemento : newCommands) {
         auto command = DrawCommandFactory::createCommandByType(nullptr,
                                                                commandMemento.type());
         command->retrieveMemento(commandMemento);

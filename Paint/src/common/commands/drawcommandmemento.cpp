@@ -4,7 +4,7 @@
 DrawCommandMemento::DrawCommandMemento(QVariant strategy, QPen pen, PaintTypes::ShapeType type)
     : m_strategyVariant {std::move(strategy)},
       m_pen {std::move(pen)},
-      m_type {std::move(type)}
+      m_type {type}
 {
 }
 

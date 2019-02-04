@@ -49,7 +49,7 @@ QString ConnectionSettings::lastError() const
     return m_lastError;
 }
 
-void ConnectionSettings::onNetworkError(QString error)
+void ConnectionSettings::onNetworkError(const QString& error)
 {
     if (error != m_lastError) {
         m_lastError = error;
@@ -57,7 +57,7 @@ void ConnectionSettings::onNetworkError(QString error)
     }
 }
 
-void ConnectionSettings::onConnectionChanged(QString state)
+void ConnectionSettings::onConnectionChanged(const QString& state)
 {
     if (state != m_connectionState) {
         m_connectionState = state;

@@ -30,8 +30,6 @@ protected:
     std::unique_ptr<DrawCommand> m_activeCommand;
 
     DrawHistory m_history;
-
-    DrawCommandFactory m_commandBuilder;
 };
 
 #endif // WORKAREAIMPL_H

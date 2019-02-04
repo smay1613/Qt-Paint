@@ -42,8 +42,8 @@ signals:
     void reconnectionStarted();
 
 public slots:
-    void onNetworkError(QString error);
-    void onConnectionChanged(QString state);
+    void onNetworkError(const QString& error);
+    void onConnectionChanged(const QString& state);
 
 private:
     ConnectionSettings() = default;

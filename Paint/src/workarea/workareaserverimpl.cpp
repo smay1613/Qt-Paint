@@ -103,7 +103,7 @@ void WorkAreaServerImpl::updatePainter(QPainter *painter)
 
 void WorkAreaServerImpl::updateActiveCommand()
 {
-    m_activeCommand = m_commandBuilder.createCommandByType(m_painter,
+    m_activeCommand = DrawCommandFactory::createCommandByType(m_painter,
                                                            PaintSettings::instance().activeShapeType());
     updateActivePen();
     if (m_activeCommand) {
