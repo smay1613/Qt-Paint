@@ -3,6 +3,7 @@
 Implementation of simple paint application with ability to share image in real time.
 
 Features:
+* Saving image
 * Color picking
 * Pen size changing
 * Undo/redo actions
@@ -13,7 +14,10 @@ Features:
 	-rectangle
 	-ellipse
 * Zoom
-* Workarea streaming (share image via network) - WIP
+* Changing workarea size
+* Workarea streaming (share image via network)
+
+<img src="https://raw.githubusercontent.com/smay1613/Qt-Paint/networking/Preview.png?sanitize=true&raw=true"/>
 
 ## Getting Started
 
@@ -24,6 +28,10 @@ Features:
 	* mode <arguments(slave/master)> - Paint application can work in two modes - slave or master.
 					   Master will stream it's painted image to slaves.
 
+## Documentation
+
+Run runDoxygen.sh script for generating the Doxygen documentation.
+
 ### Prerequisites
 
-Qt 5.11 with network module and with Qt Quick. 
+Qt 5.12 with network module and with Qt Quick. 
