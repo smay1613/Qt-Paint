@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.4
 import ToolBarPlugin 1.0
 import Common 1.0
+import Icons 1.0
 
 ToolBarItem {
     id: _rootSaveButton
@@ -30,7 +31,7 @@ ToolBarItem {
                         width: 25
                         height: 25
                         anchors.centerIn: _saveButton
-                        source: _saveColumn.resourcePath + "save.svg"
+                        source: Icons.actionIcons.save
 
                         sourceSize.width: width
                         sourceSize.height: height

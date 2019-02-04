@@ -3,7 +3,7 @@
 
 ShapesModel::ShapesModel(QObject *parent)
     : QAbstractListModel (parent),
-      m_iconsPath("/resources/shapeicons/")
+      m_iconsPath {"qrc:/images/resources/Icons/shapeicons/"}
 {
     m_shapesData = {
         std::make_pair(PaintTypes::ShapeType::Curve, "pencil.svg"),

@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
     toolBarPlugin.registerTypes("ToolBarPlugin");
 
     engine.addImportPath("qrc:/qml");
+    engine.addImportPath("qrc:/images/resources");
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

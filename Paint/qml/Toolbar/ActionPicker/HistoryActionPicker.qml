@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import ToolBarPlugin 1.0
 import Common 1.0
+import Icons 1.0
 
 ToolBarItem {
     contentItem: Component {
@@ -11,14 +12,12 @@ ToolBarItem {
             id: _rootShapePicker
             objectName: "HistoryActionPickerRowLayout"
 
-            property string resourcePath: "qrc:/resources/actionicons/"
-
             RoundButton {
                 id: _undoButton
                 background: ButtonBackground {}
                 enabled: ActionManager.undoAvailable
                 contentItem: ActionBox {
-                    source: resourcePath + "undo.svg"
+                    source: Icons.actionIcons.undo
                 }
                 onClicked: {
                     ActionManager.undo();
@@ -38,7 +37,7 @@ ToolBarItem {
                 background: ButtonBackground {}
                 enabled: ActionManager.redoAvailable
                 contentItem: ActionBox {
-                    source: resourcePath + "redo.svg"
+                    source: Icons.actionIcons.redo
                 }
                 onClicked: {
                     ActionManager.redo();
@@ -57,7 +56,7 @@ ToolBarItem {
             RoundButton {
                 background: ButtonBackground {}
                 contentItem: ActionBox {
-                    source: resourcePath + "clear.svg"
+                    source: Icons.actionIcons.clear
                 }
                 onClicked: {
                     ActionManager.clear();

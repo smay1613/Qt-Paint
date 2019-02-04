@@ -14,17 +14,10 @@
         <file>qml/Toolbar/ShapePicker/qmldir</file>
         <file>qml/Toolbar/ShapePicker/ShapePicker.qml</file>
         <file>qml/Toolbar/ShapePicker/ShapeBox.qml</file>
-        <file>resources/shapeicons/ellipse.svg</file>
-        <file>resources/shapeicons/line.svg</file>
-        <file>resources/shapeicons/pencil.svg</file>
-        <file>resources/shapeicons/rectangle.svg</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/Toolbar/ActionPicker/ActionBox.qml</file>
         <file>qml/Toolbar/ActionPicker/HistoryActionPicker.qml</file>
         <file>qml/Toolbar/ActionPicker/qmldir</file>
-        <file>resources/actionicons/clear.svg</file>
-        <file>resources/actionicons/redo.svg</file>
-        <file>resources/actionicons/undo.svg</file>
         <file>qml/Common/BasicTooltip.qml</file>
         <file>qml/Common/BorderShadow.qml</file>
         <file>qml/Common/Scaler.qml</file>
@@ -34,21 +27,15 @@
         <file>qml/Toolbar/Viewsettings/ZoomSpinBox.qml</file>
         <file>qml/Toolbar/Viewsettings/ResolutionTumbler.qml</file>
         <file>qml/Toolbar/Viewsettings/ResolutionModel.qml</file>
-        <file>resources/connectionicons/disconnected.png</file>
-        <file>resources/connectionicons/connected.png</file>
         <file>qml/StatusBar/StatusBar.qml</file>
         <file>qml/StatusBar/qmldir</file>
         <file>qml/StatusBar/ConnectionStatusIcon.qml</file>
-        <file>resources/connectionicons/connecting.png</file>
         <file>qml/Common/ButtonBackground.qml</file>
         <file>qml/Toolbar/ActionPicker/SaveButton.qml</file>
-        <file>resources/actionicons/save.svg</file>
         <file>qml/Common/BorderedItem.qml</file>
         <file>qml/Common/BorderedToolbarItem.qml</file>
         <file>qml/Toolbar/ActionPicker/ImageSaveDialog.qml</file>
         <file>qml/Common/ResultAnimator.qml</file>
-        <file>resources/states/checked.svg</file>
-        <file>resources/states/failed.svg</file>
         <file>qml/Common/BaseCarousel.qml</file>
         <file>qml/Common/ThreeItemsCarousel.qml</file>
     </qresource>

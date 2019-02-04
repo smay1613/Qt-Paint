@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
+import Icons 1.0
 
 Item {
     id: _rootIcon
@@ -10,8 +11,6 @@ Item {
     Image {
         id: _icon
         anchors.fill: _rootIcon
-
-        readonly property string resourcePath: "qrc:/resources/connectionicons/"
     }
 
     ColorOverlay {
@@ -25,18 +24,18 @@ Item {
             name: "connecting"
             PropertyChanges {
                 target: _icon
-                source: _icon.resourcePath + "connecting.png"
+                source: Icons.connectionIcons.connecting
             }
             PropertyChanges {
                 target: _colorOverlay
-                color: "darkyellow"
+                color: "yellow"
             }
         },
         State {
             name: "connected"
             PropertyChanges {
                 target: _icon
-                source: _icon.resourcePath + "connected.png"
+                source: Icons.connectionIcons.connected
             }
             PropertyChanges {
                 target: _colorOverlay
@@ -47,7 +46,7 @@ Item {
             name: "disconnected"
             PropertyChanges {
                 target: _icon
-                source: _icon.resourcePath + "disconnected.png"
+                source: Icons.connectionIcons.disconnected
             }
             PropertyChanges {
                 target: _colorOverlay

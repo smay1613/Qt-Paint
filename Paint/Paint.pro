@@ -45,10 +45,12 @@ SOURCES += \
     src/common/builders/drawstrategyfactory.cpp \
     src/common/helpers/imagesaver.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+            icons.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = $${_PRO_FILE_PWD_}/qml
+QML_IMPORT_PATH += ${_PRO_FILE_PWD_}/qml \
+                    ${_PRO_FILE_PWD_}/resources
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
