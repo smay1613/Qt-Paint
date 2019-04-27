@@ -17,7 +17,7 @@ Features:
 * Changing workarea size
 * Workarea streaming (share image via network)
 
-<img src="https://raw.githubusercontent.com/smay1613/Qt-Paint/networking/Preview.png?sanitize=true&raw=true"/>
+<img src=https://raw.githubusercontent.com/smay1613/Qt-Paint/networking/Preview.png?raw=true"/>
 
 ## Getting Started
 
